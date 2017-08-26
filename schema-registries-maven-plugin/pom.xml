@@ -86,21 +86,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-plugin-plugin</artifactId>
 				<version>3.5</version>
-<!-- 				<configuration> -->
-<!-- 					<goalPrefix>schema-registries-maven-plugin</goalPrefix> -->
-<!-- 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound> -->
-<!-- 				</configuration> -->
 				<executions>
 					<execution>
-					<id>default-descriptor</id>
-					<phase>process-classes</phase>
+						<id>default-descriptor</id>
+						<phase>process-classes</phase>
 					</execution>
-<!-- 					<execution> -->
-<!-- 						<id>mojo-descriptor</id> -->
-<!-- 						<goals> -->
-<!-- 							<goal>descriptor</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
 					<!-- if you want to generate help goal -->
 					<execution>
 						<id>help-goal</id>
@@ -112,42 +102,42 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>run-its</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-invoker-plugin</artifactId>
-						<version>1.7</version>
-						<configuration>
-							<debug>true</debug>
-							<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-							<pomIncludes>
-								<pomInclude>*/pom.xml</pomInclude>
-							</pomIncludes>
-							<postBuildHookScript>verify</postBuildHookScript>
-							<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
-							<settingsFile>src/it/settings.xml</settingsFile>
-							<goals>
-								<goal>clean</goal>
-								<goal>test-compile</goal>
-							</goals>
-						</configuration>
-						<executions>
-							<execution>
-								<id>integration-test</id>
-								<goals>
-									<goal>install</goal>
-									<goal>integration-test</goal>
-									<goal>verify</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+<!-- 	<profiles> -->
+<!-- 		<profile> -->
+<!-- 			<id>run-its</id> -->
+<!-- 			<build> -->
+<!-- 				<plugins> -->
+<!-- 					<plugin> -->
+<!-- 						<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 						<artifactId>maven-invoker-plugin</artifactId> -->
+<!-- 						<version>1.7</version> -->
+<!-- 						<configuration> -->
+<!-- 							<debug>true</debug> -->
+<!-- 							<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo> -->
+<!-- 							<pomIncludes> -->
+<!-- 								<pomInclude>*/pom.xml</pomInclude> -->
+<!-- 							</pomIncludes> -->
+<!-- 							<postBuildHookScript>verify</postBuildHookScript> -->
+<!-- 							<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath> -->
+<!-- 							<settingsFile>src/it/settings.xml</settingsFile> -->
+<!-- 							<goals> -->
+<!-- 								<goal>clean</goal> -->
+<!-- 								<goal>test-compile</goal> -->
+<!-- 							</goals> -->
+<!-- 						</configuration> -->
+<!-- 						<executions> -->
+<!-- 							<execution> -->
+<!-- 								<id>integration-test</id> -->
+<!-- 								<goals> -->
+<!-- 									<goal>install</goal> -->
+<!-- 									<goal>integration-test</goal> -->
+<!-- 									<goal>verify</goal> -->
+<!-- 								</goals> -->
+<!-- 							</execution> -->
+<!-- 						</executions> -->
+<!-- 					</plugin> -->
+<!-- 				</plugins> -->
+<!-- 			</build> -->
+<!-- 		</profile> -->
+<!-- 	</profiles> -->
 </project>
