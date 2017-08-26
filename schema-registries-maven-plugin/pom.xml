@@ -1,0 +1,153 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.frtu.schema-registries</groupId>
+		<artifactId>schema-registries-toolbox-pom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>schema-registries-maven-plugin</artifactId>
+	<packaging>maven-plugin</packaging>
+
+	<name>schema-registries-maven-plugin Maven Plugin</name>
+	<description>A maven plugin to register schemas into a Schema Registry.</description>
+
+	<properties>
+		<hortonworks.registries.version>0.3.0-SNAPSHOT</hortonworks.registries.version>
+		<avro.version>1.7.7</avro.version>
+
+		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<commons-io.version>2.4</commons-io.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>${avro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hortonworks.registries</groupId>
+			<artifactId>schema-registry-client</artifactId>
+			<version>${hortonworks.registries.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hortonworks.registries</groupId>
+			<artifactId>schema-registry-serdes</artifactId>
+			<version>${hortonworks.registries.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.frtu.simple</groupId>
+			<artifactId>simple-scan</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+
+		<!-- commons libs -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+
+		<!-- MAVEN Plugin -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>3.3</version>
+			<scope>provided</scope><!-- annotations are needed only to build the plugin -->
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>3.5</version>
+<!-- 				<configuration> -->
+<!-- 					<goalPrefix>schema-registries-maven-plugin</goalPrefix> -->
+<!-- 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound> -->
+<!-- 				</configuration> -->
+				<executions>
+					<execution>
+					<id>default-descriptor</id>
+					<phase>process-classes</phase>
+					</execution>
+<!-- 					<execution> -->
+<!-- 						<id>mojo-descriptor</id> -->
+<!-- 						<goals> -->
+<!-- 							<goal>descriptor</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+					<!-- if you want to generate help goal -->
+					<execution>
+						<id>help-goal</id>
+						<goals>
+							<goal>helpmojo</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>run-its</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-invoker-plugin</artifactId>
+						<version>1.7</version>
+						<configuration>
+							<debug>true</debug>
+							<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+							<pomIncludes>
+								<pomInclude>*/pom.xml</pomInclude>
+							</pomIncludes>
+							<postBuildHookScript>verify</postBuildHookScript>
+							<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
+							<settingsFile>src/it/settings.xml</settingsFile>
+							<goals>
+								<goal>clean</goal>
+								<goal>test-compile</goal>
+							</goals>
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<goals>
+									<goal>install</goal>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
