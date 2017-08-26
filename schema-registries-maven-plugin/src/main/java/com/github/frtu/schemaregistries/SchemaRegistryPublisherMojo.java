@@ -1,7 +1,6 @@
 package com.github.frtu.schemaregistries;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -11,12 +10,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
-import com.github.frtu.simple.scan.DirectoryScanner;
-import com.github.frtu.simple.scan.FileScannerObserver;
+import com.github.frtu.schemaregistries.hortonworks.HortonworksSchemaRegistryManager;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
-import com.hortonworks.registries.schemaregistry.errors.IncompatibleSchemaException;
-import com.hortonworks.registries.schemaregistry.errors.InvalidSchemaException;
-import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
 
 /**
  * Publish project Avro schema into Hortonworks Schema Registry
@@ -51,36 +46,19 @@ public class SchemaRegistryPublisherMojo extends AbstractMojo {
 		info("Parameter : schema.type={}", schemaType);
 		info("Parameter : schema.path={}", schemaPath);
 
-		SchemaRegistryPublisher schemaRegistryPublisher = new SchemaRegistryPublisher(schemaRegistryUrl);
+		HortonworksSchemaRegistryManager schemaRegistryPublisher = new HortonworksSchemaRegistryManager(schemaRegistryUrl);
 		try {
 			info("Init connection to Schema Registry");
 			schemaRegistryPublisher.initSchemaRegistry();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new MojoExecutionException(
 					format("ATTENTION : Configured schemaregistry.url={} doesn't link to an existing instance. Please check URL or if server is up!",
 							schemaRegistryUrl),
 					e);
 		}
 		info("=> Server validation successful !");
-		
-		FileScannerObserver fileScanner = new FileScannerObserver() {
-			@Override
-			public void scanFile(File file) {
-				try {
-					schemaRegistryPublisher.registerSchema(file);
-				} catch (IOException | InvalidSchemaException | IncompatibleSchemaException | SchemaNotFoundException e) {
-					throw new IllegalArgumentException(
-							format("Failed to publish schema file={}",
-									file.getAbsolutePath()),
-							e);
-				}
-			}
-		};
-		DirectoryScanner directoryScanner = new DirectoryScanner(fileScanner);
-		if (AvroSchemaProvider.TYPE.equalsIgnoreCase(schemaType)) {
-			directoryScanner.setFileExtensionToFilter("avsc");
-		}
-		directoryScanner.scanDirectory(schemaPath);
+		SchemaTypePublisher schemaTypePublisher = schemaRegistryPublisher.getSchemaTypePublisher(schemaType);
+		schemaTypePublisher.publishSchemaFolder(schemaPath);
 	}
 
 	private void debug(String template, Object... argv) {
