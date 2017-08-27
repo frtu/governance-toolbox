@@ -157,29 +157,19 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.10</version>
 			</plugin>
-			
+
 			<!-- RELEASE -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.1</version>
+				<version>2.5.3</version>
 				<configuration>
 					<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<releaseProfiles>release-sign-artifacts</releaseProfiles>
+			        <preparationGoals>clean verify gpg:sign</preparationGoals>
 				</configuration>
 			</plugin>
-<!-- 			<plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-gpg-plugin</artifactId>
-	            <version>1.6</version>
-	            <executions>
-	                <execution>
-	                    <goals>
-	                       <goal>sign</goal>
-	                    </goals>
-	                </execution>
-	            </executions>
-	        </plugin>
- -->	        
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -196,7 +186,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
 	<profiles>
 		<profile>
 			<id>release-sign-artifacts</id>
@@ -211,7 +200,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.5</version>
+						<version>1.6</version>
 						<configuration>
 							<useAgent>true</useAgent>
 							<passphrase>${gpg.passphrase}</passphrase>
