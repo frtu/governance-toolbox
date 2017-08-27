@@ -29,20 +29,18 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-
-	<scm>
-		<url>git@github.com:frtu/schema-registries-toolbox.git</url>
-		<connection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</connection>
-		<developerConnection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
-
 	<developers>
 		<developer>
 			<name>Frédéric TU</name>
 			<email>frederic.tu@gmail.com</email>
 		</developer>
 	</developers>
+	<scm>
+		<connection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</connection>
+		<developerConnection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</developerConnection>
+		<url>https://github.com/frtu/schema-registries-toolbox/tree/master</url>
+		<tag>HEAD</tag>
+	</scm>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -132,14 +130,8 @@
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> <version>2.9.1</version> <configuration> 
 				<author>Frederic TU</author> <encoding>${project.build.sourceEncoding}</encoding> <show>private</show> <nohelp>true</nohelp> </configuration> 
 				<executions> <execution> <id>attach-javadocs</id> <goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-				</configuration>
-			</plugin>
+
+
 			<!-- Eclipse settings -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -166,6 +158,29 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.10</version>
 			</plugin>
+			
+			<!-- RELEASE -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+				</configuration>
+			</plugin>
+<!-- 			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-gpg-plugin</artifactId>
+	            <version>1.6</version>
+	            <executions>
+	                <execution>
+	                    <goals>
+	                       <goal>sign</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>
+ -->	        
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -199,6 +214,7 @@
 						<artifactId>maven-gpg-plugin</artifactId>
 						<version>1.5</version>
 						<configuration>
+							<useAgent>true</useAgent>
 							<passphrase>${gpg.passphrase}</passphrase>
 						</configuration>
 						<executions>

@@ -14,7 +14,7 @@
 	<description>A maven plugin to register schemas into a Schema Registry.</description>
 
 	<properties>
-		<hortonworks.registries.version>0.3.0-SNAPSHOT</hortonworks.registries.version>
+		<hortonworks.registries.version>0.3.0</hortonworks.registries.version>
 		<avro.version>1.7.7</avro.version>
 
 		<commons-lang3.version>3.3.2</commons-lang3.version>
