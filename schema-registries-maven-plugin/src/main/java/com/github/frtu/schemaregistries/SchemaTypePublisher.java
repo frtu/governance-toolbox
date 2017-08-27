@@ -18,7 +18,7 @@ public interface SchemaTypePublisher {
 	/**
 	 * Publish the schema file of format {@link #getSchemaType()}.
 	 * 
-	 * @param schemaPath
+	 * @param schemaFile Path to the schema file
 	 */
 	void publishSchema(File schemaFile);
 
@@ -26,7 +26,7 @@ public interface SchemaTypePublisher {
 	 * Scan the whole folder for matching schema file extension of format
 	 * {@link #getSchemaType()}.
 	 * 
-	 * @param schemaPath
+	 * @param schemaPath Path to the schema folder
 	 */
 	void publishSchemaFolder(File schemaPath);
 }

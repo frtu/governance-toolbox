@@ -21,7 +21,7 @@ import com.hortonworks.registries.schemaregistry.errors.InvalidSchemaException;
 import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
 
 /**
- * Publisher for Avro schema Files & Folders
+ * Publisher for Avro schema Files &amp; Folders
  * 
  * @author fred
  */

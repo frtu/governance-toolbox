@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- sonatype parent pom -->
@@ -126,11 +127,25 @@
 				</executions>
 			</plugin>
 			<!-- Generate Javadocs -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> <version>2.9.1</version> <configuration> 
-				<author>Frederic TU</author> <encoding>${project.build.sourceEncoding}</encoding> <show>private</show> <nohelp>true</nohelp> </configuration> 
-				<executions> <execution> <id>attach-javadocs</id> <goals> <goal>jar</goal> </goals> </execution> </executions> </plugin> -->
-
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<configuration>
+					<author>Frederic TU</author>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<show>private</show>
+					<nohelp>true</nohelp>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- Eclipse settings -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -167,7 +182,7 @@
 					<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<releaseProfiles>release-sign-artifacts</releaseProfiles>
-			        <preparationGoals>clean verify gpg:sign</preparationGoals>
+					<preparationGoals>clean verify gpg:sign</preparationGoals>
 				</configuration>
 			</plugin>
 		</plugins>
