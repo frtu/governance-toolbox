@@ -11,7 +11,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.frtu.schemaregistries.SchemaTypePublisher;
+import com.github.frtu.schemaregistries.SchemaTypeHandler;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
 import com.hortonworks.registries.schemaregistry.client.SchemaRegistryClient;
 
@@ -27,7 +27,7 @@ public class HortonworksSchemaRegistryManager {
 
 	private SchemaRegistryClient schemaRegistryClient;
 
-	private Map<String, SchemaTypePublisher> publisherMap = new HashMap<>();
+	private Map<String, SchemaTypeHandler> handlerMap = new HashMap<>();
 
 	public HortonworksSchemaRegistryManager(URL schemaRegistryUrl) {
 		super();
@@ -88,22 +88,22 @@ public class HortonworksSchemaRegistryManager {
 	private void populatePublisherMap() {
 		// TODO Can use reflection to instantiate all SchemaTypePublisher when
 		// many will come for Protobuf or ...
-		SchemaTypePublisher schemaTypePublisher = new AvroSchemaPublisher(schemaRegistryClient);
+		SchemaTypeHandler schemaTypeHandler = new AvroSchemaHandler(schemaRegistryClient);
 
-		publisherMap.put(schemaTypePublisher.getSchemaType(), schemaTypePublisher);
+		handlerMap.put(schemaTypeHandler.getSchemaType(), schemaTypeHandler);
 	}
 
-	public SchemaTypePublisher getSchemaTypePublisher(String schemaType) {
-		return publisherMap.get(schemaType);
+	public SchemaTypeHandler getSchemaTypeHandler(String schemaType) {
+		return handlerMap.get(schemaType);
 	}
 
 	public static void main(String[] args) throws MalformedURLException {
 		URL schemaRegistryUrl = new URL("http://localhost:9090");
 
-		HortonworksSchemaRegistryManager schemaRegistryPublisher = new HortonworksSchemaRegistryManager(schemaRegistryUrl);
-		schemaRegistryPublisher.initSchemaRegistry();
+		HortonworksSchemaRegistryManager hortonworksSchemaRegistryManager = new HortonworksSchemaRegistryManager(schemaRegistryUrl);
+		hortonworksSchemaRegistryManager.initSchemaRegistry();
 
-		schemaRegistryPublisher.getSchemaTypePublisher(AvroSchemaProvider.TYPE)
+		hortonworksSchemaRegistryManager.getSchemaTypeHandler(AvroSchemaProvider.TYPE)
 				.publishSchema(new File("src/test/resources/user.avsc"));
 	}
 }

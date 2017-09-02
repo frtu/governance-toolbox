@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.frtu.schemaregistries.SchemaTypePublisher;
+import com.github.frtu.schemaregistries.SchemaTypeHandler;
 import com.hortonworks.registries.schemaregistry.SchemaCompatibility;
 import com.hortonworks.registries.schemaregistry.SchemaIdVersion;
 import com.hortonworks.registries.schemaregistry.SchemaMetadata;
@@ -29,12 +29,12 @@ import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
  * 
  * @author fred
  */
-public class AvroSchemaPublisher implements SchemaTypePublisher {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AvroSchemaPublisher.class);
+public class AvroSchemaHandler implements SchemaTypeHandler {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AvroSchemaHandler.class);
 
 	private SchemaRegistryClient schemaRegistryClient;
 
-	public AvroSchemaPublisher(SchemaRegistryClient schemaRegistryClient) {
+	public AvroSchemaHandler(SchemaRegistryClient schemaRegistryClient) {
 		super();
 		this.schemaRegistryClient = schemaRegistryClient;
 	}

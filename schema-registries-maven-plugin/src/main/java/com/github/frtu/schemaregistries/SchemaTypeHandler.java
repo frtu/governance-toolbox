@@ -7,7 +7,7 @@ import java.io.File;
  * 
  * @author fred
  */
-public interface SchemaTypePublisher {
+public interface SchemaTypeHandler {
 	/**
 	 * Type of schema this publisher handles : avro, ...
 	 * 
