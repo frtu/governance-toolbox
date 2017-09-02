@@ -10,7 +10,7 @@
 
 	<groupId>com.github.frtu.schema-registries</groupId>
 	<artifactId>schema-registries-toolbox-pom</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Schema Registries toolbox</name>
@@ -38,7 +38,7 @@
 		<connection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</connection>
 		<developerConnection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</developerConnection>
 		<url>https://github.com/frtu/schema-registries-toolbox/tree/master</url>
-		<tag>version-0.1.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
