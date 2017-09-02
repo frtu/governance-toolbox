@@ -2,12 +2,15 @@ package com.github.frtu.schemaregistries;
 
 import java.io.File;
 
+import com.hortonworks.registries.schemaregistry.SchemaVersionInfo;
+import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
+
 /**
  * Publish Schema from the format {@link #getSchemaType()}.
  * 
  * @author fred
  */
-public interface SchemaTypeHandler {
+public interface SchemaHandler {
 	/**
 	 * Type of schema this publisher handles : avro, ...
 	 * 
@@ -37,4 +40,6 @@ public interface SchemaTypeHandler {
 	 * @param versionDescription
 	 */
 	void publishSchema(File schemaFile, String versionDescription);
+
+	String fetchSchema(String schemaFullName);
 }

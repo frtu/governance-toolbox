@@ -68,14 +68,14 @@ public class SchemaRegistryPublisherMojo extends AbstractMojo {
 		}
 		info("=> Server validation successful !");
 
-		final SchemaTypeHandler schemaTypeHandler = schemaRegistryPublisher.getSchemaTypeHandler(schemaType);
+		final SchemaHandler schemaHandler = schemaRegistryPublisher.getSchemaHandler(schemaType);
 
 		DirectoryScanner directoryScanner = new DirectoryScanner(file -> {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append(schemaVersionDescription).append(" for file=").append(file.getAbsolutePath());
-			schemaTypeHandler.publishSchema(file, schemaVersionDescription);
+			schemaHandler.publishSchema(file, schemaVersionDescription);
 		});
-		directoryScanner.setFileExtensionToFilter(schemaTypeHandler.getSchemaFileExtensions());
+		directoryScanner.setFileExtensionToFilter(schemaHandler.getSchemaFileExtensions());
 
 		info("Scanning directory {}", schemaPath);
 		directoryScanner.scanDirectory(schemaPath);
