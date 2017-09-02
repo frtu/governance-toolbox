@@ -105,12 +105,10 @@ public class AvroSchemaHandler implements SchemaHandler {
 			try {
 				schemaCompatibility = checkCompability(schema, previousSchema);
 			} catch (IllegalArgumentException e) {
-				StringBuilder stringBuilder = new StringBuilder();
-				stringBuilder.append("New Schema (schemaDescription=").append(schemaDescription);
-				stringBuilder.append(" & versionDescription=").append(versionDescription);
-				stringBuilder.append(") is INCOMPATIBLE with Old Schema schemaVersionInfo=")
-				        .append(schemaVersionInfo.getDescription());
-				throw new IllegalArgumentException(stringBuilder.toString(), e);
+				String errorMessage = String.format(
+				        "New Schema (schemaDescription=%s & versionDescription=%s) is INCOMPATIBLE with Old Schema schemaVersionInfo=%s. => For how to fix it sees the inner Exception message below this stack.",
+				        schemaDescription, versionDescription, schemaVersionInfo.getDescription());
+				throw new IllegalArgumentException(errorMessage, e);
 			}
 		} catch (SchemaNotFoundException | javax.ws.rs.NotFoundException e) {
 			LOGGER.info("No previous version of schema='{}", schemaFullName);
