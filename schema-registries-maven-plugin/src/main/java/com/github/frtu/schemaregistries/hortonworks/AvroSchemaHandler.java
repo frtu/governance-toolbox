@@ -50,29 +50,30 @@ public class AvroSchemaHandler implements SchemaHandler {
 	}
 
 	@Override
-	public void publishSchema(File schemaFile) {
-		this.publishSchema(schemaFile, null);
+	public String publishSchema(File schemaFile) {
+		return this.publishSchema(schemaFile, null);
 	}
 
 	@Override
-	public void publishSchema(File schemaFile, String versionDescription) {
+	public String publishSchema(File schemaFile, String versionDescription) {
 		Schema schema;
 		try {
 			schema = new Schema.Parser().parse(schemaFile);
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
-		publishSchema(schema, versionDescription);
+		return publishSchema(schema, versionDescription);
 	}
-
+	
 	/**
 	 * Publish the schema metadata with the provided description of this particular version (can come from a build
 	 * system).
 	 * 
-	 * @param schema
-	 * @param versionDescription
+	 * @param schema The schema object
+	 * @param versionDescription The description for this version
+	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	public void publishSchema(Schema schema, String versionDescription) {
+	public String publishSchema(Schema schema, String versionDescription) {
 		String doc = schema.getDoc();
 		if (StringUtils.isEmpty(doc)) {
 			LOGGER.warn("Attention, it's a best practice to add a 'doc' section to your avro schema");
@@ -80,9 +81,9 @@ public class AvroSchemaHandler implements SchemaHandler {
 		}
 
 		if (!StringUtils.isEmpty(versionDescription)) {
-			publishSchema(schema, versionDescription, doc);
+			return publishSchema(schema, versionDescription, doc);
 		} else {
-			publishSchema(schema, doc, doc);
+			return publishSchema(schema, doc, doc);
 		}
 	}
 
@@ -90,16 +91,17 @@ public class AvroSchemaHandler implements SchemaHandler {
 	 * Publish the schema metadata with its description and some description of this particular version (can come from a
 	 * build system).
 	 * 
-	 * @param schema
-	 * @param versionDescription
-	 * @param schemaDescription
+	 * @param schema The schema object
+	 * @param versionDescription The description for this version
+	 * @param schemaDescription The description for this schema
+	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	public void publishSchema(Schema schema, String versionDescription, String schemaDescription) {
-		String schemaFullName = schema.getFullName();
+	public String publishSchema(Schema schema, String versionDescription, String schemaDescription) {
+		String schemaIdentifier = schema.getFullName();
 		SchemaCompatibility schemaCompatibility = SchemaCompatibility.BACKWARD;
 
 		try {
-			SchemaVersionInfo schemaVersionInfo = getSchema(schemaFullName);
+			SchemaVersionInfo schemaVersionInfo = getSchema(schemaIdentifier);
 
 			Schema previousSchema = new Schema.Parser().parse(schemaVersionInfo.getSchemaText());
 			try {
@@ -111,18 +113,20 @@ public class AvroSchemaHandler implements SchemaHandler {
 				throw new IllegalArgumentException(errorMessage, e);
 			}
 		} catch (SchemaNotFoundException | javax.ws.rs.NotFoundException e) {
-			LOGGER.info("No previous version of schema='{}", schemaFullName);
+			LOGGER.info("No previous version of schema='{}", schemaIdentifier);
 		}
 
 		try {
-			SchemaMetadata schemaMetadata = new SchemaMetadata.Builder(schemaFullName).type(getSchemaType())
+			SchemaMetadata schemaMetadata = new SchemaMetadata.Builder(schemaIdentifier).type(getSchemaType())
 			        .schemaGroup(schema.getNamespace()).description(schemaDescription)
 			        .compatibility(schemaCompatibility).build();
 
 			SchemaIdVersion version = schemaRegistryClient.addSchemaVersion(schemaMetadata,
 			        new SchemaVersion(schema.toString(), versionDescription));
 
-			LOGGER.info("Registered schema metadata [{}] and returned version [{}]", schemaMetadata, version);
+			LOGGER.info("Registered schema metadata [{}] and returned version [{}] for schemaIdentifier [{}]",
+			        schemaMetadata, version, schemaIdentifier);
+			return schemaIdentifier;
 		} catch (InvalidSchemaException | IncompatibleSchemaException | SchemaNotFoundException e) {
 			throw new IllegalArgumentException(e);
 		}
@@ -141,27 +145,21 @@ public class AvroSchemaHandler implements SchemaHandler {
 		return SchemaCompatibility.BACKWARD;
 	}
 
-	/**
-	 * Fetch the schema text from Schema Registry. Throws IllegalArgumentException when schema not found.
-	 * 
-	 * @param schemaFullName
-	 * @return
-	 */
 	@Override
-	public String fetchSchema(String schemaFullName) {
+	public String fetchSchema(String schemaIdentifier) {
 		try {
-			SchemaVersionInfo schemaVersionInfo = getSchema(schemaFullName);
+			SchemaVersionInfo schemaVersionInfo = getSchema(schemaIdentifier);
 			String schemaText = schemaVersionInfo.getSchemaText();
 			return schemaText;
 		} catch (SchemaNotFoundException e) {
-			throw new IllegalArgumentException("No schema found for schemaFullName=" + schemaFullName, e);
+			throw new IllegalArgumentException("No schema found for schemaFullName=" + schemaIdentifier, e);
 		}
 	}
 
-	private SchemaVersionInfo getSchema(String schemaFullName) throws SchemaNotFoundException {
-		SchemaVersionInfo schemaVersionInfo = schemaRegistryClient.getLatestSchemaVersionInfo(schemaFullName);
+	private SchemaVersionInfo getSchema(String schemaIdentifier) throws SchemaNotFoundException {
+		SchemaVersionInfo schemaVersionInfo = schemaRegistryClient.getLatestSchemaVersionInfo(schemaIdentifier);
 
-		LOGGER.info("Fetched schema using schemaFullName={} version={} timestamp={} description={}", schemaFullName,
+		LOGGER.info("Fetched schema using schemaIdentifier={} version={} timestamp={} description={}", schemaIdentifier,
 		        schemaVersionInfo.getVersion(), schemaVersionInfo.getTimestamp(), schemaVersionInfo.getDescription());
 		LOGGER.debug("SchemaText={}", schemaVersionInfo.getSchemaText());
 		return schemaVersionInfo;

@@ -2,9 +2,6 @@ package com.github.frtu.schemaregistries;
 
 import java.io.File;
 
-import com.hortonworks.registries.schemaregistry.SchemaVersionInfo;
-import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
-
 /**
  * Publish Schema from the format {@link #getSchemaType()}.
  * 
@@ -12,34 +9,43 @@ import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
  */
 public interface SchemaHandler {
 	/**
-	 * Type of schema this publisher handles : avro, ...
+	 * Return the type of schema this publisher handles.
 	 * 
-	 * @return
+	 * @return avro, ...
 	 */
 	String getSchemaType();
 
 	/**
-	 * Schema File extension matching this schema type {@link #getSchemaType()}.
+	 * Return all the schema file extension matching this schema type {@link #getSchemaType()}.
 	 * 
-	 * @return
+	 * @return .avsc, .proto, ...
 	 */
 	String[] getSchemaFileExtensions();
 
 	/**
-	 * Publish the schema file of format {@link #getSchemaType()}.
+	 * Fetch the schema text from Schema Registry. Throws IllegalArgumentException when schema not found.
+	 * 
+	 * @param schemaIdentifier The unique identifier for this schema into the registry
+	 * @return schema payload from the handled type.
+	 */
+	String fetchSchema(String schemaIdentifier);
+
+	/**
+	 * Publish the schema file of format {@link #getSchemaType()}. Return the schemaIdentifier that you can use to
+	 * {@link #fetchSchema(String)}
 	 * 
 	 * @param schemaFile Path to the schema file
+	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	void publishSchema(File schemaFile);
+	String publishSchema(File schemaFile);
 
 	/**
 	 * Publish the schema file of format {@link #getSchemaType()} and some description of this particular version (can
-	 * come from a build system).
+	 * come from a build system). Return the schemaIdentifier that you can use to {@link #fetchSchema(String)}
 	 * 
 	 * @param schemaFile Path to the schema file
-	 * @param versionDescription
+	 * @param versionDescription The description for this version
+	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	void publishSchema(File schemaFile, String versionDescription);
-
-	String fetchSchema(String schemaFullName);
+	String publishSchema(File schemaFile, String versionDescription);
 }

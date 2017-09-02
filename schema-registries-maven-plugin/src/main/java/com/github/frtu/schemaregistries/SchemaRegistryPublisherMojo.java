@@ -71,9 +71,10 @@ public class SchemaRegistryPublisherMojo extends AbstractMojo {
 		final SchemaHandler schemaHandler = schemaRegistryPublisher.getSchemaHandler(schemaType);
 
 		DirectoryScanner directoryScanner = new DirectoryScanner(file -> {
-			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(schemaVersionDescription).append(" for file=").append(file.getAbsolutePath());
-			schemaHandler.publishSchema(file, schemaVersionDescription);
+			String absolutePath = file.getAbsolutePath();
+			String fullVersionDescription = String.format("%s for file=%s", schemaVersionDescription, absolutePath);
+			String schemaIdentifier = schemaHandler.publishSchema(file, fullVersionDescription);
+			info("Successfully published id={} path={}", schemaIdentifier, absolutePath);
 		});
 		directoryScanner.setFileExtensionToFilter(schemaHandler.getSchemaFileExtensions());
 
