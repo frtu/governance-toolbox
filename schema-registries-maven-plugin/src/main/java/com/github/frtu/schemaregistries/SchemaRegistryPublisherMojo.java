@@ -11,6 +11,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
 import com.github.frtu.schemaregistries.hortonworks.HortonworksSchemaRegistryManager;
+import com.github.frtu.simple.scan.DirectoryScanner;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
 
 /**
@@ -32,11 +33,18 @@ public class SchemaRegistryPublisherMojo extends AbstractMojo {
 	 */
 	@Parameter(property = "schema.type", defaultValue = AvroSchemaProvider.TYPE)
 	private String schemaType;
+
 	/**
 	 * Schemas directory folder
 	 */
 	@Parameter(property = "schema.path", defaultValue = "${project.basedir}/src/main/avro")
 	private File schemaPath;
+
+	/**
+	 * Description for this particular version (Build ID, artifact, ...).
+	 */
+	@Parameter(property = "schema.version.description", defaultValue = "${project.groupId}-${project.artifactId}-${project.version}")
+	private String schemaVersionDescription;
 
 	@Parameter(defaultValue = "${project}", required = true, readonly = true)
 	private MavenProject mavenProject;
@@ -45,20 +53,32 @@ public class SchemaRegistryPublisherMojo extends AbstractMojo {
 		info("Parameter : schemaregistry.url={}", schemaRegistryUrl);
 		info("Parameter : schema.type={}", schemaType);
 		info("Parameter : schema.path={}", schemaPath);
+		info("Parameter : schema.version.description={}", schemaVersionDescription);
 
-		HortonworksSchemaRegistryManager schemaRegistryPublisher = new HortonworksSchemaRegistryManager(schemaRegistryUrl);
+		HortonworksSchemaRegistryManager schemaRegistryPublisher = new HortonworksSchemaRegistryManager(
+		        schemaRegistryUrl);
 		try {
 			info("Init connection to Schema Registry");
 			schemaRegistryPublisher.initSchemaRegistry();
 		} catch (Exception e) {
 			throw new MojoExecutionException(
-					format("ATTENTION : Configured schemaregistry.url={} doesn't link to an existing instance. Please check URL or if server is up!",
-							schemaRegistryUrl),
-					e);
+			        format("ATTENTION : Configured schemaregistry.url={} doesn't link to an existing instance. Please check URL or if server is up!",
+			                schemaRegistryUrl),
+			        e);
 		}
 		info("=> Server validation successful !");
-		SchemaTypePublisher schemaTypePublisher = schemaRegistryPublisher.getSchemaTypePublisher(schemaType);
-		schemaTypePublisher.publishSchemaFolder(schemaPath);
+
+		final SchemaTypePublisher schemaTypePublisher = schemaRegistryPublisher.getSchemaTypePublisher(schemaType);
+
+		DirectoryScanner directoryScanner = new DirectoryScanner(file -> {
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(schemaVersionDescription).append(" for file=").append(file.getAbsolutePath());
+			schemaTypePublisher.publishSchema(file, schemaVersionDescription);
+		});
+		directoryScanner.setFileExtensionToFilter(schemaTypePublisher.getSchemaFileExtensions());
+
+		info("Scanning directory {}", schemaPath);
+		directoryScanner.scanDirectory(schemaPath);
 	}
 
 	private void debug(String template, Object... argv) {

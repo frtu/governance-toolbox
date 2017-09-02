@@ -16,6 +16,13 @@ public interface SchemaTypePublisher {
 	String getSchemaType();
 
 	/**
+	 * Schema File extension matching this schema type {@link #getSchemaType()}.
+	 * 
+	 * @return
+	 */
+	String[] getSchemaFileExtensions();
+
+	/**
 	 * Publish the schema file of format {@link #getSchemaType()}.
 	 * 
 	 * @param schemaFile Path to the schema file
@@ -23,10 +30,11 @@ public interface SchemaTypePublisher {
 	void publishSchema(File schemaFile);
 
 	/**
-	 * Scan the whole folder for matching schema file extension of format
-	 * {@link #getSchemaType()}.
+	 * Publish the schema file of format {@link #getSchemaType()} and some description of this particular version (can
+	 * come from a build system).
 	 * 
-	 * @param schemaPath Path to the schema folder
+	 * @param schemaFile Path to the schema file
+	 * @param versionDescription
 	 */
-	void publishSchemaFolder(File schemaPath);
+	void publishSchema(File schemaFile, String versionDescription);
 }
