@@ -32,7 +32,7 @@ import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
 public class AvroSchemaHandler implements SchemaHandler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AvroSchemaHandler.class);
 
-	private SchemaRegistryClient schemaRegistryClient;
+	SchemaRegistryClient schemaRegistryClient;
 
 	public AvroSchemaHandler(SchemaRegistryClient schemaRegistryClient) {
 		super();
@@ -156,7 +156,7 @@ public class AvroSchemaHandler implements SchemaHandler {
 		}
 	}
 
-	private SchemaVersionInfo getSchema(String schemaIdentifier) throws SchemaNotFoundException {
+	SchemaVersionInfo getSchema(String schemaIdentifier) throws SchemaNotFoundException {
 		SchemaVersionInfo schemaVersionInfo = schemaRegistryClient.getLatestSchemaVersionInfo(schemaIdentifier);
 
 		LOGGER.info("Fetched schema using schemaIdentifier={} version={} timestamp={} description={}", schemaIdentifier,

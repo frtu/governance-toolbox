@@ -8,17 +8,17 @@
 		<version>7</version>
 	</parent>
 
-	<groupId>com.github.frtu.schema-registries</groupId>
-	<artifactId>schema-registries-toolbox-pom</artifactId>
+	<groupId>com.github.frtu.governance</groupId>
+	<artifactId>master-pom</artifactId>
 	<version>0.1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Schema Registries toolbox</name>
-	<description>A toolbox for registries of Data model schema</description>
-	<url>https://github.com/frtu/schema-registries-toolbox/</url>
+	<name>Governance toolbox</name>
+	<description>A toolbox for tracking static metdata (Data model schema, ...) and dynamic metadata.</description>
+	<url>https://github.com/frtu/governance-toolbox/</url>
 
 	<modules>
-		<module>schema-registries-maven-plugin</module>
+		<module>schema-registries</module>
 	</modules>
 
 	<licenses>
@@ -35,9 +35,9 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</connection>
-		<developerConnection>scm:git:git@github.com:frtu/schema-registries-toolbox.git</developerConnection>
-		<url>https://github.com/frtu/schema-registries-toolbox/tree/master</url>
+		<connection>scm:git:git@github.com:frtu/governance-toolbox.git</connection>
+		<developerConnection>scm:git:git@github.com:frtu/governance-toolbox.git</developerConnection>
+		<url>https://github.com/frtu/governance-toolbox/tree/master</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -58,45 +58,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-
-		<slf4j.version>1.7.20</slf4j.version>
-		<junit.version>4.11</junit.version>
 	</properties>
-
-
-	<dependencies>
-		<!-- Logs -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-
-		<!-- TEST -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>
-			<!-- Logs -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-
-			<!-- TEST -->
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
-				<scope>test</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>
