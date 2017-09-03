@@ -7,12 +7,12 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>schema-registries-toolbox-pom</artifactId>
+	<artifactId>timeseries-toolbox-pom</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Schema Registries toolbox</name>
-	<description>A toolbox for registries of Data model schema</description>
+	<name>TimeSeries DB toolbox</name>
+	<description>A toolbox for timeseries</description>
 	<modules>
-		<module>schema-registries-maven-plugin</module>
+		<module>influxdb-maven-plugin</module>
 	</modules>
 </project>

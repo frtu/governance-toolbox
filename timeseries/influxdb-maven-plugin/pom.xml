@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.frtu.governance</groupId>
+		<artifactId>maven-plugin-parent-pom</artifactId>
+		<version>0.1.2-SNAPSHOT</version>
+		<relativePath>../../maven-plugins/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>influxdb-maven-plugin</artifactId>
+	<packaging>maven-plugin</packaging>
+
+	<name>influxdb-maven-plugin Maven Plugin</name>
+	<description>A maven plugin to register metrics into InfluxDB.</description>
+
+	<properties>
+		<influxdb.version>2.7</influxdb.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.influxdb</groupId>
+			<artifactId>influxdb-java</artifactId>
+			<version>${influxdb.version}</version>
+		</dependency>
+	</dependencies>
+</project>
