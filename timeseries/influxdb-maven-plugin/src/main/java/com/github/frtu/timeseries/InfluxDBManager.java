@@ -43,11 +43,4 @@ public class InfluxDBManager implements Closeable {
         influxDB.disableBatch();
         influxDB.close();
 	}
-
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
