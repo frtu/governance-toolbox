@@ -50,30 +50,30 @@ public class AvroSchemaHandler implements SchemaHandler {
 	}
 
 	@Override
-	public String publishSchema(File schemaFile) {
-		return this.publishSchema(schemaFile, null);
+	public String registerSchema(File schemaFile) {
+		return this.registerSchema(schemaFile, null);
 	}
 
 	@Override
-	public String publishSchema(File schemaFile, String versionDescription) {
+	public String registerSchema(File schemaFile, String versionDescription) {
 		Schema schema;
 		try {
 			schema = new Schema.Parser().parse(schemaFile);
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e);
 		}
-		return publishSchema(schema, versionDescription);
+		return registerSchema(schema, versionDescription);
 	}
 	
 	/**
-	 * Publish the schema metadata with the provided description of this particular version (can come from a build
+	 * Register the schema metadata with the provided description of this particular version (can come from a build
 	 * system).
 	 * 
 	 * @param schema The schema object
 	 * @param versionDescription The description for this version
 	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	public String publishSchema(Schema schema, String versionDescription) {
+	public String registerSchema(Schema schema, String versionDescription) {
 		String doc = schema.getDoc();
 		if (StringUtils.isEmpty(doc)) {
 			LOGGER.warn("Attention, it's a best practice to add a 'doc' section to your avro schema");
@@ -81,14 +81,14 @@ public class AvroSchemaHandler implements SchemaHandler {
 		}
 
 		if (!StringUtils.isEmpty(versionDescription)) {
-			return publishSchema(schema, versionDescription, doc);
+			return registerSchema(schema, versionDescription, doc);
 		} else {
-			return publishSchema(schema, doc, doc);
+			return registerSchema(schema, doc, doc);
 		}
 	}
 
 	/**
-	 * Publish the schema metadata with its description and some description of this particular version (can come from a
+	 * Register the schema metadata with its description and some description of this particular version (can come from a
 	 * build system).
 	 * 
 	 * @param schema The schema object
@@ -96,7 +96,7 @@ public class AvroSchemaHandler implements SchemaHandler {
 	 * @param schemaDescription The description for this schema
 	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	public String publishSchema(Schema schema, String versionDescription, String schemaDescription) {
+	public String registerSchema(Schema schema, String versionDescription, String schemaDescription) {
 		String schemaIdentifier = schema.getFullName();
 		SchemaCompatibility schemaCompatibility = SchemaCompatibility.BACKWARD;
 
@@ -146,7 +146,7 @@ public class AvroSchemaHandler implements SchemaHandler {
 	}
 
 	@Override
-	public String fetchSchema(String schemaIdentifier) {
+	public String downloadSchema(String schemaIdentifier) {
 		try {
 			SchemaVersionInfo schemaVersionInfo = getSchema(schemaIdentifier);
 			String schemaText = schemaVersionInfo.getSchemaText();

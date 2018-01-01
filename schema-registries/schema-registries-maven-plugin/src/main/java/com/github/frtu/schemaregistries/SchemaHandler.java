@@ -28,24 +28,24 @@ public interface SchemaHandler {
 	 * @param schemaIdentifier The unique identifier for this schema into the registry
 	 * @return schema payload from the handled type.
 	 */
-	String fetchSchema(String schemaIdentifier);
+	String downloadSchema(String schemaIdentifier);
 
 	/**
-	 * Publish the schema file of format {@link #getSchemaType()}. Return the schemaIdentifier that you can use to
-	 * {@link #fetchSchema(String)}
+	 * Register the schema file of format {@link #getSchemaType()}. Return the schemaIdentifier that you can use to
+	 * {@link #downloadSchema(String)}
 	 * 
 	 * @param schemaFile Path to the schema file
 	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	String publishSchema(File schemaFile);
+	String registerSchema(File schemaFile);
 
 	/**
-	 * Publish the schema file of format {@link #getSchemaType()} and some description of this particular version (can
-	 * come from a build system). Return the schemaIdentifier that you can use to {@link #fetchSchema(String)}
+	 * Register the schema file of format {@link #getSchemaType()} and some description of this particular version (can
+	 * come from a build system). Return the schemaIdentifier that you can use to {@link #downloadSchema(String)}
 	 * 
 	 * @param schemaFile Path to the schema file
 	 * @param versionDescription The description for this version
 	 * @return schemaIdentifier The unique identifier for this schema into the registry
 	 */
-	String publishSchema(File schemaFile, String versionDescription);
+	String registerSchema(File schemaFile, String versionDescription);
 }

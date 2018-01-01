@@ -15,7 +15,7 @@ import com.github.frtu.simple.scan.DirectoryScanner;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
 
 /**
- * Publish project Avro schema into Hortonworks Schema Registry
+ * Publish project Avro schema into Schema Registry
  * 
  * @author frtu
  */
@@ -73,7 +73,7 @@ public class SchemaRegistryPublisherMojo extends AbstractMojo {
 		DirectoryScanner directoryScanner = new DirectoryScanner(file -> {
 			String absolutePath = file.getAbsolutePath();
 			String fullVersionDescription = String.format("%s for file=%s", schemaVersionDescription, absolutePath);
-			String schemaIdentifier = schemaHandler.publishSchema(file, fullVersionDescription);
+			String schemaIdentifier = schemaHandler.registerSchema(file, fullVersionDescription);
 			info("Successfully published id={} path={}", schemaIdentifier, absolutePath);
 		});
 		directoryScanner.setFileExtensionToFilter(schemaHandler.getSchemaFileExtensions());

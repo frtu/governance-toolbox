@@ -104,6 +104,6 @@ public class HortonworksSchemaRegistryManager {
 		hortonworksSchemaRegistryManager.initSchemaRegistry();
 
 		hortonworksSchemaRegistryManager.getSchemaHandler(AvroSchemaProvider.TYPE)
-				.publishSchema(new File("src/test/resources/user.avsc"));
+				.registerSchema(new File("src/test/resources/user.avsc"));
 	}
 }
