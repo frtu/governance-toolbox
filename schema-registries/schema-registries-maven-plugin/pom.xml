@@ -34,7 +34,12 @@
 			<artifactId>schema-registry-serdes</artifactId>
 			<version>${hortonworks.registries.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-schema-registry-client</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.github.frtu.simple</groupId>
 			<artifactId>simple-scan</artifactId>
