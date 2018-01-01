@@ -1,20 +1,16 @@
 package com.github.frtu.schemaregistries.hortonworks;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.avro.Schema;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.frtu.schemaregistries.AbstractAvroSchemaHandler;
 import com.github.frtu.schemaregistries.SchemaHandler;
 import com.hortonworks.registries.schemaregistry.SchemaCompatibility;
 import com.hortonworks.registries.schemaregistry.SchemaIdVersion;
 import com.hortonworks.registries.schemaregistry.SchemaMetadata;
 import com.hortonworks.registries.schemaregistry.SchemaVersion;
 import com.hortonworks.registries.schemaregistry.SchemaVersionInfo;
-import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaValidator;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaValidator.SchemaCompatibilityResult;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaValidator.SchemaIncompatibilityType;
@@ -25,12 +21,12 @@ import com.hortonworks.registries.schemaregistry.errors.InvalidSchemaException;
 import com.hortonworks.registries.schemaregistry.errors.SchemaNotFoundException;
 
 /**
- * Publisher for Avro schema Files &amp; Folders
+ * Publisher for Hortonworks Avro schema Files &amp; Folders
  * 
  * @author fred
  */
-public class AvroSchemaHandler implements SchemaHandler {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AvroSchemaHandler.class);
+public class AvroSchemaHandler extends AbstractAvroSchemaHandler implements SchemaHandler {
+	static final Logger LOGGER = LoggerFactory.getLogger(AvroSchemaHandler.class);
 
 	SchemaRegistryClient schemaRegistryClient;
 
@@ -40,53 +36,25 @@ public class AvroSchemaHandler implements SchemaHandler {
 	}
 
 	@Override
-	public String getSchemaType() {
-		return AvroSchemaProvider.TYPE;
-	}
-
-	@Override
-	public String[] getSchemaFileExtensions() {
-		return new String[] { "avsc" };
-	}
-
-	@Override
-	public String registerSchema(File schemaFile) {
-		return this.registerSchema(schemaFile, null);
-	}
-
-	@Override
-	public String registerSchema(File schemaFile, String versionDescription) {
-		Schema schema;
+	public String downloadSchema(String schemaIdentifier) {
 		try {
-			schema = new Schema.Parser().parse(schemaFile);
-		} catch (IOException e) {
-			throw new IllegalArgumentException(e);
+			SchemaVersionInfo schemaVersionInfo = getSchema(schemaIdentifier);
+			String schemaText = schemaVersionInfo.getSchemaText();
+			return schemaText;
+		} catch (SchemaNotFoundException e) {
+			throw new IllegalArgumentException("No schema found for schemaFullName=" + schemaIdentifier, e);
 		}
-		return registerSchema(schema, versionDescription);
+	}
+
+	SchemaVersionInfo getSchema(String schemaIdentifier) throws SchemaNotFoundException {
+		SchemaVersionInfo schemaVersionInfo = schemaRegistryClient.getLatestSchemaVersionInfo(schemaIdentifier);
+
+		LOGGER.info("Fetched schema using schemaIdentifier={} version={} timestamp={} description={}", schemaIdentifier,
+		        schemaVersionInfo.getVersion(), schemaVersionInfo.getTimestamp(), schemaVersionInfo.getDescription());
+		LOGGER.debug("SchemaText={}", schemaVersionInfo.getSchemaText());
+		return schemaVersionInfo;
 	}
 	
-	/**
-	 * Register the schema metadata with the provided description of this particular version (can come from a build
-	 * system).
-	 * 
-	 * @param schema The schema object
-	 * @param versionDescription The description for this version
-	 * @return schemaIdentifier The unique identifier for this schema into the registry
-	 */
-	public String registerSchema(Schema schema, String versionDescription) {
-		String doc = schema.getDoc();
-		if (StringUtils.isEmpty(doc)) {
-			LOGGER.warn("Attention, it's a best practice to add a 'doc' section to your avro schema");
-			doc = schema.getFullName();
-		}
-
-		if (!StringUtils.isEmpty(versionDescription)) {
-			return registerSchema(schema, versionDescription, doc);
-		} else {
-			return registerSchema(schema, doc, doc);
-		}
-	}
-
 	/**
 	 * Register the schema metadata with its description and some description of this particular version (can come from a
 	 * build system).
@@ -131,7 +99,7 @@ public class AvroSchemaHandler implements SchemaHandler {
 			throw new IllegalArgumentException(e);
 		}
 	}
-
+	
 	public SchemaCompatibility checkCompability(Schema newSchema, Schema existingSchema) {
 		SchemaPairCompatibility compatibility = AvroSchemaValidator.checkReaderWriterCompatibility(newSchema,
 		        existingSchema);
@@ -143,25 +111,5 @@ public class AvroSchemaHandler implements SchemaHandler {
 			throw new IllegalArgumentException(schemaCompatibilityResult.getMessage());
 		}
 		return SchemaCompatibility.BACKWARD;
-	}
-
-	@Override
-	public String downloadSchema(String schemaIdentifier) {
-		try {
-			SchemaVersionInfo schemaVersionInfo = getSchema(schemaIdentifier);
-			String schemaText = schemaVersionInfo.getSchemaText();
-			return schemaText;
-		} catch (SchemaNotFoundException e) {
-			throw new IllegalArgumentException("No schema found for schemaFullName=" + schemaIdentifier, e);
-		}
-	}
-
-	SchemaVersionInfo getSchema(String schemaIdentifier) throws SchemaNotFoundException {
-		SchemaVersionInfo schemaVersionInfo = schemaRegistryClient.getLatestSchemaVersionInfo(schemaIdentifier);
-
-		LOGGER.info("Fetched schema using schemaIdentifier={} version={} timestamp={} description={}", schemaIdentifier,
-		        schemaVersionInfo.getVersion(), schemaVersionInfo.getTimestamp(), schemaVersionInfo.getDescription());
-		LOGGER.debug("SchemaText={}", schemaVersionInfo.getSchemaText());
-		return schemaVersionInfo;
 	}
 }
