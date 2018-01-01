@@ -19,7 +19,7 @@ import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
  * 
  * @author frtu
  */
-@Mojo(name = "publish", // configurator = "include-project-dependencies",
+@Mojo(name = "register", // configurator = "include-project-dependencies",
 requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME)
 public class SchemaRegistryPublisherMojo extends AbstractMojo {
 	/**
