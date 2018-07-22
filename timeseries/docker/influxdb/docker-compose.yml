@@ -3,14 +3,16 @@
 version: '2.1'
 services:
   influxdb:
-    image: influxdb:1.3.5
+    image: influxdb:1.5.4
     hostname: influxdb
     expose:
       - "8086"
+      - "8083"
     ports:
+      - "8083:8083"
       - "8086:8086"
-    volumes:
-      - ~/data/influxdb:/var/lib/influxdb  
+#    volumes:
+#      - ~/data/influxdb:/var/lib/influxdb  
     environment:
       PRE_CREATE_DB: misc
     healthcheck:
@@ -20,11 +22,11 @@ services:
       retries: 3
 
   grafana:
-    image: grafana/grafana:4.4.3
+    image: grafana/grafana:5.2.1
     hostname: grafana
     depends_on:
       influxdb: { condition: service_healthy }
     ports:
       - "3000:3000"
-    volumes:
-      - ~/data/grafana:/var/lib/grafana
+#    volumes:
+#      - ~/data/grafana:/var/lib/grafana
