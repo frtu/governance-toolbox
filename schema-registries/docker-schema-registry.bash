@@ -28,12 +28,16 @@ schemaregistry_hortonworks_start() {
 
 echo "== Type 'schemaregistry_confluentinc_start' to start Confluence Schema Registry =="
 schemaregistry_confluentinc_start() {
+	if [ -n "$SERVICE_SCR_dckkafka" ]; then
+		export DCK_SCRIPT=$SERVICE_SCR_dckkafka
+	fi
+
 	echo "Make sure you have ** docker-compose ** installed using 2.1 that allow ordering!!"
 	echo "- http://127.0.0.1:8000 for Schema Registry UI"
 	echo "- http://127.0.0.1:8081/subjects/[NAME]/versions Schema Registry APIs"
 
-  	echo "export DCK_KAFKA_INSTANCE=${CONFLUENT_KAFKA_INSTANCE}" > $DCK_SCRIPT
-  	echo "export DCK_ZK_INSTANCE=${CONFLUENT_ZK_INSTANCE}" >> $DCK_SCRIPT
+	echo "export DCK_INSTANCE_NAME_KAFKA=${CONFLUENT_KAFKA_INSTANCE}" > $DCK_SCRIPT
+	echo "export DCK_INSTANCE_NAME_ZK=${CONFLUENT_ZK_INSTANCE}" >> $DCK_SCRIPT
 	(cd docker/confluentinc-schema-registry && exec docker-compose up)
 	dckmport 8000
 	dckmport 8081
@@ -44,16 +48,16 @@ shckafka() {
 	if [ -f "${DCK_SCRIPT}" ]; then
 	  source $DCK_SCRIPT
 	fi
-	echo "dckbash $DCK_KAFKA_INSTANCE $@"
-    dckbash $DCK_KAFKA_INSTANCE "$@"
+	echo "dckbash $DCK_INSTANCE_NAME_KAFKA $@"
+    dckbash $DCK_INSTANCE_NAME_KAFKA "$@"
 }
 echo "== Type 'shczk' to start Confluence Zookeeper bash =="
 shczk() {
 	if [ -f "${DCK_SCRIPT}" ]; then
 	  source $DCK_SCRIPT
 	fi
-	echo "dckbash ${DCK_ZK_INSTANCE} $@"
-	dckbash ${DCK_ZK_INSTANCE} "$@"
+	echo "dckbash ${DCK_INSTANCE_NAME_ZK} $@"
+	dckbash ${DCK_INSTANCE_NAME_ZK} "$@"
 }
 dckbash() {
   usage $# "IMAGE_NAME" "[COMMANDS]"
