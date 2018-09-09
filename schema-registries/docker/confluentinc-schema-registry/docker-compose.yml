@@ -3,7 +3,7 @@
 version: '2.1'
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:3.3.0
+    image: confluentinc/cp-zookeeper:5.0.0-2
     hostname: zookeeper
     ports:
       - "2181:2181"
@@ -18,7 +18,7 @@ services:
       retries: 3
 
   broker:
-    image: confluentinc/cp-kafka:3.3.0
+    image: confluentinc/cp-kafka:5.0.0-2
     hostname: broker
     depends_on:
       zookeeper: { condition: service_healthy }
@@ -41,7 +41,7 @@ services:
       retries: 3
 
   schema_registry:
-    image: confluentinc/cp-schema-registry:3.3.0
+    image: confluentinc/cp-schema-registry:5.0.0-1
     hostname: schema_registry
     depends_on:
       broker: { condition: service_healthy }
@@ -54,7 +54,7 @@ services:
 #      SCHEMA_REGISTRY_DEBUG: "true"
 
   schema_registry_ui:
-    image: landoop/schema-registry-ui:0.9.3
+    image: landoop/schema-registry-ui:0.9.5
     hostname: schema_registry_ui
     ports:
       - "8000:8000"
