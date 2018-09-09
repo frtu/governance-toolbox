@@ -36,7 +36,7 @@ schemaregistry_confluentinc_start() {
 	echo "- http://127.0.0.1:8000 for Schema Registry UI"
 	echo "- http://127.0.0.1:8081/subjects/[NAME]/versions Schema Registry APIs"
 
-	echo "export DCK_INSTANCE_NAME_KAFKA=${CONFLUENT_KAFKA_INSTANCE}" > $DCK_SCRIPT
+	echo "export DCK_INSTANCE_NAME_KAFKA=${CONFLUENT_KAFKA_INSTANCE}" >> $DCK_SCRIPT
 	echo "export DCK_INSTANCE_NAME_ZK=${CONFLUENT_ZK_INSTANCE}" >> $DCK_SCRIPT
 	(cd docker/confluentinc-schema-registry && exec docker-compose up)
 	dckmport 8000
