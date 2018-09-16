@@ -7,10 +7,7 @@
     <version>${version}</version>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>${artifactId}</module>
-        <module>${artifactId}-model</module>
-    </modules>
+    <modules/>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
