@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.frtu.governance</groupId>
+		<artifactId>master-pom</artifactId>
+		<version>0.3.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.github.frtu.archetype</groupId>
+	<artifactId>archetype-pom</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Archetypes parent pom</name>
+	<description>A parent pom for all Archetypes</description>
+	<modules>
+		<module>base-pom</module>
+		<module>kafka-project</module>
+	</modules>
+</project>
