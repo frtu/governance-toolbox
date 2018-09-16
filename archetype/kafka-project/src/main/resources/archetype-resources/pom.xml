@@ -1,6 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.frtu.archetype</groupId>
+        <artifactId>base-pom</artifactId>
+        <version>${base-pom-version}</version>
+    </parent>
 
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}-pom</artifactId>
@@ -14,19 +19,23 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <avro.version>1.8.2</avro.version>
         <!--===========================-->
-        <!--Uncomment to override version-->
+        <!-- Set based on docker confluentinc/cp-kafka:5.0.0-2 -->
+        <!-- & on https://search.maven.org/artifact/org.apache.kafka/kafka-clients/2.0.0/jar -->
         <!--===========================-->
-        <!--<slf4j.version>1.7.16</slf4j.version>-->
-        <!--<logback.version>1.1.5</logback.version>]-->
-        <!--<junit.version>4.10</junit.version>-->
+        <slf4j.version>1.7.25</slf4j.version>
+        <!--<logback.version>1.1.5</logback.version>-->
+        <junit.version>4.12</junit.version>
         <!--<powermock.version>1.6.2</powermock.version>-->
-        <!--<easymock.version>3.2</easymock.version>-->
+        <easymock.version>3.6</easymock.version>
 
-        <!--<commons-lang3.version>3.3.2</commons-lang3.version>-->
+        <commons-lang3.version>3.5</commons-lang3.version>
         <!--<commons-io.version>2.4</commons-io.version>-->
         <!--===========================-->
+
+        <avro.version>1.8.1</avro.version>
+        <jackson.version>2.9.6</jackson.version>
+        <kafka.version>2.0.0</kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -36,15 +45,32 @@
                 <artifactId>avro</artifactId>
                 <version>${avro.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!--Java client-->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+            <!--Scala client-->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.12</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
 
             <!-- Internal domain dependencies -->
-            <dependency>
-                <groupId>com.github.frtu.archetype</groupId>
-                <artifactId>base-pom</artifactId>
-                <version>0.3.0-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>com.github.frtu.archetype</groupId>-->
+                <!--<artifactId>base-pom</artifactId>-->
+                <!--<version>${base-pom-version}</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
     <build>

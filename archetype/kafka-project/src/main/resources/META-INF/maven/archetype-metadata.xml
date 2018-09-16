@@ -5,12 +5,11 @@
                       name="podcastpedia"
                       xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <!--<requiredProperties>-->
-        <!--<requiredProperty key="property-with-default">-->
-            <!--<defaultValue>default-value</defaultValue>-->
-        <!--</requiredProperty>-->
-        <!--<requiredProperty key="property-without-default"/>-->
-    <!--</requiredProperties>-->
+    <requiredProperties>
+        <requiredProperty key="base-pom-version">
+            <defaultValue>0.3.0-SNAPSHOT</defaultValue>
+        </requiredProperty>
+    </requiredProperties>
     <fileSets>
         <fileSet encoding="UTF-8">
             <directory></directory>
