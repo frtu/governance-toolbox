@@ -7,7 +7,7 @@
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <requiredProperties>
         <requiredProperty key="base-pom-version">
-            <defaultValue>0.3.0-SNAPSHOT</defaultValue>
+            <defaultValue>0.3.0</defaultValue>
         </requiredProperty>
     </requiredProperties>
     <fileSets>
@@ -62,7 +62,7 @@
                 <!--</fileSet>-->
             </fileSets>
         </module>
-        <module id="${rootArtifactId}" dir="__rootArtifactId__-model" name="${rootArtifactId}-model">
+        <module id="${rootArtifactId}" dir="__rootArtifactId__-datamodel" name="${rootArtifactId}-model">
             <fileSets>
                 <fileSet filtered="true" packaged="true" encoding="UTF-8">
                     <directory>src/main/java</directory>

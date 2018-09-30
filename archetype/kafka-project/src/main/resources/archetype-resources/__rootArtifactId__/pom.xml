@@ -17,7 +17,7 @@
         <!-- Internal domain dependencies -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>${artifactId}-model</artifactId>
+            <artifactId>${artifactId}-datamodel</artifactId>
             <version>${project.version}</version>
         </dependency>
 
