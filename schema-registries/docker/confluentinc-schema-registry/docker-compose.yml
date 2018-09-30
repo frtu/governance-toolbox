@@ -1,4 +1,5 @@
 # http://docs.confluent.io/current/cp-docker-images/docs/configuration.html
+# https://docs.confluent.io/current/installation/docker/docs/config-reference.html
 ---
 version: '2.1'
 services:
@@ -28,6 +29,10 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092'
+      # Comment for manual creation
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_BROKER_ID=1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
 #      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
 #      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
 #      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
