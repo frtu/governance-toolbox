@@ -28,11 +28,11 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:9092'
       # Comment for manual creation
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_BROKER_ID=1
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 #      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
 #      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
 #      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -61,14 +61,14 @@ services:
       KAFKA_REST_LISTENERS: 'http://kafka_rest:8082'
       KAFKA_REST_HOST_NAME: 'kafka_rest'
 
-  kafka-topics-ui:
-    image: landoop/kafka-topics-ui:0.9.4
-    hostname: kafka-topics-ui
-    ports:
-      - "8000:8000"
-    environment:
-      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
-      PROXY: 'true'
+#  kafka-topics-ui:
+#    image: landoop/kafka-topics-ui:0.9.4
+#    hostname: kafka-topics-ui
+#    ports:
+#      - "8000:8000"
+#    environment:
+#      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
+#      PROXY: 'true'
 
   schema_registry:
     image: confluentinc/cp-schema-registry:5.0.0-1
@@ -83,14 +83,14 @@ services:
 #      SCHEMA_REGISTRY_LISTENERS: 'http://schema_registry:8081'
 #      SCHEMA_REGISTRY_DEBUG: "true"
 
-# schema_registry_ui:
-#   image: landoop/schema-registry-ui:0.9.5
-#   hostname: schema_registry_ui
-#   ports:
-#     - "8000:8000"
-#   environment:
-#     SCHEMAREGISTRY_URL: 'http://schema_registry:8081'
-#     PROXY: 'true'
-#      ALLOW_GLOBAL: 1
+  schema_registry_ui:
+   image: landoop/schema-registry-ui:0.9.5
+   hostname: schema_registry_ui
+   ports:
+     - "8000:8000"
+   environment:
+      SCHEMAREGISTRY_URL: 'http://schema_registry:8081'
+      PROXY: 'true'
+      ALLOW_GLOBAL: 1
 #      ALLOW_TRANSITIVE: 1
 #      PROXY_SKIP_VERIFY: 'true'

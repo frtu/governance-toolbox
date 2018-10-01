@@ -11,8 +11,6 @@
     <artifactId>${artifactId}-datamodel</artifactId>
 
     <properties>
-        <!--<governance-maven-plugin.version>${base-pom-version}</governance-maven-plugin.version>-->
-        <!--<confluent-schema-registry-plugin.version>4.0.0</confluent-schema-registry-plugin.version>-->
         <!--<schemaregistry.url>http://localhost:8081</schemaregistry.url>-->
     </properties>
 
@@ -70,21 +68,19 @@
             <!--<plugin>-->
                 <!--<groupId>com.github.frtu.governance</groupId>-->
                 <!--<artifactId>schema-registries-maven-plugin</artifactId>-->
-                <!--<version>${governance-maven-plugin.version}</version>-->
             <!--</plugin>-->
             <!--===========================-->
             <!--UNCOMMENT FOR CONFLUENT SCHEMA REGISTRY-->
+            <!--https://docs.confluent.io/current/schema-registry/docs/maven-plugin.html-->
             <!--<plugin>-->
                 <!--<groupId>io.confluent</groupId>-->
                 <!--<artifactId>kafka-schema-registry-maven-plugin</artifactId>-->
-                <!--<version>${confluent-schema-registry-plugin.version}</version>-->
                 <!--<configuration>-->
                     <!--<schemaRegistryUrls>-->
                         <!--<param>${schemaregistry.url}</param>-->
                     <!--</schemaRegistryUrls>-->
                     <!--<subjects>-->
-                        <!--<TestSubject000-key>src/main/avro/xxx-Key.avsc</TestSubject000-key>-->
-                        <!--<TestSubject000-value>src/main/avro/xxx-Value.avsc</TestSubject000-value>-->
+                        <!--<schemaname>src/main/avro/schemafile.avsc</schemaname>-->
                     <!--</subjects>-->
                 <!--</configuration>-->
                 <!--<goals>-->

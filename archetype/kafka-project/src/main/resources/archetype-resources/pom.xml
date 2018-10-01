@@ -36,7 +36,21 @@
         <avro.version>1.8.1</avro.version>
         <jackson.version>2.8.5</jackson.version>
         <kafka.version>2.0.0</kafka.version>
+
+        <!--https://docs.confluent.io/current/schema-registry/docs/maven-plugin.html-->
+        <confluent.maven.repo>https://packages.confluent.io/maven/</confluent.maven.repo>
+        <confluent-schema-registry-plugin.version>5.0.0</confluent-schema-registry-plugin.version>
+        <!--https://github.com/frtu/governance-toolbox#hortonworks-schema-registry-->
+        <governance-maven-plugin.version>${base-pom-version}</governance-maven-plugin.version>
     </properties>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <name>Confluent</name>
+            <url>${confluent.maven.repo}</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencyManagement>
         <dependencies>
@@ -168,6 +182,21 @@
                         <arguments>${arguments}</arguments>
                     </configuration>
                 </plugin>
+                <!--===========================-->
+                <!--HORTONWORKS SCHEMA REGISTRY-->
+                <plugin>
+                    <groupId>com.github.frtu.governance</groupId>
+                    <artifactId>schema-registries-maven-plugin</artifactId>
+                    <version>${governance-maven-plugin.version}</version>
+                </plugin>
+                <!--===========================-->
+                <!-- CONFLUENT SCHEMA REGISTRY-->
+                <plugin>
+                    <groupId>io.confluent</groupId>
+                    <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                    <version>${confluent-schema-registry-plugin.version}</version>
+                </plugin>
+                <!--===========================-->
             </plugins>
         </pluginManagement>
     </build>
