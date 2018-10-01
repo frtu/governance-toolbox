@@ -45,31 +45,6 @@ services:
       timeout: 5s
       retries: 3
 
-  kafka_rest:
-    image: confluentinc/cp-kafka-rest:5.0.0-1
-    hostname: kafka_rest
-    depends_on:
-      - zookeeper
-      - schema_registry
-      - broker
-    ports:
-      - "8082:8082"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema_registry:8081'
-      KAFKA_REST_LISTENERS: 'http://kafka_rest:8082'
-      KAFKA_REST_HOST_NAME: 'kafka_rest'
-
-#  kafka-topics-ui:
-#    image: landoop/kafka-topics-ui:0.9.4
-#    hostname: kafka-topics-ui
-#    ports:
-#      - "8000:8000"
-#    environment:
-#      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
-#      PROXY: 'true'
-
   schema_registry:
     image: confluentinc/cp-schema-registry:5.0.0-1
     hostname: schema_registry
@@ -80,8 +55,9 @@ services:
     environment:
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
       SCHEMA_REGISTRY_HOST_NAME: schema_registry
-#      SCHEMA_REGISTRY_LISTENERS: 'http://schema_registry:8081'
 #      SCHEMA_REGISTRY_DEBUG: "true"
+# DON'T enable else you get io.confluent.common.config.ConfigException: Found a listener without a port. All listeners must have a port. The listener without a port is:
+#      SCHEMA_REGISTRY_LISTENERS: 'http://schema_registry:8081'
 
   schema_registry_ui:
    image: landoop/schema-registry-ui:0.9.5
@@ -94,3 +70,33 @@ services:
       ALLOW_GLOBAL: 1
 #      ALLOW_TRANSITIVE: 1
 #      PROXY_SKIP_VERIFY: 'true'
+
+# https://github.com/confluentinc/kafka-rest
+  kafka_rest:
+    image: confluentinc/cp-kafka-rest:5.0.0-1
+    hostname: kafka_rest
+    depends_on:
+      - zookeeper
+      - schema_registry
+      - broker
+    ports:
+      - "8182:8082"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema_registry:8081'
+# DON'T enable else you get io.confluent.common.config.ConfigException: Found a listener without a port. All listeners must have a port. The listener without a port is:
+#      KAFKA_REST_LISTENERS: 'http://kafka_rest:8182'
+      KAFKA_REST_HOST_NAME: 'kafka_rest'
+
+# https://github.com/Landoop/kafka-topics-ui/tree/master/docker
+  kafka-topics-ui:
+    image: landoop/kafka-topics-ui:0.9.4
+    hostname: kafka-topics-ui
+    ports:
+      - "8100:8100"
+    environment:
+      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8182/'
+      PROXY: 'false'
+      PROXY_SKIP_VERIFY: 'true'
+      PORT: 8100
