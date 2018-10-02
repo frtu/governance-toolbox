@@ -80,7 +80,7 @@
                         <!--<param>${schemaregistry.url}</param>-->
                     <!--</schemaRegistryUrls>-->
                     <!--<subjects>-->
-                        <!--<schemaname>src/main/avro/schemafile.avsc</schemaname>-->
+                        <!--<subject-name>src/main/avro/Sample.avsc</subject-name>-->
                     <!--</subjects>-->
                 <!--</configuration>-->
                 <!--<goals>-->
