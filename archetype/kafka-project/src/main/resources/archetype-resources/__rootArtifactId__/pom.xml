@@ -21,6 +21,26 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!--===========================-->
+        <!-- UNCOMMENT FOR Java client -->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.kafka</groupId>-->
+            <!--<artifactId>kafka-clients</artifactId>-->
+        <!--</dependency>-->
+        <!--===========================-->
+        <!-- UNCOMMENT FOR Scala client-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.kafka</groupId>-->
+            <!--<artifactId>kafka_2.12</artifactId>-->
+        <!--</dependency>-->
+        <!--===========================-->
+        <!-- UNCOMMENT FOR Schema Registry -->
+        <!--<dependency>-->
+        <!--<groupId>io.confluent</groupId>-->
+        <!--<artifactId>kafka-avro-serializer</artifactId>-->
+        <!--</dependency>-->
+        <!--===========================-->
+
         <!-- Logs -->
         <dependency>
             <groupId>org.slf4j</groupId>
