@@ -72,6 +72,7 @@ services:
 #      PROXY_SKIP_VERIFY: 'true'
 
 # https://github.com/confluentinc/kafka-rest
+# CORS PARAMS : https://github.com/apache/kafka/commit/eb823281a52f3b27c3a889e7412bc07b3024e688
   kafka_rest:
     image: confluentinc/cp-kafka-rest:5.0.0-1
     hostname: kafka_rest
@@ -95,6 +96,9 @@ services:
       KAFKA_REST_ACCESS_CONTROL_ALLOW_ORIGN: '*'
 
 # https://github.com/Landoop/kafka-topics-ui/tree/master/docker
+# PROXY & /api/kafka-rest-proxy paramters
+# https://github.com/Landoop/kafka-topics-ui/blob/e96bf2d3359aed76845c7e1512af950625945891/docker/run.sh#L29-L31
+# FIX issues
 # https://github.com/Landoop/kafka-topics-ui/issues/118
   kafka-topics-ui:
     image: landoop/kafka-topics-ui:0.9.4
