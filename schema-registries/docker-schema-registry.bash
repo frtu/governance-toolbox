@@ -1,5 +1,6 @@
 export CONFLUENT_KAFKA_INSTANCE="confluentincschemaregistry_broker_1"
 export CONFLUENT_ZK_INSTANCE="confluentincschemaregistry_zookeeper_1"
+export CONFLUENT_KAFKA_REST_INSTANCE=confluentincschemaregistry_kafka_rest_1
 
 export DCK_SCRIPT=~/scr-local/env-docker-kafka.bash
 if [ -f "${DCK_SCRIPT}" ]; then
@@ -47,6 +48,21 @@ schemaregistry_confluentinc_start() {
 	dckmport 8100
 }
 
+echo "== Type 'shcrest' to start Confluence Kafka REST bash =="
+shcrest() {
+	if [ -f "${DCK_SCRIPT}" ]; then
+	  source $DCK_SCRIPT
+	fi
+	echo "dckbash $CONFLUENT_KAFKA_REST_INSTANCE $@"
+    dckbash $CONFLUENT_KAFKA_REST_INSTANCE "$@"
+}
+echo "== Type 'shcrestconfig' to read config for Confluence Kafka REST =="
+shcrestconfig() {
+	# https://github.com/Landoop/kafka-topics-ui#common-issues
+	echo "=== /etc/kafka-rest/kafka-rest.properties ==="
+	shcrest "cat /etc/kafka-rest/kafka-rest.properties"
+}
+
 echo "== Type 'shckafka' to start Confluence Kafka bash =="
 shckafka() {
 	if [ -f "${DCK_SCRIPT}" ]; then
@@ -55,6 +71,15 @@ shckafka() {
 	echo "dckbash $DCK_INSTANCE_NAME_KAFKA $@"
     dckbash $DCK_INSTANCE_NAME_KAFKA "$@"
 }
+echo "== Type 'shckafkaconfig' to read config for Confluence Kafka =="
+shckafkaconfig() {
+	echo "=== /etc/kafka/kafka.properties ==="
+	shckafka "cat /etc/kafka/kafka.properties"
+
+	echo "=== /etc/kafka/server.properties ==="
+	shckafka "cat /etc/kafka/server.properties"
+}
+
 echo "== Type 'shczk' to start Confluence Zookeeper bash =="
 shczk() {
 	if [ -f "${DCK_SCRIPT}" ]; then
