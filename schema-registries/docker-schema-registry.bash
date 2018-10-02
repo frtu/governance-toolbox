@@ -27,6 +27,12 @@ schemaregistry_hortonworks_start() {
 	dckmport 9090
 }
 
+echo "== Type 'kafkahost' to set Confluence Kafka URI to localhost =="
+kafkahost() {
+    echo "127.0.0.1 broker" >> /etc/hosts
+    cat /etc/hosts
+}
+
 echo "== Type 'schemaregistry_confluentinc_start' to start Confluence Schema Registry =="
 schemaregistry_confluentinc_start() {
 	if [ -n "$SERVICE_SCR_dckkafka" ]; then
