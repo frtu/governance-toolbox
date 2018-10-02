@@ -55,9 +55,8 @@ services:
     environment:
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
       SCHEMA_REGISTRY_HOST_NAME: schema_registry
+      SCHEMA_REGISTRY_LISTENERS: 'http://0.0.0.0:8081'
 #      SCHEMA_REGISTRY_DEBUG: "true"
-# DON'T enable else you get io.confluent.common.config.ConfigException: Found a listener without a port. All listeners must have a port. The listener without a port is:
-#      SCHEMA_REGISTRY_LISTENERS: 'http://schema_registry:8081'
 
   schema_registry_ui:
    image: landoop/schema-registry-ui:0.9.5
@@ -80,23 +79,30 @@ services:
       - schema_registry
       - broker
     ports:
-      - "8182:8082"
+      - "8082:8082"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema_registry:8081'
-# DON'T enable else you get io.confluent.common.config.ConfigException: Found a listener without a port. All listeners must have a port. The listener without a port is:
-#      KAFKA_REST_LISTENERS: 'http://kafka_rest:8182'
       KAFKA_REST_HOST_NAME: 'kafka_rest'
+      KAFKA_REST_LISTENERS: 'http://0.0.0.0:8082'
+      KAFKA_REST_ACCESS_CONTROL_ALLOW_METHODS: 'GET,POST,PUT,DELETE,OPTIONS'
+      KAFKA_REST_ACCESS_CONTROL_ALLOW_ORIGN: '*'
 
 # https://github.com/Landoop/kafka-topics-ui/tree/master/docker
+# https://github.com/Landoop/kafka-topics-ui/issues/118
   kafka-topics-ui:
     image: landoop/kafka-topics-ui:0.9.4
     hostname: kafka-topics-ui
+    depends_on:
+      - zookeeper
+      - broker
+      - schema_registry
+      - kafka_rest
     ports:
       - "8100:8100"
     environment:
-      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8182/'
-      PROXY: 'false'
+      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
+      PROXY: 'true'
       PROXY_SKIP_VERIFY: 'true'
       PORT: 8100

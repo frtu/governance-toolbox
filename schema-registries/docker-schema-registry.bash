@@ -36,7 +36,7 @@ schemaregistry_confluentinc_start() {
 	echo "Make sure you have ** docker-compose ** installed using 2.1 that allow ordering!!"
 	echo "- http://127.0.0.1:8000 for Schema Registry UI"
 	echo "- http://127.0.0.1:8081/subjects/[NAME]/versions Schema Registry APIs"
-	echo "- http://127.0.0.1:8182 for Kafka REST"
+	echo "- http://127.0.0.1:8082/topics for Kafka REST"
 	echo "- http://127.0.0.1:8100 for Kafka Topic UI"
 
 	echo "export DCK_INSTANCE_NAME_KAFKA=${CONFLUENT_KAFKA_INSTANCE}" >> $DCK_SCRIPT
@@ -44,7 +44,7 @@ schemaregistry_confluentinc_start() {
 	(cd docker/confluentinc-schema-registry && exec docker-compose up)
 	dckmport 8000
 	dckmport 8081
-	dckmport 8182
+	dckmport 8082
 	dckmport 8100
 }
 
