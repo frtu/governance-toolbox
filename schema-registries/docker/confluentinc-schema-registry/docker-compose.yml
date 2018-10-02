@@ -33,6 +33,7 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_BROKER_ID: 1
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
 #      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
 #      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
 #      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -76,16 +77,20 @@ services:
     hostname: kafka_rest
     depends_on:
       - zookeeper
-      - schema_registry
       - broker
+      - schema_registry
     ports:
       - "8082:8082"
+#    volumes:
+#      - ./config/kafka-rest/:/etc/kafka-rest/
     environment:
       KAFKA_BROKER_ID: 1
+      KAFKA_REST_HOST_NAME: 'kafka_rest'
       KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema_registry:8081'
-      KAFKA_REST_HOST_NAME: 'kafka_rest'
       KAFKA_REST_LISTENERS: 'http://0.0.0.0:8082'
+#      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://broker:9092
+      KAFKA_REST_CONSUMER_REQUEST_TIMEOUT_MS: 30000
       KAFKA_REST_ACCESS_CONTROL_ALLOW_METHODS: 'GET,POST,PUT,DELETE,OPTIONS'
       KAFKA_REST_ACCESS_CONTROL_ALLOW_ORIGN: '*'
 
@@ -102,7 +107,8 @@ services:
     ports:
       - "8100:8100"
     environment:
-      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
-      PROXY: 'true'
-      PROXY_SKIP_VERIFY: 'true'
       PORT: 8100
+      PROXY_SKIP_VERIFY: 'true'
+      PROXY: 'true'
+      KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
+#      SCHEMAREGISTRY_UI_URL: http://schema_registry:8081
