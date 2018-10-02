@@ -63,10 +63,11 @@ services:
    image: landoop/schema-registry-ui:0.9.5
    hostname: schema_registry_ui
    ports:
-     - "8000:8000"
+     - "8001:8001"
    environment:
-      SCHEMAREGISTRY_URL: 'http://schema_registry:8081'
+      PORT: 8001
       PROXY: 'true'
+      SCHEMAREGISTRY_URL: 'http://schema_registry:8081'
       ALLOW_GLOBAL: 1
 #      ALLOW_TRANSITIVE: 1
 #      PROXY_SKIP_VERIFY: 'true'
@@ -109,9 +110,9 @@ services:
       - schema_registry
       - kafka_rest
     ports:
-      - "8100:8100"
+      - "8002:8002"
     environment:
-      PORT: 8100
+      PORT: 8002
       PROXY_SKIP_VERIFY: 'true'
       PROXY: 'true'
       KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
