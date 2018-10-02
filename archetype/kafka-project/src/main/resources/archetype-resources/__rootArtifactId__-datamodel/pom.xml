@@ -80,7 +80,7 @@
                         <!--<param>${schemaregistry.url}</param>-->
                     <!--</schemaRegistryUrls>-->
                     <!--<subjects>-->
-                        <!--<${artifactId}-sample>src/main/avro/Sample.avsc</${artifactId}-sample>-->
+                        <!--<${DatamodelClassName}>src/main/avro/Sample.avsc</${DatamodelClassName}>-->
                     <!--</subjects>-->
                 <!--</configuration>-->
                 <!--<goals>-->

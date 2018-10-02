@@ -1,7 +1,7 @@
 {
   "type": "record",
   "namespace": "${groupId}",
-  "name": "Sample",
+  "name": "${DatamodelClassName}",
   "doc": "Please describe your object",
   "fields": [
     {

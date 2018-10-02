@@ -9,6 +9,7 @@
         <requiredProperty key="base-pom-version">
             <defaultValue>0.3.0</defaultValue>
         </requiredProperty>
+        <requiredProperty key="DatamodelClassName"/>
     </requiredProperties>
     <fileSets>
         <fileSet encoding="UTF-8">
