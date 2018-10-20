@@ -1,45 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.github.frtu.archetype</groupId>
+		<artifactId>archetype-pom</artifactId>
+		<version>0.3.2-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
-	<groupId>com.github.frtu.archetype</groupId>
     <artifactId>kafka-project-archetype</artifactId>
-	<version>0.3.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
 	<name>Avro and Kafka project archetype</name>
 	<description>Avro and Kafka project archetype</description>
-	<url>https://github.com/frtu/governance-toolbox/</url>
-
-	<licenses>
-		<license>
-			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-	<developers>
-		<developer>
-			<name>Frédéric TU</name>
-			<email>frederic.tu@gmail.com</email>
-		</developer>
-	</developers>
-	<scm>
-		<connection>scm:git:git@github.com:frtu/governance-toolbox.git</connection>
-		<developerConnection>scm:git:git@github.com:frtu/governance-toolbox.git</developerConnection>
-		<url>https://github.com/frtu/governance-toolbox/tree/master</url>
-		<tag>HEAD</tag>
-	</scm>
-
-    <distributionManagement>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus snapshot repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Sonatype Nexus release repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>   
 </project>
