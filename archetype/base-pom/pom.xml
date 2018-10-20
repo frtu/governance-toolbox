@@ -27,6 +27,9 @@
 
         <commons-lang3.version>3.3.2</commons-lang3.version>
         <commons-io.version>2.4</commons-io.version>
+
+        <!-- FIX https://nvd.nist.gov/vuln/detail/CVE-2018-7489-->
+        <jackson.version>2.8.11.1</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +44,12 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
+            </dependency>
+            <!--JSON Library-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
             <!-- Logs -->
