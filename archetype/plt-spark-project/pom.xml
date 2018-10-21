@@ -7,9 +7,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-    <artifactId>spark-project-archetype</artifactId>
+    <artifactId>plt-spark-project-archetype</artifactId>
     <packaging>jar</packaging>
 
-	<name>Spark project archetype</name>
-	<description>Spark project archetype</description>
+	<name>Spark Platform project archetype</name>
+	<description>Spark Platform project archetype</description>
 </project>
