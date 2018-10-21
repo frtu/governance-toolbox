@@ -1,0 +1,189 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>${artifactId}-datamodel</artifactId>
+
+    <properties>
+        <!--<schemaregistry.url>http://localhost:8081</schemaregistry.url>-->
+
+        <!--===========================-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--===========================-->
+        <avro.version>1.8.1</avro.version>
+        <!--===========================-->
+        <!--https://docs.confluent.io/current/clients/install.html?_ga=2.53151595.2105087684.1538406517-910848708.1535980058#installation-maven-->
+        <confluent.maven.repo>https://packages.confluent.io/maven/</confluent.maven.repo>
+        <confluent.version>5.0.0</confluent.version>
+        <!--https://github.com/frtu/governance-toolbox#hortonworks-schema-registry-->
+        <governance-maven-plugin.version>${base-pom-version}</governance-maven-plugin.version>
+        <!--===========================-->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/avro/</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>${avro.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                            <outputDirectory>${basedir}/target/generated-sources/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.9</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/target/generated-sources/</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--===========================-->
+            <!--===========================-->
+            <!--REMOVE ALL THE SECTIONS BELOW IF YOU HAVE YOUR OWN POM-->
+            <!--===========================-->
+            <!--===========================-->
+            <!--UNCOMMENT FOR HORTONWORKS SCHEMA REGISTRY-->
+            <!--<plugin>-->
+            <!--<groupId>com.github.frtu.governance</groupId>-->
+            <!--<artifactId>schema-registries-maven-plugin</artifactId>-->
+            <!--</plugin>-->
+            <!--===========================-->
+            <!--UNCOMMENT FOR CONFLUENT SCHEMA REGISTRY-->
+            <!--https://docs.confluent.io/current/schema-registry/docs/maven-plugin.html-->
+            <!--<plugin>-->
+            <!--<groupId>io.confluent</groupId>-->
+            <!--<artifactId>kafka-schema-registry-maven-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<schemaRegistryUrls>-->
+            <!--<param>${schemaregistry.url}</param>-->
+            <!--</schemaRegistryUrls>-->
+            <!--<subjects>-->
+            <!--<${DatamodelClassName}>src/main/avro/Sample.avsc</${DatamodelClassName}>-->
+            <!--</subjects>-->
+            <!--</configuration>-->
+            <!--<goals>-->
+            <!--<goal>register</goal>-->
+            <!--</goals>-->
+            <!--</plugin>-->
+            <!--===========================-->
+        </plugins>
+        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+            <plugins>
+                <!--===========================-->
+                <!--HORTONWORKS SCHEMA REGISTRY-->
+                <plugin>
+                    <groupId>com.github.frtu.governance</groupId>
+                    <artifactId>schema-registries-maven-plugin</artifactId>
+                    <version>${governance-maven-plugin.version}</version>
+                </plugin>
+                <!--===========================-->
+                <!-- CONFLUENT SCHEMA REGISTRY-->
+                <!--https://docs.confluent.io/current/schema-registry/docs/maven-plugin.html-->
+                <plugin>
+                    <groupId>io.confluent</groupId>
+                    <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                    <version>${confluent.version}</version>
+                </plugin>
+                <!--===========================-->
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <name>Confluent</name>
+            <url>${confluent.maven.repo}</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <name>Confluent</name>
+            <url>${confluent.maven.repo}</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+            <!-- Confluent Stack -->
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-avro-serializer</artifactId>
+                <version>${confluent.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-client</artifactId>
+                <version>${confluent.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Internal domain dependencies -->
+            <dependency>
+                <groupId>com.github.frtu.archetype</groupId>
+                <artifactId>base-pom</artifactId>
+                <version>${base-pom-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

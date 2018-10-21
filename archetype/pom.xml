@@ -12,6 +12,7 @@
 
 	<modules>
 		<module>base-pom</module>
+		<module>avro-project</module>
 		<module>kafka-project</module>
 		<module>spark-project</module>
 	</modules>
