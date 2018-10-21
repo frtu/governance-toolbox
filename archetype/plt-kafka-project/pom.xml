@@ -7,9 +7,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-    <artifactId>kafka-project-archetype</artifactId>
+    <artifactId>plt-kafka-project-archetype</artifactId>
     <packaging>jar</packaging>
 
-	<name>Avro and Kafka project archetype</name>
-	<description>Avro and Kafka project archetype</description>
+	<name>Kafka Platform project archetype</name>
+	<description>Kafka Platform project archetype</description>
 </project>
