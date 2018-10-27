@@ -6,6 +6,13 @@ runspark() {
 	(cd ${artifactId} && mvn clean compile exec:java)
 }
 
+echo "== Type 'pkgspark' to move Spark application into folder ./release/ =="
+pkgspark() {
+    mvn package
+    mkdir -p release/
+    mv ${artifactId}/target/*-jar-with-dependencies.jar release/
+}
+
 echo "== Generate model with > gendatamodel DATA_MODEL_PROJECT_NAME =="
 gendatamodel() {
   # MIN NUM OF ARG
