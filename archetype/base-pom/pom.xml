@@ -30,8 +30,10 @@
         <!-- https://nvd.nist.gov/vuln/detail/CVE-2018-11771 -->
         <commons-compress.version>1.18</commons-compress.version>
 
+        <jackson.version>2.8.11</jackson.version>
         <!-- FIX https://nvd.nist.gov/vuln/detail/CVE-2018-7489-->
-        <jackson.version>2.8.11.1</jackson.version>
+        <jackson-binding.version>${jackson.version}.1</jackson-binding.version>
+
         <!-- FIX https://nvd.nist.gov/vuln/detail/CVE-2018-11040 -->
         <!-- FIX https://nvd.nist.gov/vuln/detail/CVE-2018-11039 -->
         <spring.version>4.3.18</spring.version>
@@ -59,9 +61,20 @@
             <!--JSON Library-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
+                <artifactId>jackson-core</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-binding.version}</version>
+            </dependency>
+
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
