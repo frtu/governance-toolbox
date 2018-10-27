@@ -9,7 +9,7 @@ Dynamic metadata
 
 * InfluxDB : TSDB to store PiT (Point In Time) based metadata.
 
-Archetype
+[Archetype](https://github.com/frtu/governance-toolbox/tree/master/archetype)
 
 * avro : generate a base project for avro data model, generate & compile
 * plt-kafka : standalone multi modules project to Publish & Consume Kafka
@@ -114,25 +114,4 @@ Using official Docker image. Look at this link for more details on the port :
 
 ## Maven artefact generator
 
-Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/0.3.2/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
-
-Feel free to inline dependencies and remove it.
-
-### Avro & Schema-registry
-
-Allow to generate a base project for Avro, Schema registry, publishing Kafka or Spark project.
-
-Generate using :
-
-- Avro
-
-> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=0.3.2
-
-### Kafka
-
-> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=0.3.2
-
-### Spark
-
-> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=0.3.2
-
+See [Archetype](https://github.com/frtu/governance-toolbox/tree/master/archetype)
