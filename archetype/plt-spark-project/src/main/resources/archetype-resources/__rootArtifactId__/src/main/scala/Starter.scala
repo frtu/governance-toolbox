@@ -14,8 +14,8 @@ object Starter {
     // => You can get some sample data at : https://support.spatialkey.com/spatialkey-sample-csv-data/
     var data = if (!args.isEmpty) args(0) else "${artifactId}/src/test/resources/"
 
-    val sparkContext: SparkContext = new SparkContext(sparkConf)
-    val system = FileSystem.get(sparkContext.hadoopConfiguration)
+    val sc: SparkContext = new SparkContext(sparkConf)
+    val system = FileSystem.get(sc.hadoopConfiguration)
 
     val files: Seq[String] = for {
       folder <- system.listStatus(new Path(data));
@@ -26,6 +26,6 @@ object Starter {
       println("PATH:" + sourceFile)
     })
 
-    sparkContext.stop
+    sc.stop
   }
 }
