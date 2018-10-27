@@ -7,7 +7,7 @@
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <requiredProperties>
         <requiredProperty key="base-pom-version">
-            <defaultValue>0.3.2</defaultValue>
+            <defaultValue>0.3.3</defaultValue>
         </requiredProperty>
     </requiredProperties>
     <fileSets>
