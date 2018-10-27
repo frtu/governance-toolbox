@@ -22,8 +22,12 @@ object Starter {
       file <- system.listStatus(folder.getPath)
     } yield file.getPath.toString
 
+    // Use RDD to read file
+    // https://spark.apache.org/docs/latest/rdd-programming-guide.html#external-datasets
     files.foreach(sourceFile => {
-      println("PATH:" + sourceFile)
+      println("= FILE PATH:" + sourceFile)
+      val textFile = sc.textFile(sourceFile)
+      textFile.foreach(line => println("==" + line))
     })
 
     sc.stop
