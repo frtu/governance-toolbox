@@ -11,14 +11,14 @@
     <artifactId>${artifactId}</artifactId>
 
     <properties>
+        <start-class>${groupId}.Starter</start-class>
     </properties>
-
     <dependencies>
         <!-- UNCOMMENT for Internal domain dependencies -->
         <!--<dependency>-->
-            <!--<groupId>${project.groupId}</groupId>-->
-            <!--<artifactId>${artifactId}-datamodel</artifactId>-->
-            <!--<version>${project.version}</version>-->
+        <!--<groupId>${project.groupId}</groupId>-->
+        <!--<artifactId>${artifactId}-datamodel</artifactId>-->
+        <!--<version>${project.version}</version>-->
         <!--</dependency>-->
 
         <!--Libraries-->
@@ -32,11 +32,62 @@
         </dependency>
 
         <!--===========================-->
+        <!-- UNCOMMENT to use Jackason for Scala-->
+        <!--<dependency>-->
+        <!--<groupId>com.fasterxml.jackson.module</groupId>-->
+        <!--<artifactId>jackson-module-scala_${scala.version}</artifactId>-->
+        <!--</dependency>-->
+        <!--===========================-->
         <!-- UNCOMMENT to use Kafka client for Scala-->
         <!--<dependency>-->
         <!--<groupId>org.apache.kafka</groupId>-->
-        <!--<artifactId>kafka_2.12</artifactId>-->
+        <!--<artifactId>kafka_${scala.version}</artifactId>-->
         <!--</dependency>-->
         <!--===========================-->
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>${start-class}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assemble-all</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>${start-class}</mainClass>
+                    <arguments>
+                        <!--<argument>foo</argument>-->
+                    </arguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

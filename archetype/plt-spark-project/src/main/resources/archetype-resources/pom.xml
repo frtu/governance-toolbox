@@ -15,7 +15,6 @@
     <modules/>
 
     <properties>
-        <start-class>${groupId}.Starter</start-class>
         <!--===========================-->
         <java.version>1.8</java.version>
         <scala.version>2.11</scala.version>
