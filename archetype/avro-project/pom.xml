@@ -13,4 +13,31 @@
 
     <name>Avro project archetype</name>
     <description>Avro project archetype</description>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <ignoreMissingFile>false</ignoreMissingFile>
+                    <file>${project.build.outputDirectory}/META-INF/maven/archetype-metadata.xml</file>
+                    <replacements>
+                        <replacement>
+                            <token>%PROJECT_VERSION%</token>
+                            <value>${project.version}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
