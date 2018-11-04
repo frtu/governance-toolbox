@@ -120,6 +120,7 @@
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>3.4.2</version>
+                <!--http://davidb.github.io/scala-maven-plugin/index.html-->
                 <executions>
                     <execution>
                         <goals>

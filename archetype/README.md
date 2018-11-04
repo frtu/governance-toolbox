@@ -2,32 +2,54 @@
 
 Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/0.3.2/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
 
-Feel free to inline dependencies and remove it.
+Feel free to inline some of the dependencies or all dependencies & remove it.
 
-## Avro & Schema-registry
+## Overview
 
-Allow to generate a base project for Avro, Schema registry, publishing Kafka or Spark project.
+Allow to generate a base project for 
 
-Generate using :
+- Avro & Schema registry, 
+- Kafka pub/sub project
+- Spark platform
 
-- Avro
+## Catalog
 
-> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=0.3.3
+A **Module** is a standalone project with one single pom OR can be hosted in a Platform projet.
 
-## Kafka
+A **Platform** means that it comes with a parent pom, hosting a sub project. When you generate another module at its root folder, the new module is append next to the others.
 
-> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=0.3.3
+Generate archetypes with the below commands :
 
-## Spark
+- Replace **x.y.z** with the latest version
 
-### Generate the project
+### Avro module
+[<img src="https://img.shields.io/maven-central/v/com.github.frtu.archetype/avro-project-archetype.svg?label=latest%20release%20:%20avro-project-archetype"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22avro-project-archetype%22+g%3A%22com.github.frtu.archetype%22)
 
-> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=0.3.3
+> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=x.y.z
 
-### Run & import the Spark module
+### Kafka platform
+
+[<img src="https://img.shields.io/maven-central/v/com.github.frtu.archetype/plt-kafka-project-archetype.svg?label=latest%20release%20:%20plt-kafka-project-archetype"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22plt-kafka-project-archetype%22+g%3A%22com.github.frtu.archetype%22)
+
+
+> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=x.y.z
+
+### Spark platform
+
+#### Generate the project
+
+[<img src="https://img.shields.io/maven-central/v/com.github.frtu.archetype/plt-spark-project-archetype.svg?label=latest%20release%20:%20plt-spark-project-archetype"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22plt-spark-project-archetype%22+g%3A%22com.github.frtu.archetype%22)
+
+
+> mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=x.y.z
+
+#### Run & import the Spark module
 
 In the **sub module** containing the Spark application, you can run the main class using
 
 > mvn clean compile exec:java
 
-In IntelliJ, Import the **sub module** if you want the file path to be consistent. 
+In IntelliJ, you can choose to 
+
+- Import directly the **sub module** so that you can run directly the [Starter.scala](https://github.com/frtu/governance-toolbox/blob/master/archetype/plt-spark-project/src/main/resources/archetype-resources/__rootArtifactId__/src/main/scala/Starter.scala). 
+- (ADVANCED) Import the parent pom along with the sub modules. Before running the [Starter.scala](https://github.com/frtu/governance-toolbox/blob/master/archetype/plt-spark-project/src/main/resources/archetype-resources/__rootArtifactId__/src/main/scala/Starter.scala), don't forget to Edit Configuration and move the Working directory one folder down.
