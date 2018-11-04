@@ -53,3 +53,68 @@ In IntelliJ, you can choose to
 
 - Import directly the **sub module** so that you can run directly the [Starter.scala](https://github.com/frtu/governance-toolbox/blob/master/archetype/plt-spark-project/src/main/resources/archetype-resources/__rootArtifactId__/src/main/scala/Starter.scala). 
 - (ADVANCED) Import the parent pom along with the sub modules. Before running the [Starter.scala](https://github.com/frtu/governance-toolbox/blob/master/archetype/plt-spark-project/src/main/resources/archetype-resources/__rootArtifactId__/src/main/scala/Starter.scala), don't forget to Edit Configuration and move the Working directory one folder down.
+
+## Spark platform tutorial
+
+### Generate a Spark app
+
+Generate your Spark app with :
+
+```
+mvn archetype:generate -DarchetypeCatalog=local \
+-DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-spark-project-archetype -DarchetypeVersion=0.3.3 \
+-DgroupId=com.github.frtu -DartifactId=sparkapp -Dversion=0.0.1-SNAPSHOT
+```
+
+Copy into :
+
+- the test resource folder /**(ARTIFACT-ID)**/**(ARTIFACT-ID)**/src/test/resources 
+- a data file (csv, json, ...) with each line one record.
+
+Run it with 
+
+```
+. mvn-cmds.bash
+runspark
+```
+
+It will run Spark in the local machine, read the data file and flush every line to the console.
+
+### Generate an Avro data module
+
+Generate your Avro sub module to manipulate **sales** record with :
+
+```
+mvn archetype:generate -DarchetypeCatalog=local \
+-DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=0.3.3 \
+-DgroupId=com.github.frtu -DartifactId=sales -Dversion=0.0.1-SNAPSHOT
+```
+
+When asked a **DatamodelClassName**, type **Sales** which will be the *Class name* of the generated object.
+
+To finish to generate all the artifacts, run : 
+
+```
+mvn compile
+```
+
+### Data model & Data
+
+What you got is :
+
+### Avro data model
+
+* sparkapp/sales/src/main/avro/Sample.avsc : Avro schema filled with the record **Sales** with only one attribute **name**
+* sparkapp/sales/src/test/java/com/frtu/Main.java : A test main that allow to **illustrate Avro serialize & deserialize mechanism** with : SpecificDatumWriter > GenericDatumReader
+
+### Spark application with test data
+
+* sparkapp/sparkapp/src/test/resources/SalesJan2009.csv : Test data with the right format
+* sparkapp/sparkapp/src/main/scala/com/frtu/Starter.scala : Spark main app
+* sparkapp/sparkapp/src/main/resources/logback.xml : Logback log level setting 
+
+### Going forward
+
+You can now map each line of your data with the include Avro data model and run it on Spark !!
+
+~ Have fun !
