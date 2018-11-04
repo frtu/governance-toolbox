@@ -27,6 +27,10 @@ Generate archetypes with the below commands :
 
 > mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=x.y.z
 
+Avro comes with the version [1.8.1](https://search.maven.org/artifact/org.apache.avro/avro/1.8.1/bundle) but feel free to upgrade it to the latest version. Check at :
+
+[Search maven - g:org.apache.avro AND a:avro](https://search.maven.org/search?q=g:org.apache.avro%20AND%20a:avro&core=gav)
+
 ### Kafka platform
 
 [<img src="https://img.shields.io/maven-central/v/com.github.frtu.archetype/plt-kafka-project-archetype.svg?label=latest%20release%20:%20plt-kafka-project-archetype"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22plt-kafka-project-archetype%22+g%3A%22com.github.frtu.archetype%22)
@@ -98,18 +102,20 @@ To finish to generate all the artifacts, run :
 mvn compile
 ```
 
-### Data model & Data
+### Work with Data Model & Data
 
 What you got is :
 
-### Avro data model
+#### Avro data model
 
 * sparkapp/sales/src/main/avro/Sample.avsc : Avro schema filled with the record **Sales** with only one attribute **name**
 * sparkapp/sales/src/test/java/com/frtu/Main.java : A test main that allow to **illustrate Avro serialize & deserialize mechanism** with : SpecificDatumWriter > GenericDatumReader
 
-### Spark application with test data
+Check the different Avro data type at : [schema type](https://avro.apache.org/docs/1.8.1/spec.html#schemas)
 
-* sparkapp/sparkapp/src/test/resources/SalesJan2009.csv : Test data with the right format
+#### Spark application with test data
+
+* sparkapp/sparkapp/src/test/resources/Sales.csv : Sample test data using the real format
 * sparkapp/sparkapp/src/main/scala/com/frtu/Starter.scala : Spark main app
 * sparkapp/sparkapp/src/main/resources/logback.xml : Logback log level setting 
 
