@@ -16,4 +16,33 @@
 
     <properties>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>generate</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>schema-maven-plugin</artifactId>
+                        <version>${project.version}</version>
+                        <executions>
+                            <execution>
+                                <!-- https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Setting_Up_Your_Project_to_Use_the_Build_Lifecycle -->
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>pojo2avro</goal>
+                                </goals>
+                                <configuration>
+                                    <includePackage>tests</includePackage>
+                                    <subtypesOf>tests.pojo.UserInterface</subtypesOf>
+                                    <outputDirectory>${basedir}/target/generated-sources/</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
