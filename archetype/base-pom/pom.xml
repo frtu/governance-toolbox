@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.frtu.archetype</groupId>
@@ -36,8 +37,13 @@
 
         <!-- FIX https://nvd.nist.gov/vuln/detail/CVE-2018-11040 -->
         <!-- FIX https://nvd.nist.gov/vuln/detail/CVE-2018-11039 -->
-        <spring.version>4.3.18</spring.version>
+        <spring.version>4.3.18.RELEASE</spring.version>
+
+        <reflections.version>0.9.11</reflections.version>
+        <avro.version>1.8.2</avro.version>
+        <jackson-binding.version>2.8.11</jackson-binding.version>
     </properties>
+
 
     <dependencyManagement>
         <dependencies>
@@ -57,7 +63,22 @@
                 <artifactId>commons-compress</artifactId>
                 <version>${commons-compress.version}</version>
             </dependency>
+            <!-- Reflections -->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
 
+            <!--===========================-->
+            <!--Serialization Deserialization-->
+            <!--===========================-->
+            <!-- AVRO library -->
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
             <!--JSON Library-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -74,8 +95,15 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson-binding.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-avro</artifactId>
+                <version>${jackson-binding.version}</version>
+            </dependency>
 
+            <!--===========================-->
             <!-- Spring -->
+            <!--===========================-->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
@@ -87,7 +115,9 @@
                 <version>${spring.version}</version>
             </dependency>
 
+            <!--===========================-->
             <!-- Logs -->
+            <!--===========================-->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -116,7 +146,9 @@
                 <version>${logback.version}</version>
             </dependency>
 
+            <!--===========================-->
             <!-- TEST -->
+            <!--===========================-->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

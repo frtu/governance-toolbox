@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.frtu.governance</groupId>
+        <artifactId>maven-plugin-parent-pom</artifactId>
+        <version>0.3.4-SNAPSHOT</version>
+        <relativePath>../../maven-plugins/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>schema-maven-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
+
+    <name>schema-registries-maven-plugin Maven Plugin</name>
+    <description>A maven plugin to register schemas into a Schema Registry.</description>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-avro</artifactId>
+        </dependency>
+
+        <!--Internal domain dependencies -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>samples-schema-maven-usage</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!--Internal domain dependencies -->
+            <dependency>
+                <groupId>com.github.frtu.archetype</groupId>
+                <artifactId>base-pom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

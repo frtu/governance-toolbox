@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.frtu.governance</groupId>
 		<artifactId>master-pom</artifactId>
-		<version>0.1.2-SNAPSHOT</version>
+		<version>0.3.4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -14,5 +14,6 @@
 	<description>A toolbox for registries of Data model schema</description>
 	<modules>
 		<module>schema-registries-maven-plugin</module>
+        <module>schema-maven-plugin</module>
 	</modules>
 </project>
