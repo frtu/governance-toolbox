@@ -23,13 +23,16 @@ Generate archetypes with the below commands :
 - Replace **x.y.z** with the latest version
 
 ### Avro module
+#### Generate the project
 [<img src="https://img.shields.io/maven-central/v/com.github.frtu.archetype/avro-project-archetype.svg?label=latest%20release%20:%20avro-project-archetype"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22avro-project-archetype%22+g%3A%22com.github.frtu.archetype%22)
 
 > mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=x.y.z
 
+#### Avro library version
+
 Avro comes with the version [1.8.1](https://search.maven.org/artifact/org.apache.avro/avro/1.8.1/bundle) but feel free to upgrade it to the latest version. Check at :
 
-[Search maven - g:org.apache.avro AND a:avro](https://search.maven.org/search?q=g:org.apache.avro%20AND%20a:avro&core=gav)
+* [Search maven - g:org.apache.avro AND a:avro](https://search.maven.org/search?q=g:org.apache.avro%20AND%20a:avro&core=gav)
 
 ### Kafka platform
 
@@ -46,6 +49,15 @@ Avro comes with the version [1.8.1](https://search.maven.org/artifact/org.apache
 
 
 > mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=x.y.z
+
+#### System requirements
+
+The generated project uses **net.alchim31.maven:scala-maven-plugin:3.4.2** plugins that requires a certain version of Maven. If you have Maven **version < 3.5.4**, it is recommended to upgrade your Maven to this version or above.
+
+On IntelliJ :
+
+* you may also change your settings to use your system version : **Preferences > Build, Exec > Build Tools > Maven**. 
+* Set **Maven home directory** to the one of your system.
 
 #### Run & import the Spark module
 
