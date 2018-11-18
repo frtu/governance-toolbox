@@ -15,7 +15,44 @@ Dynamic metadata
 * plt-kafka : standalone multi modules project to Publish & Consume Kafka
 * plt-spark : standalone multi modules project to run Spark
 
-## Maven client
+## Maven Plugins
+
+### Schema maven plugins
+
+[<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/schema-maven-plugin.svg?label=latest%20release%20:%20schema-maven-plugin"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22schema-maven-plugin%22+g%3A%22com.github.frtu.governance%22)
+
+#### Mojo :pojo2json
+Allow to generate an Avro schema based on POJO (Interface or Implementation)
+
+* includePackage : which package to scan
+* subtypesOf : filter all the classes that extends the specified interface or parent class
+* outputDirectory : specify the folder into which plugin should generate the .avsc files (One per filtered class found).
+
+See [sample project](https://github.com/frtu/governance-toolbox/tree/master/samples/schema-maven-usage).
+
+```XML
+<plugin>
+    <groupId>com.github.frtu.governance</groupId>
+    <artifactId>schema-maven-plugin</artifactId>
+    <version>x.y.z</version>
+    <executions>
+        <execution>
+            <phase>process-resources</phase>
+            <goals>
+                <goal>pojo2avro</goal>
+            </goals>
+            <configuration>
+                <includePackage>tests</includePackage>
+                <subtypesOf>tests.pojo.UserInterface</subtypesOf>
+                <outputDirectory>${basedir}/target/generated-sources/</outputDirectory>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+
+
 ### Hortonworks Schema-registry
 
 This plugin allow to scan all Avro schema in the project folder /src/main/avro/*.avsc and register it into 'schemaregistry.url'
