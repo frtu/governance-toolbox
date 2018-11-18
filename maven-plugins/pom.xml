@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.frtu.governance</groupId>
 		<artifactId>master-pom</artifactId>
-		<version>0.3.5-SNAPSHOT</version>
+		<version>0.3.4-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -13,7 +13,7 @@
 	<name>Maven plugin parent pom</name>
 	<description>A parent pom for all Maven plugins</description>
 	<modules>
-		<module>../schema-registries/schema-registries-maven-plugin</module>
+		<module>../schema-registries</module>
 		<module>../timeseries/influxdb-maven-plugin</module>
 	</modules>
 

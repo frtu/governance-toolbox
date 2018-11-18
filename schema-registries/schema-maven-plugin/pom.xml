@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.frtu.governance</groupId>
-        <artifactId>maven-plugin-parent-pom</artifactId>
+        <artifactId>schema-registries-toolbox-pom</artifactId>
         <version>0.3.4-SNAPSHOT</version>
-        <relativePath>../../maven-plugins/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>schema-maven-plugin</artifactId>

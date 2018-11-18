@@ -4,7 +4,7 @@
 		<groupId>com.github.frtu.governance</groupId>
 		<artifactId>master-pom</artifactId>
 		<version>0.3.4-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath>../maven-plugins/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>schema-registries-toolbox-pom</artifactId>
