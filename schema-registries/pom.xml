@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.github.frtu.governance</groupId>
-		<artifactId>master-pom</artifactId>
+		<artifactId>maven-plugin-parent-pom</artifactId>
 		<version>0.3.4-SNAPSHOT</version>
 		<relativePath>../maven-plugins/pom.xml</relativePath>
 	</parent>
