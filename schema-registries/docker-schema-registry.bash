@@ -8,11 +8,20 @@ if [ -f "${DCK_SCRIPT}" ]; then
 fi
 
 echo "== Type 'inst_script' to install bash-fwk locally =="
-
 inst_script() {
 	echo "Install bash-fwk that contains Docker & Vagrant utilities."
 	echo "$(curl -fsSL https://raw.githubusercontent.com/frtu/bash-fwk/master/autoinstaller4curl.bash)" | bash
 }
+
+echo "== Type 'inst_dns' to install domain name for the Confluence stack =="
+inst_dns() {
+	echo "Register domains : zookeeper broker schema_registry kafka_rest into /etc/hosts"
+	echo "
+127.0.0.1 zookeeper broker schema_registry kafka_rest" | sudo tee -a /etc/hosts > /dev/null
+	echo "cat /etc/hosts"
+	cat /etc/hosts
+}
+
 
 # MANUAL Docker build : https://github.com/hortonworks/registry/blob/master/docker/images/registry/Dockerfile
 #

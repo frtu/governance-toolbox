@@ -28,6 +28,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      # Attention register domain 'broker' in /etc/hosts with 'inst_dns'
       KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:9092'
       # Comment for manual creation
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
@@ -54,6 +55,7 @@ services:
     ports:
       - "8081:8081"
     environment:
+      # Attention register domain 'zookeeper' in /etc/hosts with 'inst_dns'
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
       SCHEMA_REGISTRY_HOST_NAME: schema_registry
       SCHEMA_REGISTRY_LISTENERS: 'http://0.0.0.0:8081'
@@ -67,6 +69,7 @@ services:
    environment:
       PORT: 8001
       PROXY: 'true'
+      # Attention register domain 'schema_registry' in /etc/hosts with 'inst_dns'
       SCHEMAREGISTRY_URL: 'http://schema_registry:8081'
       ALLOW_GLOBAL: 1
 #      ALLOW_TRANSITIVE: 1
@@ -88,7 +91,9 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_REST_HOST_NAME: 'kafka_rest'
+      # Attention register domain 'zookeeper' in /etc/hosts with 'inst_dns'
       KAFKA_REST_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      # Attention register domain 'schema_registry' in /etc/hosts with 'inst_dns'
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema_registry:8081'
       KAFKA_REST_LISTENERS: 'http://0.0.0.0:8082'
 #      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://broker:9092
@@ -115,5 +120,6 @@ services:
       PORT: 8002
       PROXY_SKIP_VERIFY: 'true'
       PROXY: 'true'
+      # Attention register domain 'kafka_rest' in /etc/hosts with 'inst_dns'
       KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
 #      SCHEMAREGISTRY_UI_URL: http://schema_registry:8081
