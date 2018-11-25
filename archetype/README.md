@@ -1,6 +1,6 @@
 # Maven artefact generator
 
-Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/0.3.2/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
+Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/0.3.4/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
 
 Feel free to inline some of the dependencies or all dependencies & remove it.
 
@@ -84,7 +84,7 @@ mvn archetype:generate -DarchetypeCatalog=local \
 
 Copy into :
 
-- the test resource folder /**(ARTIFACT-ID)**/**(ARTIFACT-ID)**/src/test/resources 
+- the test resource folder /**(ARTIFACT-ID)**/**(ARTIFACT-ID)**/src/test/resources/data
 - a data file (csv, json, ...) with each line one record.
 
 Run it with 
@@ -127,9 +127,13 @@ Check the different Avro data type at : [schema type](https://avro.apache.org/do
 
 #### Spark application with test data
 
-* sparkapp/sparkapp/src/test/resources/Sales.csv : Sample test data using the real format
+* sparkapp/sparkapp/src/test/resources/data/Sales.csv : Sample test data using the real format
 * sparkapp/sparkapp/src/main/scala/com/frtu/Starter.scala : Spark main app
 * sparkapp/sparkapp/src/main/resources/logback.xml : Logback log level setting 
+
+#### Spark application with Avro data model
+
+In **pom.xml** of the spark project, uncomment the section "UNCOMMENT for Internal domain dependencies" and replace the **artifactId** tag with your previously created datamodel project.
 
 ### Going forward
 
