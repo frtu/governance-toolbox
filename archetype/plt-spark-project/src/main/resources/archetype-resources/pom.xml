@@ -21,6 +21,8 @@
 
         <!--Check latest at https://mvnrepository.com/artifact/org.scala-lang/scala-library-->
         <scalalib.version>${scala.version}.12</scalalib.version>
+        <scalatest.version>3.0.5</scalatest.version>
+
         <!--Check latest at https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
         <spark.version>2.3.2</spark.version>
         <!--Check latest at https://mvnrepository.com/artifact/org.apache.kafka/kafka-->
@@ -66,7 +68,7 @@
             <dependency>
                 <groupId>org.scalatest</groupId>
                 <artifactId>scalatest_${scala.version}</artifactId>
-                <version>${scalalib.version}</version>
+                <version>${scalatest.version}</version>
                 <scope>test</scope>
             </dependency>
 

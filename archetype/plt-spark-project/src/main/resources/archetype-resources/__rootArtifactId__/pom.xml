@@ -32,7 +32,7 @@
         </dependency>
 
         <!--===========================-->
-        <!-- UNCOMMENT to use Jackason for Scala-->
+        <!-- UNCOMMENT to use Jackson for Scala-->
         <!--<dependency>-->
         <!--<groupId>com.fasterxml.jackson.module</groupId>-->
         <!--<artifactId>jackson-module-scala_${scala.version}</artifactId>-->
@@ -44,6 +44,12 @@
         <!--<artifactId>kafka_${scala.version}</artifactId>-->
         <!--</dependency>-->
         <!--===========================-->
+
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.version}</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -87,6 +93,35 @@
                         <!--<argument>foo</argument>-->
                     </arguments>
                 </configuration>
+            </plugin>
+            <!--http://www.scalatest.org/user_guide/using_the_scalatest_maven_plugin-->
+            <!-- disable surefire -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <!-- enable scalatest -->
+            <plugin>
+                <groupId>org.scalatest</groupId>
+                <artifactId>scalatest-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                    <junitxml>.</junitxml>
+                    <filereports>WDF TestSuite.txt</filereports>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
