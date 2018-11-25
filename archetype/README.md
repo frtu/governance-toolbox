@@ -52,7 +52,7 @@ Avro comes with the version [1.8.1](https://search.maven.org/artifact/org.apache
 
 #### System requirements
 
-The generated project uses **net.alchim31.maven:scala-maven-plugin:3.4.2** plugins that requires a certain version of Maven. If you have Maven **version < 3.5.4**, it is recommended to upgrade your Maven to this version or above.
+The generated project uses **net.alchim31.maven:scala-maven-plugin:3.1.0** plugins.
 
 On IntelliJ :
 
