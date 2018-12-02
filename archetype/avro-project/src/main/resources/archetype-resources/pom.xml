@@ -2,7 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>${groupId}</groupId>
     <artifactId>${artifactId}-datamodel</artifactId>
+    <version>${version}</version>
 
     <properties>
         <!--<schemaregistry.url>http://localhost:8081</schemaregistry.url>-->
@@ -116,6 +118,19 @@
                     <groupId>io.confluent</groupId>
                     <artifactId>kafka-schema-registry-maven-plugin</artifactId>
                     <version>${confluent.version}</version>
+                    <dependencies>
+                      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+                      <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                        <version>${jackson-binding.version}</version>
+                      </dependency>
+                      <dependency>
+                        <groupId>org.apache.avro</groupId>
+                        <artifactId>avro</artifactId>
+                        <version>${avro.version}</version>
+                      </dependency>
+                    </dependencies>
                 </plugin>
                 <!--===========================-->
             </plugins>
