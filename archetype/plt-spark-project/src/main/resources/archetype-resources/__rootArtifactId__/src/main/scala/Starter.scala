@@ -2,10 +2,13 @@ package ${groupId}
 
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.{SparkConf, SparkContext}
-
+import org.apache.spark.sql.{SQLContext, SaveMode, SparkSession}
+import org.apache.spark.sql.functions._
+ 
 object Starter {
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setAppName("${artifactId}")
+    val appName = "${artifactId}"
+    val sparkConf = new SparkConf().setAppName(appName)
 
     // MODE LOCAL or YARN
     if (args.isEmpty) sparkConf.setMaster("local[*]")
@@ -15,8 +18,39 @@ object Starter {
     var data = if (!args.isEmpty) args(0) else "src/test/resources/data"
 
     val sc: SparkContext = new SparkContext(sparkConf)
-    val system = FileSystem.get(sc.hadoopConfiguration)
+    val spark = SparkSession.builder()
+      .appName(appName)
+      // https://spark.apache.org/docs/2.3.0/api/java/org/apache/spark/sql/SparkSession.Builder.html#enableHiveSupport()
+      //      .enableHiveSupport()
+      .getOrCreate()
 
+    println(spark.conf.get("spark.sql.catalogImplementation"))
+
+    //======================
+    // Read file
+    //======================
+    //    val df = spark.read.
+    //      //      option("header", "true").
+    //      option("inferSchema", "true").
+    //      option("delimiter", "~").
+    ////      csv(data + "csv/file.csv")
+    //      json(data + "json/file.json")
+    //
+    //    df.printSchema()
+    //    df.show(10)
+
+    //======================
+    // Write Table & Query
+    //======================
+    //    val tableName = "mytable"
+    //
+    //    df.write.mode(SaveMode.Overwrite).saveAsTable(tableName)
+    //    spark.sql("SELECT * FROM " + tableName).show(10)
+
+    //======================
+    // Read folder
+    //======================
+    val system = FileSystem.get(sc.hadoopConfiguration)
     val files: Seq[String] = for {
       folder <- system.listStatus(new Path(data));
       file <- system.listStatus(folder.getPath)
