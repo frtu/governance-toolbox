@@ -1,5 +1,7 @@
 package ${groupId}
 
+import java.io.FileNotFoundException
+
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.{SQLContext, SaveMode, SparkSession}
@@ -53,6 +55,7 @@ object Starter {
     val dataPath = new Path(data)
 
     val system = FileSystem.get(sc.hadoopConfiguration)
+    try {
     val files: Seq[String] = for {
       folder <- system.listStatus(dataPath);
       file <- system.listStatus(folder.getPath)
@@ -68,6 +71,12 @@ object Starter {
       val textFile = sc.textFile(sourceFile)
       textFile.foreach(line => println("==" + line))
     })
+    } catch {
+      case ex: FileNotFoundException => {
+        println("Folder '" + dataPath.toUri + "' not found ! Please check you're running the application in the RIGHT location !")
+        ex.printStackTrace()
+      }
+    }
 
     sc.stop
   }
