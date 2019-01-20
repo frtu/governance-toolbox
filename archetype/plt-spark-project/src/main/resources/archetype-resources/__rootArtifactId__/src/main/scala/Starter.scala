@@ -6,7 +6,7 @@ import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.{SQLContext, SaveMode, SparkSession}
 import org.apache.spark.sql.functions._
- 
+
 object Starter {
   def main(args: Array[String]): Unit = {
     val appName = "${artifactId}"
@@ -56,21 +56,21 @@ object Starter {
 
     val system = FileSystem.get(sc.hadoopConfiguration)
     try {
-    val files: Seq[String] = for {
-      folder <- system.listStatus(dataPath);
-      file <- system.listStatus(folder.getPath)
-    } yield file.getPath.toString
+      val files: Seq[String] = for {
+        folder <- system.listStatus(dataPath);
+        file <- system.listStatus(folder.getPath)
+      } yield file.getPath.toString
 
-    println("Scanning folder " + dataPath.toUri + " files founds : " + files.size)
+      println("Scanning folder " + dataPath.toUri + " files founds : " + files.size)
 
 
-    // Use RDD to read file
-    // https://spark.apache.org/docs/latest/rdd-programming-guide.html#external-datasets
-    files.foreach(sourceFile => {
-      println("= FILE PATH:" + sourceFile)
-      val textFile = sc.textFile(sourceFile)
-      textFile.foreach(line => println("==" + line))
-    })
+      // Use RDD to read file
+      // https://spark.apache.org/docs/latest/rdd-programming-guide.html#external-datasets
+      files.foreach(sourceFile => {
+        println("= FILE PATH:" + sourceFile)
+        val textFile = sc.textFile(sourceFile)
+        textFile.foreach(line => println("==" + line))
+      })
     } catch {
       case ex: FileNotFoundException => {
         println("Folder '" + dataPath.toUri + "' not found ! Please check you're running the application in the RIGHT location !")
