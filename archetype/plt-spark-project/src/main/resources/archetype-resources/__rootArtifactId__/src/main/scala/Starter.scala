@@ -73,7 +73,7 @@ object Starter {
       })
     } catch {
       case ex: FileNotFoundException => {
-        println("Folder '" + dataPath.toUri + "' not found ! Please check you're running the application in the RIGHT location !")
+        System.err.println("Folder '" + dataPath.toUri + "' not found ! Please check you're running the application in the RIGHT location !")
         ex.printStackTrace()
       }
     }
