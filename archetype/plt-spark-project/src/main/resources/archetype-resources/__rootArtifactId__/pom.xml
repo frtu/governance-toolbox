@@ -34,11 +34,25 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_${scala.version}</artifactId>
         </dependency>
+        <!--===========================-->
         <!--UNCOMMNENT FOR spark.sql.catalogImplementation=hive -->
         <!--<dependency>-->
-            <!--<groupId>org.apache.spark</groupId>-->
-            <!--<artifactId>spark-hive_${scala.version}</artifactId>-->
+        <!--<groupId>org.apache.spark</groupId>-->
+        <!--<artifactId>spark-hive_${scala.version}</artifactId>-->
         <!--</dependency>-->
+        <!--===========================-->
+        <!--UNCOMMNENT FOR spark streaming-->
+        <!--COPY sample here https://github.com/apache/spark/tree/v2.3.2/examples/src/main/scala/org/apache/spark/examples/streaming-->
+        <!--===========================-->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.spark</groupId>-->
+        <!--<artifactId>spark-streaming_${scala.version}</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.apache.spark</groupId>-->
+        <!--<artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>-->
+        <!--</dependency>-->
+        <!--===========================-->
 
         <!--===========================-->
         <!-- UNCOMMENT to use Jackson for Scala-->
