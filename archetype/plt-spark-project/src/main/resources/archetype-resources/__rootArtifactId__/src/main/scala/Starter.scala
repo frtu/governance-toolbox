@@ -50,11 +50,16 @@ object Starter {
     //======================
     // Read folder
     //======================
+    val dataPath = new Path(data)
+
     val system = FileSystem.get(sc.hadoopConfiguration)
     val files: Seq[String] = for {
-      folder <- system.listStatus(new Path(data));
+      folder <- system.listStatus(dataPath);
       file <- system.listStatus(folder.getPath)
     } yield file.getPath.toString
+
+    println("Scanning folder " + dataPath.toUri + " files founds : " + files.size)
+
 
     // Use RDD to read file
     // https://spark.apache.org/docs/latest/rdd-programming-guide.html#external-datasets
