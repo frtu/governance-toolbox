@@ -27,8 +27,8 @@
         </encoder>
     </appender>
 
-    <!-- SERDES LAYER -->
-    <logger name="com.github.frtu.serdes" level="debug" additivity="false"/>
+    <!-- Main package -->
+    <logger name="com.github.frtu" level="debug" additivity="false"/>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

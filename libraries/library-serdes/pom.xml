@@ -11,10 +11,9 @@
     <artifactId>library-serdes</artifactId>
 
     <name>library-serdes</name>
-    <description>Library for serialization deseriazliation</description>
+    <description>Library for serialization deserialization</description>
 
     <properties>
-        <avro.version>1.8.2</avro.version>
     </properties>
 
     <dependencies>
