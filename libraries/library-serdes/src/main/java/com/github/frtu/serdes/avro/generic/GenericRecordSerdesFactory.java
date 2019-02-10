@@ -7,6 +7,11 @@ import com.github.frtu.serdes.avro.json.JsonAvroSerdes;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 
+/**
+ * AvroRecordSerdesFactory for Avro {@link GenericRecord}.
+ *
+ * @param <T> The generic Avro class it is meant to serialize and deserialize
+ */
 public class GenericRecordSerdesFactory<T extends GenericRecord> implements AvroRecordSerdesFactory<T> {
 
     private Schema schema;

@@ -13,7 +13,8 @@ public class BaseKafkaAvroRecordSerdes {
      * Major Kafka configuration key to pass the schema location for deserializer.
      * <p>
      * Value accepted :
-     * {@see <a href="https://docs.spring.io/spring-framework/docs/4.3.18.RELEASE/spring-framework-reference/html/resources.html#resources-resourceloader">ResourceLoader - Spring framework</a>}
+     *
+     * @see <a href="https://docs.spring.io/spring-framework/docs/4.3.18.RELEASE/spring-framework-reference/html/resources.html#resources-resourceloader">ResourceLoader - Spring framework</a>
      */
     public static final String CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION = "avro.schema.classpath.location";
 

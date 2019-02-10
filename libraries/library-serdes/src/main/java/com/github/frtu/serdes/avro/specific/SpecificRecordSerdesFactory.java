@@ -6,6 +6,11 @@ import com.github.frtu.serdes.avro.AvroRecordSerializer;
 import org.apache.avro.Schema;
 import org.apache.avro.specific.SpecificRecord;
 
+/**
+ * AvroRecordSerdesFactory for Avro {@link SpecificRecord}.
+ *
+ * @param <T> The specific Avro class it is meant to serialize and deserialize
+ */
 public class SpecificRecordSerdesFactory<T extends SpecificRecord> implements AvroRecordSerdesFactory<T> {
 
     private Schema schema;

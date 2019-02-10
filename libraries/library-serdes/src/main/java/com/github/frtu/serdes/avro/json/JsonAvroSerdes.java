@@ -33,9 +33,9 @@ public class JsonAvroSerdes<T extends GenericRecord> extends GenericRecordSerial
     /**
      * Deserialize the Avro bytes of type {@link T} into JSON string.
      *
-     * @param bytes
+     * @param bytes the Avro bytes with the same schema as the expected JSON
      * @return JSON String corresponding to the avro object.
-     * @throws IOException
+     * @throws IOException bytes is not matching the expectation
      */
     public String deserialize(byte[] bytes) throws IOException {
         final T avroObject = avroRecordDeserializer.deserialize(bytes, false);
@@ -46,9 +46,9 @@ public class JsonAvroSerdes<T extends GenericRecord> extends GenericRecordSerial
     /**
      * Serialize the JSON string into Avro bytes of type {@link T}.
      *
-     * @param jsonString
-     * @return JSON String corresponding to the avro object.
-     * @throws IOException
+     * @param jsonString the JSON representation of the Avro object
+     * @return the Avro bytes with the same schema as the expected JSON.
+     * @throws IOException the json string is not matching the expectation
      */
     public byte[] serialize(String jsonString) throws IOException {
         final T avroObject = avroRecordDeserializer.deserialize(jsonString.getBytes(CHARSET_NAME), true);
