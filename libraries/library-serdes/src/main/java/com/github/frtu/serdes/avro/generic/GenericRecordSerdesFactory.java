@@ -3,12 +3,9 @@ package com.github.frtu.serdes.avro.generic;
 import com.github.frtu.serdes.avro.AvroRecordDeserializer;
 import com.github.frtu.serdes.avro.AvroRecordSerdesFactory;
 import com.github.frtu.serdes.avro.AvroRecordSerializer;
-import com.github.frtu.serdes.avro.DummyData;
-import com.github.frtu.serdes.avro.specific.SpecificRecordDeserializer;
-import com.github.frtu.serdes.avro.specific.SpecificRecordSerializer;
+import com.github.frtu.serdes.avro.converter.AvroConverter;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
-import org.apache.avro.specific.SpecificRecord;
 
 public class GenericRecordSerdesFactory<T extends GenericRecord> implements AvroRecordSerdesFactory<T> {
 
@@ -23,6 +20,10 @@ public class GenericRecordSerdesFactory<T extends GenericRecord> implements Avro
     public GenericRecordSerdesFactory(Schema schema, boolean isFormatJson) {
         this.schema = schema;
         this.isFormatJson = isFormatJson;
+    }
+
+    public Schema getSchema() {
+        return schema;
     }
 
     @Override
@@ -43,5 +44,9 @@ public class GenericRecordSerdesFactory<T extends GenericRecord> implements Avro
     @Override
     public AvroRecordDeserializer<T> buildDeserializer(boolean isFormatJson) {
         return new GenericRecordDeserializer(this.schema, isFormatJson);
+    }
+
+    public AvroConverter<T> buildConverter() {
+        return new AvroConverter((GenericRecordDeserializer) buildDeserializer());
     }
 }

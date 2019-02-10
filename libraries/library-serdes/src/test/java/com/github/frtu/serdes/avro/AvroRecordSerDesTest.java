@@ -1,9 +1,11 @@
 package com.github.frtu.serdes.avro;
 
+import com.github.frtu.serdes.avro.converter.AvroConverter;
 import com.github.frtu.serdes.avro.generic.GenericRecordSerdesFactory;
 import com.github.frtu.serdes.avro.specific.SpecificRecordSerdesFactory;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -192,5 +194,56 @@ public class AvroRecordSerDesTest {
         // 3. Validate
         //--------------------------------------
         Assert.assertEquals(dummyData.toString(), resultDummyData.toString());
+    }
+
+    @Test
+    public void bytesToJson() throws IOException {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        GenericRecord dummyData = new GenericData.Record(genericRecordSerdesFactory.getSchema());
+        dummyData.put("name", "Fred");
+
+        AvroRecordSerializer<GenericRecord> genericRecordSerializer = genericRecordSerdesFactory.buildSerializer();
+        byte[] inputBytes = genericRecordSerializer.serialize(dummyData);
+        final String expected = StringUtils.deleteWhitespace(dummyData.toString());
+
+        //--------------------------------------
+        // 2. Run tests
+        //--------------------------------------
+        final AvroConverter avroConverter = genericRecordSerdesFactory.buildConverter();
+        final String jsonString = avroConverter.convertBytesToJson(inputBytes);
+
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        Assert.assertEquals(expected, StringUtils.deleteWhitespace(jsonString));
+    }
+
+    @Test
+    public void jsonToBytes() throws IOException {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        GenericRecord dummyData = new GenericData.Record(genericRecordSerdesFactory.getSchema());
+        dummyData.put("name", "Fred");
+
+        AvroRecordSerializer<GenericRecord> genericRecordSerializer = genericRecordSerdesFactory.buildSerializer();
+        final String inputJsonString = StringUtils.deleteWhitespace(dummyData.toString());
+        byte[] expected = genericRecordSerializer.serialize(dummyData);
+
+        //--------------------------------------
+        // 2. Run tests
+        //--------------------------------------
+        final AvroConverter avroConverter = genericRecordSerdesFactory.buildConverter();
+        final byte[] resultBytes = avroConverter.convertJsonToBytes(inputJsonString);
+
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        Assert.assertEquals(expected.length, resultBytes.length);
+        for (int i = 0; i < expected.length; i++) {
+            Assert.assertEquals(expected[i], resultBytes[i]);
+        }
     }
 }
