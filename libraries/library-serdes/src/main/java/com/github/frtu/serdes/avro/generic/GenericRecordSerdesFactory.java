@@ -3,7 +3,7 @@ package com.github.frtu.serdes.avro.generic;
 import com.github.frtu.serdes.avro.AvroRecordDeserializer;
 import com.github.frtu.serdes.avro.AvroRecordSerdesFactory;
 import com.github.frtu.serdes.avro.AvroRecordSerializer;
-import com.github.frtu.serdes.avro.converter.AvroConverter;
+import com.github.frtu.serdes.avro.json.JsonAvroSerdes;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 
@@ -46,7 +46,7 @@ public class GenericRecordSerdesFactory<T extends GenericRecord> implements Avro
         return new GenericRecordDeserializer(this.schema, isFormatJson);
     }
 
-    public AvroConverter<T> buildConverter() {
-        return new AvroConverter((GenericRecordDeserializer) buildDeserializer());
+    public JsonAvroSerdes<T> buildConverter() {
+        return new JsonAvroSerdes((GenericRecordDeserializer) buildDeserializer());
     }
 }

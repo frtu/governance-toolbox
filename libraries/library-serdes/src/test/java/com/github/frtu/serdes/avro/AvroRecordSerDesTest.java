@@ -1,6 +1,6 @@
 package com.github.frtu.serdes.avro;
 
-import com.github.frtu.serdes.avro.converter.AvroConverter;
+import com.github.frtu.serdes.avro.json.JsonAvroSerdes;
 import com.github.frtu.serdes.avro.generic.GenericRecordSerdesFactory;
 import com.github.frtu.serdes.avro.specific.SpecificRecordSerdesFactory;
 import org.apache.avro.generic.GenericData;
@@ -211,8 +211,8 @@ public class AvroRecordSerDesTest {
         //--------------------------------------
         // 2. Run tests
         //--------------------------------------
-        final AvroConverter avroConverter = genericRecordSerdesFactory.buildConverter();
-        final String jsonString = avroConverter.convertBytesToJson(inputBytes);
+        final JsonAvroSerdes jsonAvroSerdes = genericRecordSerdesFactory.buildConverter();
+        final String jsonString = jsonAvroSerdes.deserialize(inputBytes);
 
         //--------------------------------------
         // 3. Validate
@@ -235,8 +235,8 @@ public class AvroRecordSerDesTest {
         //--------------------------------------
         // 2. Run tests
         //--------------------------------------
-        final AvroConverter avroConverter = genericRecordSerdesFactory.buildConverter();
-        final byte[] resultBytes = avroConverter.convertJsonToBytes(inputJsonString);
+        final JsonAvroSerdes jsonAvroSerdes = genericRecordSerdesFactory.buildConverter();
+        final byte[] resultBytes = jsonAvroSerdes.serialize(inputJsonString);
 
         //--------------------------------------
         // 3. Validate
