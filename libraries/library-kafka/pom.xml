@@ -81,7 +81,7 @@
                             <goal>schema</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/test/resources/</sourceDirectory>
+                            <sourceDirectory>${project.basedir}/src/test/avro/</sourceDirectory>
                             <!--<outputDirectory>${basedir}/target/generated-test-sources/</outputDirectory>-->
                         </configuration>
                     </execution>
