@@ -4,6 +4,7 @@ import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericContainer;
 import org.apache.avro.io.BinaryEncoder;
 import org.apache.avro.io.DatumWriter;
+import org.apache.avro.io.Encoder;
 import org.apache.avro.io.EncoderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,17 @@ public abstract class AvroRecordSerializer<T extends GenericContainer> { // impl
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AvroRecordSerializer.class);
 
-//  @Override
+    private boolean isFormatJson = false;
+
+    protected AvroRecordSerializer() {
+        this(false);
+    }
+
+    protected AvroRecordSerializer(boolean isFormatJson) {
+        this.isFormatJson = isFormatJson;
+    }
+
+    //  @Override
 //  public byte[] serialize(String topic, T record) {
 //    try {
 //      return getBytes(record);
@@ -46,13 +57,21 @@ public abstract class AvroRecordSerializer<T extends GenericContainer> { // impl
      * @throws IOException Serialization exception
      */
     public byte[] serialize(T record) throws IOException {
-        LOGGER.debug("Serialize record:{}", record);
-        DatumWriter<T> writer = buildDatumWriter(record.getSchema());
+        final Schema schema = record.getSchema();
+        LOGGER.debug("Serialize record:{} schema:{}", record, schema);
+
+        DatumWriter<T> writer = buildDatumWriter(schema);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        BinaryEncoder binaryEncoder = EncoderFactory.get().binaryEncoder(byteArrayOutputStream, null);
-        writer.write(record, binaryEncoder);
-        binaryEncoder.flush();
+        Encoder encoder;
+        if (this.isFormatJson) {
+            encoder = EncoderFactory.get().jsonEncoder(schema, byteArrayOutputStream);
+        } else {
+            encoder = EncoderFactory.get().binaryEncoder(byteArrayOutputStream, null);
+        }
+        writer.write(record, encoder);
+        encoder.flush();
         byteArrayOutputStream.close();
+
         byte[] bytes = byteArrayOutputStream.toByteArray();
         LOGGER.debug("Serialize successfully bytes:{}", bytes);
         return bytes;

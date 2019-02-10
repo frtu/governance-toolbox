@@ -14,6 +14,14 @@ import org.apache.avro.specific.SpecificRecord;
  */
 public class SpecificRecordSerializer<T extends SpecificRecord> extends AvroRecordSerializer<T> {
 
+    public SpecificRecordSerializer() {
+        super();
+    }
+
+    public SpecificRecordSerializer(boolean isFormatJson) {
+        super(isFormatJson);
+    }
+
     @Override
     protected DatumWriter<T> buildDatumWriter(Schema schema) {
         return new SpecificDatumWriter<>(schema);

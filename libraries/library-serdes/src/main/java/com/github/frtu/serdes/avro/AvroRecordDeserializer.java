@@ -1,12 +1,11 @@
 package com.github.frtu.serdes.avro;
 
 import org.apache.avro.Schema;
-import org.apache.avro.io.BinaryDecoder;
-import org.apache.avro.io.DatumReader;
-import org.apache.avro.io.DecoderFactory;
+import org.apache.avro.io.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -28,8 +27,15 @@ public abstract class AvroRecordDeserializer<T> { // implements Deserializer<T> 
 
     private Schema schema;
 
+    private boolean isFormatJson = false;
+
     protected AvroRecordDeserializer(Schema schema) {
+        this(schema, false);
+    }
+
+    protected AvroRecordDeserializer(Schema schema, boolean isFormatJson) {
         this.schema = schema;
+        this.isFormatJson = isFormatJson;
     }
 
     public Schema getSchema() {
@@ -57,8 +63,13 @@ public abstract class AvroRecordDeserializer<T> { // implements Deserializer<T> 
     public T deserialize(byte[] bytes) throws IOException {
         LOGGER.debug("Deserialize bytes:{}", bytes);
         DatumReader<T> datumReader = buildDatumReader();
-        BinaryDecoder binaryDecoder = DecoderFactory.get().binaryDecoder(bytes, null);
-        T record = datumReader.read(null, binaryDecoder);
+        Decoder decoder;
+        if (this.isFormatJson) {
+            decoder = DecoderFactory.get().jsonDecoder(this.schema, new ByteArrayInputStream(bytes));
+        } else {
+            decoder = DecoderFactory.get().binaryDecoder(bytes, null);
+        }
+        T record = datumReader.read(null, decoder);
         LOGGER.debug("Deserialize successful:{}", record);
         return record;
     }

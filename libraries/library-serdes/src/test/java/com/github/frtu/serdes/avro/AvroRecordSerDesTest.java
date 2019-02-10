@@ -36,6 +36,28 @@ public class AvroRecordSerDesTest {
     }
 
     @Test
+    public void specificSerdesJSON() throws IOException {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        DummyData dummyData = DummyData.newBuilder().setName("Fred").build();
+
+        //--------------------------------------
+        // 2. Run tests
+        //--------------------------------------
+        AvroRecordSerializer<DummyData> specificRecordSerializer = new SpecificRecordSerializer<>(true);
+        byte[] serializedBytes = specificRecordSerializer.serialize(dummyData);
+
+        AvroRecordDeserializer<DummyData> specificRecordDeserializer = new SpecificRecordDeserializer(DummyData.getClassSchema(), true);
+        DummyData resultDummyData = specificRecordDeserializer.deserialize(serializedBytes);
+
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        Assert.assertEquals(dummyData.toString(), resultDummyData.toString());
+    }
+
+    @Test
     public void genericSerdes() throws IOException {
         //--------------------------------------
         // 1. Prepare data
@@ -50,6 +72,29 @@ public class AvroRecordSerDesTest {
         byte[] serializedBytes = genericRecordSerializer.serialize(dummyData);
 
         AvroRecordDeserializer<GenericRecord> genericRecordDeserializer = new GenericRecordDeserializer(DummyData.getClassSchema());
+        GenericRecord resultDummyData = genericRecordDeserializer.deserialize(serializedBytes);
+
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        Assert.assertEquals(dummyData.toString(), resultDummyData.toString());
+    }
+
+    @Test
+    public void genericSerdesJSON() throws IOException {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        GenericRecord dummyData = new GenericData.Record(DummyData.getClassSchema());
+        dummyData.put("name", "Fred");
+
+        //--------------------------------------
+        // 2. Run tests
+        //--------------------------------------
+        AvroRecordSerializer<GenericRecord> genericRecordSerializer = new GenericRecordSerializer<>(true);
+        byte[] serializedBytes = genericRecordSerializer.serialize(dummyData);
+
+        AvroRecordDeserializer<GenericRecord> genericRecordDeserializer = new GenericRecordDeserializer(DummyData.getClassSchema(), true);
         GenericRecord resultDummyData = genericRecordDeserializer.deserialize(serializedBytes);
 
         //--------------------------------------

@@ -22,6 +22,10 @@ public class SpecificRecordDeserializer<T extends SpecificRecord> extends AvroRe
         super(schema);
     }
 
+    public SpecificRecordDeserializer(Schema schema, boolean isFormatJson) {
+        super(schema, isFormatJson);
+    }
+
     @Override
     protected DatumReader<T> buildDatumReader() {
         return new SpecificDatumReader<>(getSchema());

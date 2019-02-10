@@ -14,6 +14,14 @@ import org.apache.avro.io.DatumWriter;
  */
 public class GenericRecordSerializer<T extends GenericRecord> extends AvroRecordSerializer<T> {
 
+    public GenericRecordSerializer() {
+        super();
+    }
+
+    public GenericRecordSerializer(boolean isFormatJson) {
+        super(isFormatJson);
+    }
+
     @Override
     protected DatumWriter<T> buildDatumWriter(Schema schema) {
         return new GenericDatumWriter<>(schema);

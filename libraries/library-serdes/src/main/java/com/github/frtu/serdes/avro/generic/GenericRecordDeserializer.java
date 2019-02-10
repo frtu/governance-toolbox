@@ -18,6 +18,10 @@ public class GenericRecordDeserializer<T extends GenericRecord> extends AvroReco
         super(schema);
     }
 
+    public GenericRecordDeserializer(Schema schema, boolean isFormatJson) {
+        super(schema, isFormatJson);
+    }
+
     @Override
     protected DatumReader<T> buildDatumReader() {
         return new GenericDatumReader<>(getSchema());
