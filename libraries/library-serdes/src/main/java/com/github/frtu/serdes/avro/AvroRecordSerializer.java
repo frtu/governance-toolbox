@@ -57,13 +57,17 @@ public abstract class AvroRecordSerializer<T extends GenericContainer> { // impl
      * @throws IOException Serialization exception
      */
     public byte[] serialize(T record) throws IOException {
+        return serialize(record, this.isFormatJson);
+    }
+
+    public byte[] serialize(T record, boolean isFormatJson) throws IOException {
         final Schema schema = record.getSchema();
         LOGGER.debug("Serialize record:{} schema:{}", record, schema);
 
         DatumWriter<T> writer = buildDatumWriter(schema);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         Encoder encoder;
-        if (this.isFormatJson) {
+        if (isFormatJson) {
             encoder = EncoderFactory.get().jsonEncoder(schema, byteArrayOutputStream);
         } else {
             encoder = EncoderFactory.get().binaryEncoder(byteArrayOutputStream, null);

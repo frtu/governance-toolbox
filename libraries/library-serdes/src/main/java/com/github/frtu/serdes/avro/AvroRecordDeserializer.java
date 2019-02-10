@@ -61,10 +61,14 @@ public abstract class AvroRecordDeserializer<T> { // implements Deserializer<T> 
     }
 
     public T deserialize(byte[] bytes) throws IOException {
+        return deserialize(bytes, this.isFormatJson);
+    }
+
+    public T deserialize(byte[] bytes, boolean isFormatJson) throws IOException {
         LOGGER.debug("Deserialize bytes:{}", bytes);
         DatumReader<T> datumReader = buildDatumReader();
         Decoder decoder;
-        if (this.isFormatJson) {
+        if (isFormatJson) {
             decoder = DecoderFactory.get().jsonDecoder(this.schema, new ByteArrayInputStream(bytes));
         } else {
             decoder = DecoderFactory.get().binaryDecoder(bytes, null);
