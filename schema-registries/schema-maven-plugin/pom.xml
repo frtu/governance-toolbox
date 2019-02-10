@@ -33,16 +33,7 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-avro</artifactId>
         </dependency>
-
-        <!--Internal domain dependencies -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>samples-schema-maven-usage</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
 
     <dependencyManagement>
         <dependencies>
