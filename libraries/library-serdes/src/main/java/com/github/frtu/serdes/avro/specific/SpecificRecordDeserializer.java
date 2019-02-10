@@ -15,7 +15,11 @@ import org.apache.avro.specific.SpecificRecord;
 public class SpecificRecordDeserializer<T extends SpecificRecord> extends AvroRecordDeserializer<T> {
 
     public SpecificRecordDeserializer(T similarRecord) {
-        this(similarRecord.getSchema());
+        this(similarRecord, false);
+    }
+
+    public SpecificRecordDeserializer(T similarRecord, boolean isFormatJson) {
+        super(similarRecord.getSchema(), isFormatJson);
     }
 
     public SpecificRecordDeserializer(Schema schema) {
