@@ -1,7 +1,9 @@
 package com.github.frtu.serdes.avro;
 
 import org.apache.avro.Schema;
-import org.apache.avro.io.*;
+import org.apache.avro.io.DatumReader;
+import org.apache.avro.io.Decoder;
+import org.apache.avro.io.DecoderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,20 +11,16 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-//import org.apache.kafka.common.serialization.Deserializer;
-//import org.apache.kafka.common.errors.SerializationException;
-
 /**
  * Avro record deserializer.
  * <p>
- * NOTE : Can be used as Kafka Deserializer but the current library doesn't pollute the dependency with the fat JAR.
+ * NOTE : To use into Kafka, please import library : com.github.frtu.governance:library-serdes
  * </p>
  *
  * @param <T> The specific Avro class it is meant to deserialize
  * @author frtu
  */
-public abstract class AvroRecordDeserializer<T> { // implements Deserializer<T> {
-
+public abstract class AvroRecordDeserializer<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AvroRecordDeserializer.class);
 
     private Schema schema;
@@ -41,18 +39,6 @@ public abstract class AvroRecordDeserializer<T> { // implements Deserializer<T> 
     public Schema getSchema() {
         return schema;
     }
-
-//  @Override
-//  public T deserialize(String topic, byte[] bytes) {
-//    try {
-//      T record = deserialize(bytes);
-//      return record;
-//    } catch (IOException e) {
-//      final String errMsg = String.format("Error when deserializing bytes {} due to {}", bytes, e.getMessage());
-//      LOGGER.error(errMsg, e);
-//      throw new SerializationException(errMsg, e);
-//    }
-//  }
 
     protected abstract DatumReader<T> buildDatumReader();
 
@@ -78,7 +64,6 @@ public abstract class AvroRecordDeserializer<T> { // implements Deserializer<T> 
         return record;
     }
 
-    //  @Override
     public void close() {
         // nothing to do
     }

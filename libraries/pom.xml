@@ -16,6 +16,7 @@
 
     <modules>
         <module>library-serdes</module>
+        <module>library-kafka</module>
     </modules>
 
     <properties>
