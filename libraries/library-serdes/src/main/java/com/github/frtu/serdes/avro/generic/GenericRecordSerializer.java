@@ -11,6 +11,7 @@ import org.apache.avro.io.DatumWriter;
  *
  * @param <T> The generic Avro class it is meant to serialize
  * @author frtu
+ * @since 0.3.5
  */
 public class GenericRecordSerializer<T extends GenericRecord> extends AvroRecordSerializer<T> {
 

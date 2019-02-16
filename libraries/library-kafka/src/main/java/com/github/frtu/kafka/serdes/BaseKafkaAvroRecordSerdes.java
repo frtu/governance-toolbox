@@ -7,6 +7,7 @@ import java.util.Map;
  * and {@link org.apache.kafka.common.serialization.Serializer} with Kafka configuration keys.
  *
  * @author frtu
+ * @since 0.3.5
  */
 public class BaseKafkaAvroRecordSerdes {
     /**

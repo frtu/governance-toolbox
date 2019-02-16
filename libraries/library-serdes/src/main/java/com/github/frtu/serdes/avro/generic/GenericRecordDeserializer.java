@@ -11,6 +11,7 @@ import org.apache.avro.io.DatumReader;
  *
  * @param <T> The generic Avro class it is meant to deserialize
  * @author frtu
+ * @since 0.3.5
  */
 public class GenericRecordDeserializer<T extends GenericRecord> extends AvroRecordDeserializer<T> {
 

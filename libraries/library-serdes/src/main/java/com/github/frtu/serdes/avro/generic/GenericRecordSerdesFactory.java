@@ -11,6 +11,7 @@ import org.apache.avro.generic.GenericRecord;
  * AvroRecordSerdesFactory for Avro {@link GenericRecord}.
  *
  * @param <T> The generic Avro class it is meant to serialize and deserialize
+ * @since 0.3.5
  */
 public class GenericRecordSerdesFactory<T extends GenericRecord> implements AvroRecordSerdesFactory<T> {
 

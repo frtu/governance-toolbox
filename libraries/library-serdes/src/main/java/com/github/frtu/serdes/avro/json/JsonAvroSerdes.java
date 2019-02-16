@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
  *
  * @param <T> The Avro type corresponding to the Avro schema for this JSON string.
  * @author frtu
+ * @since 0.3.5
  */
 public class JsonAvroSerdes<T extends GenericRecord> extends GenericRecordSerializer<T> {
 

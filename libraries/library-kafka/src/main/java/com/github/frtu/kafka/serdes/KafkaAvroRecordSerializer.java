@@ -18,6 +18,7 @@ import java.util.Map;
  *
  * @param <T> The generic Avro class it is meant to serialize
  * @author frtu
+ * @since 0.3.5
  */
 public class KafkaAvroRecordSerializer<T extends GenericContainer> extends BaseKafkaAvroRecordSerdes implements Serializer<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaAvroRecordSerializer.class);

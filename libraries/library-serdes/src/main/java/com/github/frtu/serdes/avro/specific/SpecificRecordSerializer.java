@@ -11,6 +11,7 @@ import org.apache.avro.specific.SpecificRecord;
  *
  * @param <T> The specific Avro class it is meant to serialize
  * @author frtu
+ * @since 0.3.5
  */
 public class SpecificRecordSerializer<T extends SpecificRecord> extends AvroRecordSerializer<T> {
 

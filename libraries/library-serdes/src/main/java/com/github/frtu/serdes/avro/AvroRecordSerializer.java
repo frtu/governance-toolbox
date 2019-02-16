@@ -19,6 +19,7 @@ import java.io.IOException;
  *
  * @param <T> The specific Avro class it is meant to serialize
  * @author frtu
+ * @since 0.3.5
  */
 public abstract class AvroRecordSerializer<T extends GenericContainer> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AvroRecordSerializer.class);

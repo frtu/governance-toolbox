@@ -10,6 +10,7 @@ import org.apache.avro.specific.SpecificRecord;
  * AvroRecordSerdesFactory for Avro {@link SpecificRecord}.
  *
  * @param <T> The specific Avro class it is meant to serialize and deserialize
+ * @since 0.3.5
  */
 public class SpecificRecordSerdesFactory<T extends SpecificRecord> implements AvroRecordSerdesFactory<T> {
 

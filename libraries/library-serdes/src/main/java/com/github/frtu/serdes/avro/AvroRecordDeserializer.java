@@ -19,6 +19,7 @@ import java.nio.ByteBuffer;
  *
  * @param <T> The specific Avro class it is meant to deserialize
  * @author frtu
+ * @since 0.3.5
  */
 public abstract class AvroRecordDeserializer<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AvroRecordDeserializer.class);
