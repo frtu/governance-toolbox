@@ -27,7 +27,7 @@
         </encoder>
     </appender>
 
-    <logger name="${groupId}" level="debug" additivity="false"/>
+    <logger name="${groupId}" level="debug"/>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>
