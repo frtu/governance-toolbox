@@ -14,13 +14,18 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Schema schema = new Schema.Parser().parse(Main.class.getResourceAsStream("/Sample.avsc"));
+        Schema schema = new Schema.Parser().parse(Main.class.getResourceAsStream("/${artifactId}.avsc"));
 
         ${DatamodelClassName} sample = ${DatamodelClassName}.newBuilder()
                 .setName("name")
                 .build();
 
-        File file = new File(sample.getClass().getName()+".avro");
+        final File testFolder = new File("target/");
+        final boolean mkdirs = testFolder.mkdirs();
+        if (!mkdirs) {
+            throw new IllegalStateException("Impossible to create folder " + testFolder.getAbsolutePath());
+        }
+        File file = new File(testFolder, sample.getClass().getSimpleName() + ".avro");
 
         DatumWriter<${DatamodelClassName}> userDatumWriter = new SpecificDatumWriter<${DatamodelClassName}>(${DatamodelClassName}.class);
         DataFileWriter<${DatamodelClassName}> dataFileWriter = new DataFileWriter<${DatamodelClassName}>(userDatumWriter);
