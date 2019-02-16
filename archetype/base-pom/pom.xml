@@ -41,11 +41,25 @@
         <reflections.version>0.9.11</reflections.version>
         <avro.version>1.8.2</avro.version>
         <jackson-binding.version>2.8.11</jackson-binding.version>
+        <!--===========================-->
+        <frdtu.lib.version>0.3.6</frdtu.lib.version>
     </properties>
 
 
     <dependencyManagement>
         <dependencies>
+            <!--LIBRARY-->
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-serdes</artifactId>
+                <version>${frdtu.lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-kafka</artifactId>
+                <version>${frdtu.lib.version}</version>
+            </dependency>
+
             <!-- commons libs -->
             <dependency>
                 <groupId>org.apache.commons</groupId>

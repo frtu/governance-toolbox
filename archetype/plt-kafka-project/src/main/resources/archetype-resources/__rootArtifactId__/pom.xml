@@ -21,6 +21,16 @@
         <!--<version>${project.version}</version>-->
         <!--</dependency>-->
 
+        <!--LIBRARY-->
+        <dependency>
+            <groupId>com.github.frtu.governance</groupId>
+            <artifactId>library-serdes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.frtu.governance</groupId>
+            <artifactId>library-kafka</artifactId>
+        </dependency>
+
         <!--===========================-->
         <!-- UNCOMMENT FOR Schema Registry -->
         <dependency>

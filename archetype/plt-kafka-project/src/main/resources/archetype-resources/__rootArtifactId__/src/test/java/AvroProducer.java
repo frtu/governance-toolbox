@@ -1,5 +1,7 @@
 package ${groupId};
 
+import com.github.frtu.kafka.serdes.KafkaSerializerAvroRecord;
+
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -19,15 +21,20 @@ public class AvroProducer {
         props.put(ProducerConfig.CLIENT_ID_CONFIG, "${DatamodelClassName}AvroProducer");
 
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
-        // Schema Registry location.
-        props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG,
-                "http://localhost:8081");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
 
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                LongSerializer.class.getName());
-        // Configure the KafkaAvroSerializer.
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                KafkaAvroSerializer.class.getName());
+        //------------------------------------------
+        // Confluent Schema registry serdes
+        //------------------------------------------
+        // Schema registry location. Usually Schema Registry on 8081
+        props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
+
+        //------------------------------------------
+        // Custom local serdes
+        //------------------------------------------
+//        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaSerializerAvroRecord.class.getName());
+//        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_IS_JSON, Boolean.TRUE);
 
         props.put("acks", "all");
         props.put("retries", 0);
