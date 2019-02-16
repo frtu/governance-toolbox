@@ -12,14 +12,11 @@ import java.util.Properties;
 import java.util.stream.IntStream;
 
 public class AvroConsumer {
-    public final static String BOOTSTRAP_SERVERS = "localhost:9092";
-    public final static String TOPIC = "${DatamodelClassName}-topic";
-
     private static Consumer<Long, ${DatamodelClassName}> createConsumer() {
         Properties props = new Properties();
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "${DatamodelClassName}AvroConsumer");
 
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, AvroProducer.BOOTSTRAP_SERVERS);
         //Schema registry location.
         props.put(KafkaAvroDeserializerConfig.SCHEMA_REGISTRY_URL_CONFIG,
                 "http://localhost:8081"); //<----- Run Schema Registry on 8081
@@ -37,7 +34,7 @@ public class AvroConsumer {
 
     public static void main(String... args) {
         final Consumer<Long, ${DatamodelClassName}> consumer = createConsumer();
-        consumer.subscribe(Collections.singletonList(TOPIC));
+        consumer.subscribe(Collections.singletonList(AvroProducer.TOPIC));
         IntStream.range(1, 100).forEach(index -> {
             final ConsumerRecords<Long, ${DatamodelClassName}> records =
                     consumer.poll(100);

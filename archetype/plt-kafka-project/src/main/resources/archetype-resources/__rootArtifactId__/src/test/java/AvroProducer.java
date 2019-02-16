@@ -11,11 +11,14 @@ import java.util.Properties;
 import java.util.stream.IntStream;
 
 public class AvroProducer {
+    public final static String BOOTSTRAP_SERVERS = "localhost:9092";
+    public final static String TOPIC = "${DatamodelClassName}-topic";
+
     private static Producer<Long, ${DatamodelClassName}> createProducer() {
         Properties props = new Properties();
         props.put(ProducerConfig.CLIENT_ID_CONFIG, "${DatamodelClassName}AvroProducer");
 
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, AvroConsumer.BOOTSTRAP_SERVERS);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
         // Schema Registry location.
         props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG,
                 "http://localhost:8081");
@@ -40,7 +43,7 @@ public class AvroProducer {
                 .build();
 
         IntStream.range(1, 100).forEach(index->{
-            producer.send(new ProducerRecord<>(AvroConsumer.TOPIC, 1L * index, sample));
+            producer.send(new ProducerRecord<>(TOPIC, 1L * index, sample));
         });
         producer.flush();
         producer.close();
