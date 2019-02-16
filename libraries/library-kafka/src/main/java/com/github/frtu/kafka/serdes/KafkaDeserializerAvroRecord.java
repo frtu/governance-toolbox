@@ -25,28 +25,28 @@ import java.util.Map;
  *
  * @param <T> The specific Avro class it is meant to deserialize
  * @author frtu
- * @since 0.3.5
+ * @since 0.3.6
  */
-public class KafkaAvroRecordDeserializer<T extends GenericContainer> extends BaseKafkaAvroRecordSerdes implements Deserializer<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaAvroRecordDeserializer.class);
+public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends BaseKafkaAvroRecordSerdes implements Deserializer<T> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDeserializerAvroRecord.class);
 
     private AvroRecordDeserializer<T> avroRecordDeserializer;
 
     private Schema schema;
 
-    public KafkaAvroRecordDeserializer() {
+    public KafkaDeserializerAvroRecord() {
         this(null);
     }
 
-    protected KafkaAvroRecordDeserializer(Schema schema) {
+    protected KafkaDeserializerAvroRecord(Schema schema) {
         this(true, schema);
     }
 
-    protected KafkaAvroRecordDeserializer(boolean isGenericRecord, Schema schema) {
+    protected KafkaDeserializerAvroRecord(boolean isGenericRecord, Schema schema) {
         this(isGenericRecord, schema, false);
     }
 
-    protected KafkaAvroRecordDeserializer(boolean isGenericRecord, Schema schema, boolean isFormatJson) {
+    protected KafkaDeserializerAvroRecord(boolean isGenericRecord, Schema schema, boolean isFormatJson) {
         super(isGenericRecord, isFormatJson);
         this.schema = schema;
     }
@@ -111,7 +111,7 @@ public class KafkaAvroRecordDeserializer<T extends GenericContainer> extends Bas
     @Override
     public T deserialize(String topic, byte[] bytes) {
         try {
-            LOGGER.debug("Calling KafkaAvroRecordDeserializer.deserialize topic={} bytes={}", topic, bytes);
+            LOGGER.debug("Calling KafkaDeserializerAvroRecord.deserialize topic={} bytes={}", topic, bytes);
             T record = avroRecordDeserializer.deserialize(bytes);
             return record;
         } catch (IOException e) {

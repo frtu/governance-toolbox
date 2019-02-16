@@ -1,8 +1,6 @@
 package com.github.frtu.kafka;
 
-import com.github.frtu.kafka.serdes.BaseKafkaAvroRecordSerdes;
-import com.github.frtu.kafka.serdes.DummyDataKafkaAvroRecordDeserializer;
-import com.github.frtu.kafka.serdes.KafkaAvroRecordDeserializer;
+import com.github.frtu.kafka.serdes.DummyDataKafkaDeserializerAvroRecord;
 import com.github.frtu.serdes.avro.DummyData;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -21,9 +19,9 @@ public class AvroConsumer {
 
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, AvroProducer.BOOTSTRAP_SERVERS);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, LongDeserializer.class.getName());
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, DummyDataKafkaAvroRecordDeserializer.class.getName());
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, DummyDataKafkaDeserializerAvroRecord.class.getName());
 
-//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaAvroRecordDeserializer.class.getName());
+//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaDeserializerAvroRecord.class.getName());
 //        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "classpath:dummy_data.avsc");
 //        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_GENERIC_AVRO_READER, Boolean.FALSE);
 //        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_IS_JSON, Boolean.TRUE);

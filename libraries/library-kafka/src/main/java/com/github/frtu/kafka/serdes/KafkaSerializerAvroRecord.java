@@ -18,22 +18,22 @@ import java.util.Map;
  *
  * @param <T> The generic Avro class it is meant to serialize
  * @author frtu
- * @since 0.3.5
+ * @since 0.3.6
  */
-public class KafkaAvroRecordSerializer<T extends GenericContainer> extends BaseKafkaAvroRecordSerdes implements Serializer<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaAvroRecordSerializer.class);
+public class KafkaSerializerAvroRecord<T extends GenericContainer> extends BaseKafkaAvroRecordSerdes implements Serializer<T> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaSerializerAvroRecord.class);
 
     private AvroRecordSerializer<T> avroRecordSerializer;
 
-    public KafkaAvroRecordSerializer() {
+    public KafkaSerializerAvroRecord() {
         this(GENERIC_AVRO_READER_DEFAULT);
     }
 
-    protected KafkaAvroRecordSerializer(boolean isGenericRecord) {
+    protected KafkaSerializerAvroRecord(boolean isGenericRecord) {
         this(isGenericRecord, IS_JSON_FORMAT);
     }
 
-    protected KafkaAvroRecordSerializer(boolean isGenericRecord, boolean isFormatJson) {
+    protected KafkaSerializerAvroRecord(boolean isGenericRecord, boolean isFormatJson) {
         super(isGenericRecord, isFormatJson);
     }
 

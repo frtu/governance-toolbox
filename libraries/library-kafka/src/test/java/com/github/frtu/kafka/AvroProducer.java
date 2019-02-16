@@ -1,7 +1,6 @@
 package com.github.frtu.kafka;
 
-import com.github.frtu.kafka.serdes.BaseKafkaAvroRecordSerdes;
-import com.github.frtu.kafka.serdes.KafkaAvroRecordSerializer;
+import com.github.frtu.kafka.serdes.KafkaSerializerAvroRecord;
 import com.github.frtu.serdes.avro.DummyData;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -22,7 +21,7 @@ public class AvroProducer {
 
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroRecordSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaSerializerAvroRecord.class.getName());
 
 //        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_GENERIC_AVRO_READER, Boolean.FALSE);
 //        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_IS_JSON, Boolean.TRUE);
