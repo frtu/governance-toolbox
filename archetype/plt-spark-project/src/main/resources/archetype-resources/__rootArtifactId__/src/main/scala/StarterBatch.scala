@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.{SQLContext, SaveMode, SparkSession}
 import org.apache.spark.sql.functions._
 
-object Starter {
+object StarterBatch {
   def main(args: Array[String]): Unit = {
     val appName = "${artifactId}"
     val sparkConf = new SparkConf().setAppName(appName)

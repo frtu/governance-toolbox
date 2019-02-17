@@ -11,7 +11,7 @@
     <artifactId>${artifactId}</artifactId>
 
     <properties>
-        <start-class>${groupId}.Starter</start-class>
+        <start-class>${groupId}.StarterBatch</start-class>
     </properties>
     <dependencies>
         <!-- UNCOMMENT for Internal domain dependencies -->
@@ -21,7 +21,7 @@
         <!--<version>${project.version}</version>-->
         <!--</dependency>-->
 
-        <!--Libraries-->
+        <!--Scala Libraries-->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
