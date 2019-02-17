@@ -1,5 +1,6 @@
 package ${groupId};
 
+import com.github.frtu.kafka.serdes.BaseKafkaAvroRecordSerdes;
 import com.github.frtu.kafka.serdes.KafkaSerializerAvroRecord;
 
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
@@ -11,6 +12,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.LongSerializer;
 import java.util.Properties;
 import java.util.stream.IntStream;
+import java.util.Random;
 
 public class AvroProducer {
     public final static String BOOTSTRAP_SERVERS = "localhost:9092";
@@ -27,14 +29,14 @@ public class AvroProducer {
         // Confluent Schema registry serdes
         //------------------------------------------
         // Schema registry location. Usually Schema Registry on 8081
-        props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
+//        props.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081");
+//        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
 
         //------------------------------------------
         // Custom local serdes
         //------------------------------------------
-//        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaSerializerAvroRecord.class.getName());
-//        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_IS_JSON, Boolean.TRUE);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaSerializerAvroRecord.class.getName());
+        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_IS_JSON, Boolean.TRUE);
 
         props.put("acks", "all");
         props.put("retries", 0);
@@ -45,11 +47,15 @@ public class AvroProducer {
     public static void main(String... args) {
         Producer<Long, ${DatamodelClassName}> producer = createProducer();
 
-        ${DatamodelClassName} sample = ${DatamodelClassName}.newBuilder()
-                .setName("name")
-                .build();
+        final Random random = new Random();
+        IntStream.range(1, 20).forEach(index->{
+            ${DatamodelClassName} sample = ${DatamodelClassName}.newBuilder()
+                    .setId(Integer.toString(index % 4))
+                    .setName("fred" + (index % 4))
+                    .setValue(random.nextFloat())
+                    .setEventTime(System.currentTimeMillis())
+                    .build();
 
-        IntStream.range(1, 100).forEach(index->{
             producer.send(new ProducerRecord<>(TOPIC, 1L * index, sample));
         });
         producer.flush();

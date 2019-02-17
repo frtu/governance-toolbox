@@ -11,19 +11,22 @@ import org.apache.avro.specific.SpecificDatumWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         Schema schema = new Schema.Parser().parse(Main.class.getResourceAsStream("/${artifactId}.avsc"));
 
         ${DatamodelClassName} sample = ${DatamodelClassName}.newBuilder()
-                .setName("name")
+                .setId(UUID.randomUUID().toString())
+                .setName("fred")
+                .setEventTime(System.currentTimeMillis())
                 .build();
 
         final File testFolder = new File("target/");
         final boolean mkdirs = testFolder.mkdirs();
         if (!mkdirs) {
-            throw new IllegalStateException("Impossible to create folder " + testFolder.getAbsolutePath());
+            System.err.println("Impossible to create folder " + testFolder.getAbsolutePath());
         }
         File file = new File(testFolder, sample.getClass().getSimpleName() + ".avro");
 

@@ -21,6 +21,16 @@
         <!--<version>${project.version}</version>-->
         <!--</dependency>-->
 
+        <!--LIBRARY-->
+        <dependency>
+            <groupId>com.github.frtu.governance</groupId>
+            <artifactId>library-serdes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.frtu.governance</groupId>
+            <artifactId>library-kafka</artifactId>
+        </dependency>
+
         <!--Scala Libraries-->
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -53,6 +63,13 @@
         <!--<artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>-->
         <!--</dependency>-->
         <!--===========================-->
+        <!--COMMNENT if you don't need Spark structured streaming-->
+        <!--https://databricks.com/blog/2017/05/08/event-time-aggregation-watermarking-apache-sparks-structured-streaming.html-->
+        <!--===========================-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql-kafka-0-10_${scala.version}</artifactId>
+        </dependency>
 
         <!--===========================-->
         <!-- UNCOMMENT to use Jackson for Scala-->

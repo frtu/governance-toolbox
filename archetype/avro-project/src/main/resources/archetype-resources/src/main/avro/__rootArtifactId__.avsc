@@ -5,9 +5,27 @@
   "doc": "Please describe your object",
   "fields": [
     {
-      "name": "name",
-      "doc": "Name of the sample object",
+      "name": "id",
+      "doc": "ID from which this data can be uniquely identified",
       "type": "string"
+    },
+    {
+      "name": "name",
+      "doc": "Name of this data",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "value",
+      "doc": "A certain value this data contains",
+      "type": "float",
+      "default": 0
+    },
+    {
+      "name": "eventTime",
+      "type": "long",
+      "doc": "epoch time when the event occurred. See https://databricks.com/blog/2017/05/08/event-time-aggregation-watermarking-apache-sparks-structured-streaming.html",
+      "default": 0
     }
   ]
 }

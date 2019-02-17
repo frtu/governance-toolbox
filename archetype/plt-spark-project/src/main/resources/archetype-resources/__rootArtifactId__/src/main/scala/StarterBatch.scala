@@ -17,7 +17,7 @@ object StarterBatch {
 
     // INPUT FILE : Put your test data file here (CSV, ...)
     // => You can get some sample data at : https://support.spatialkey.com/spatialkey-sample-csv-data/
-    var data = if (!args.isEmpty) args(0) else "src/test/resources/data"
+    var inputData = if (!args.isEmpty) args(0) else "src/test/resources/data"
 
     val sc: SparkContext = new SparkContext(sparkConf)
     val spark = SparkSession.builder()
@@ -52,7 +52,7 @@ object StarterBatch {
     //======================
     // Read folder
     //======================
-    val dataPath = new Path(data)
+    val dataPath = new Path(inputData)
 
     val system = FileSystem.get(sc.hadoopConfiguration)
     try {

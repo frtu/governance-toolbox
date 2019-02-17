@@ -31,6 +31,8 @@
         <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.2</logback.version>
         <!--===========================-->
+        <frdtu.lib.version>${base-pom-version}</frdtu.lib.version>
+        <!--===========================-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -52,6 +54,18 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!--LIBRARY-->
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-serdes</artifactId>
+                <version>${frdtu.lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-kafka</artifactId>
+                <version>${frdtu.lib.version}</version>
+            </dependency>
+
             <!--KAFKA-->
             <dependency>
                 <groupId>org.apache.kafka</groupId>
@@ -119,6 +133,12 @@
             <dependency>
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <!-- Structured Streaming with SQL -->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql-kafka-0-10_${scala.version}</artifactId>
                 <version>${spark.version}</version>
             </dependency>
 

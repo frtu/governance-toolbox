@@ -31,7 +31,7 @@
     <logger name="${groupId}" level="DEBUG"/>
 
     <!--RAISE SPARK STARTUP LOG to INFO. You can decrease it to DEBUG if needed-->
-    <root level="INFO">
+    <root level="ERROR">
         <appender-ref ref="STDOUT"/>
         <!--<appender-ref ref="RollingFile"/>-->
     </root>
