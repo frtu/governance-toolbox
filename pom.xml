@@ -10,7 +10,7 @@
 
 	<groupId>com.github.frtu.governance</groupId>
 	<artifactId>master-pom</artifactId>
-	<version>0.3.6</version>
+	<version>0.3.7-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Governance toolbox</name>
@@ -41,7 +41,7 @@
 		<connection>scm:git:git@github.com:frtu/governance-toolbox.git</connection>
 		<developerConnection>scm:git:git@github.com:frtu/governance-toolbox.git</developerConnection>
 		<url>https://github.com/frtu/governance-toolbox/tree/master</url>
-		<tag>v0.3.6</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<distributionManagement>
