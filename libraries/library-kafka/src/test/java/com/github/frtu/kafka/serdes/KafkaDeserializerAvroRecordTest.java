@@ -1,105 +1,107 @@
 package com.github.frtu.kafka.serdes;
 
+import com.github.frtu.serdes.avro.DummyData;
+import com.github.frtu.serdes.avro.specific.SpecificRecordSerializer;
 import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericContainer;
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.github.frtu.kafka.serdes.BaseKafkaAvroRecordSerdes.CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION;
 
 public class KafkaDeserializerAvroRecordTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDeserializerAvroRecordTest.class);
 
     @Test
-    public void getSchemaString() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "classpath:dummy_data.avsc");
+    public void build() throws IOException {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        DummyData dummyData = DummyData.newBuilder()
+                .setName("Fred")
+                .build();
 
+        final SpecificRecordSerializer specificRecordSerializer = new SpecificRecordSerializer();
+        final byte[] serializedBytes = specificRecordSerializer.serialize(dummyData);
+
+        //--------------------------------------
+        // 2. Run tests
+        //--------------------------------------
+        final KafkaDeserializerAvroRecord<GenericContainer> genericContainerKafkaDeserializerAvroRecord = KafkaDeserializerAvroRecord.build("classpath:dummy_data.avsc");
+        Assert.assertNotNull("build() method should never return null", genericContainerKafkaDeserializerAvroRecord);
+
+        final GenericContainer resultDummyData = genericContainerKafkaDeserializerAvroRecord.deserialize("KafkaTopicName", serializedBytes);
+
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        Assert.assertEquals(dummyData.toString(), resultDummyData.toString());
+    }
+
+    @Test
+    public void getSchemaString() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        final Schema schema = kafkaDeserializerAvroRecord.getSchema(configs);
+        final Schema schema = kafkaDeserializerAvroRecord.getSchema("classpath:dummy_data.avsc");
 
         LOGGER.debug(schema.toString());
-        Assert.notNull(schema, "Schema must not be null");
+        Assert.assertNotNull("Schema must not be null", schema);
     }
 
     @Test
     public void getSchemaWithFile() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, new File("src/test/resources/dummy_data.avsc"));
-
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        final Schema schema = kafkaDeserializerAvroRecord.getSchema(configs);
+        final Schema schema = kafkaDeserializerAvroRecord.getSchema(new File("src/test/resources/dummy_data.avsc"));
 
         LOGGER.debug(schema.toString());
-        Assert.notNull(schema, "Schema must not be null");
+        Assert.assertNotNull("Schema must not be null", schema);
     }
 
     @Test
     public void getSchemaWithPath() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, Paths.get("src/test/resources/dummy_data.avsc"));
-
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        final Schema schema = kafkaDeserializerAvroRecord.getSchema(configs);
+        final Schema schema = kafkaDeserializerAvroRecord.getSchema(Paths.get("src/test/resources/dummy_data.avsc"));
 
         LOGGER.debug(schema.toString());
-        Assert.notNull(schema, "Schema must not be null");
+        Assert.assertNotNull("Schema must not be null", schema);
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaNull() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(new HashMap<>());
+        kafkaDeserializerAvroRecord.getSchema(null);
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaEmptyPath() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "");
-
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(configs);
+        kafkaDeserializerAvroRecord.getSchema("");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaOnlySpacePath() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "     ");
-
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(configs);
+        kafkaDeserializerAvroRecord.getSchema("     ");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaFolderPath() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "src/test/resources/");
-
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(configs);
+        kafkaDeserializerAvroRecord.getSchema("src/test/resources/");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaNonExistingPath() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "non/existing/path");
-
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(configs);
+        kafkaDeserializerAvroRecord.getSchema("non/existing/path");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaUnsupportedType() {
-        final Map<String, Object> configs = new HashMap<>();
-        configs.put(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, new Object());
-
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(configs);
+        kafkaDeserializerAvroRecord.getSchema(new Object());
     }
 }

@@ -9,10 +9,7 @@ import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,14 +27,25 @@ import java.util.Map;
 public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends BaseKafkaAvroRecordSerdes implements Deserializer<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDeserializerAvroRecord.class);
 
-    private AvroRecordDeserializer<T> avroRecordDeserializer;
+    private static AvroSchemaUtil avroSchemaUtil = new AvroSchemaUtil();
 
+    private AvroRecordDeserializer<T> avroRecordDeserializer;
     private Schema schema;
 
+    /**
+     * Default constructor to pass to Kafka Consumer.
+     * MUST be initialized with {@link #configure(Map, boolean)} before calling {@link #deserialize(String, byte[])}
+     */
     public KafkaDeserializerAvroRecord() {
-        this(null);
+        super();
     }
 
+    /**
+     * Parametrized constructor. Schema MUST NOT be null !
+     *
+     * @param schema Avro schema to deserialize bytes from.
+     * @throws IllegalStateException IF schema is erroneous.
+     */
     protected KafkaDeserializerAvroRecord(Schema schema) {
         this(true, schema);
     }
@@ -48,49 +56,58 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
 
     protected KafkaDeserializerAvroRecord(boolean isGenericRecord, Schema schema, boolean isFormatJson) {
         super(isGenericRecord, isFormatJson);
+        Assert.notNull(schema, "Schema MUST NOT be null to be able to deserialize object !");
         this.schema = schema;
+        this.avroRecordDeserializer = this.<T>buildAvroRecordDeserializer(this.schema, isFormatJson, isGenericRecord);
     }
 
+    private <T> AvroRecordDeserializer<T> buildAvroRecordDeserializer(Schema schema, boolean json, boolean generic) {
+        final AvroRecordDeserializer<T> avroRecordDeserializer;
+        if (generic) {
+            LOGGER.info("Create GenericRecordDeserializer with isJson={} schema={}", schema);
+            avroRecordDeserializer = new GenericRecordDeserializer(schema, json);
+        } else {
+            LOGGER.info("Create SpecificRecordDeserializer with isJson={} schema={}", schema);
+            avroRecordDeserializer = new SpecificRecordDeserializer(schema, json);
+        }
+        return avroRecordDeserializer;
+    }
+
+    public static <T extends GenericContainer> KafkaDeserializerAvroRecord<T> build(String location) throws IOException {
+        final Schema schema = avroSchemaUtil.readSchema(location);
+        return new KafkaDeserializerAvroRecord(schema);
+    }
+
+    /**
+     * Lazy initialiation with Kafka config map if calling the default constructor.
+     *
+     * @param configs configs in key/value pairs
+     * @param isKey   whether is for key or value
+     */
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
         if (this.schema == null) {
-            this.schema = getSchema(configs);
+            final Object configurationValue = configs.get(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION);
+            this.schema = getSchema(configurationValue);
         }
-
-        final boolean json = isJson(configs);
-        if (isGeneric(configs)) {
-            LOGGER.info("Create GenericRecordDeserializer with isJson={} schema={}", schema);
-            this.avroRecordDeserializer = new GenericRecordDeserializer(schema, json);
-        } else {
-            LOGGER.info("Create SpecificRecordDeserializer with isJson={} schema={}", schema);
-            this.avroRecordDeserializer = new SpecificRecordDeserializer(schema, json);
+        if (this.avroRecordDeserializer == null) {
+            final boolean isFormatJson = isJson(configs);
+            final boolean isGenericRecord = isGeneric(configs);
+            this.avroRecordDeserializer = this.<T>buildAvroRecordDeserializer(this.schema, isFormatJson, isGenericRecord);
         }
     }
 
-    protected Schema readSchema(File file) throws IOException {
-        return readSchema("file:///" + file.getAbsolutePath());
-    }
-
-    protected Schema readSchema(String location) throws IOException {
-        LOGGER.info("Calling readSchema location={}", location);
-        Assert.isTrue(!StringUtils.isEmpty(location.trim()), "Path cannot be empty!!");
-        final Resource resource = new DefaultResourceLoader().getResource(location);
-        return new Schema.Parser().parse(resource.getInputStream());
-    }
-
-    protected Schema getSchema(Map<String, ?> configs) {
-        final Object configurationValue = configs.get(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION);
+    protected Schema getSchema(Object configurationValue) {
         try {
             if (configurationValue instanceof String) {
                 LOGGER.debug("Found config={} string={}", CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, configurationValue);
-                return readSchema((String) configurationValue);
+                return avroSchemaUtil.readSchema((String) configurationValue);
             } else if (configurationValue instanceof File) {
                 LOGGER.debug("Found config={} file={}", CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, configurationValue);
-                return readSchema((File) configurationValue);
+                return avroSchemaUtil.readSchema((File) configurationValue);
             } else if (configurationValue instanceof Path) {
-                Path path = (Path) configurationValue;
-                LOGGER.debug("Found config={} path={}", CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, path);
-                return readSchema(path.toFile());
+                LOGGER.debug("Found config={} path={}", CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, (Path) configurationValue);
+                return avroSchemaUtil.readSchema((Path) configurationValue);
             }
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalStateException(String.format(

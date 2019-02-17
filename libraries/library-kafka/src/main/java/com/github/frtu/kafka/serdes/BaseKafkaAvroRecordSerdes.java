@@ -39,6 +39,7 @@ public class BaseKafkaAvroRecordSerdes {
     private boolean isFormatJson = IS_JSON_FORMAT;
 
     protected BaseKafkaAvroRecordSerdes() {
+        this(GENERIC_AVRO_READER_DEFAULT, IS_JSON_FORMAT);
     }
 
     protected BaseKafkaAvroRecordSerdes(boolean isGenericRecord, boolean isFormatJson) {
