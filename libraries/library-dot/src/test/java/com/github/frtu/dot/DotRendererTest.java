@@ -87,4 +87,25 @@ public class DotRendererTest {
         Assert.assertTrue(renderGraph.contains("--"));
         Assert.assertTrue(renderGraph.contains("graph"));
     }
+
+    @Test
+    public void testSuperGraph() {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        SuperGraph superGraph = GraphTest.buildSuperGraph();
+        //--------------------------------------
+        // 2. Run tests
+        //--------------------------------------
+        final DotRenderer dotRenderer = new DotRenderer();
+        final String renderGraph = dotRenderer.renderGraph(superGraph, true);
+
+        LOGGER.debug(renderGraph);
+
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        System.out.println(superGraph);
+    }
+
 }

@@ -21,6 +21,42 @@ public class DotRenderer {
         result = new StringBuilder();
     }
 
+    public String renderGraph(SuperGraph graph, boolean directed) {
+        if (directed) {
+            result.append("di");
+        }
+        // TODO OPTIMIZE!
+        result.append("graph ").append(graph.getId()).append(" {\n");
+        renderComment(graph);
+
+        renderAttributes("graph", graph.getGraphAttributes());
+        renderAttributes("node", graph.getGraphAttributes());
+        renderAttributes("edge", graph.getGraphAttributes());
+
+        // SuperGraph
+        final String rankdir = graph.getRankdir();
+        if (rankdir != null) {
+            indent();
+            result.append("rankdir=").append(rankdir);
+            newline();
+        }
+        graph.getSubgraphs().forEach(subgraph -> {
+            indent();
+            result.append("sub");
+            renderGraph(subgraph, directed);
+            newline();
+        });
+        // SuperGraph
+
+        renderGraphNode(graph.getRootNode(), directed);
+        graph.getAllEdges().stream().forEach(graphEdge -> {
+            renderStatementEdge(graphEdge, directed);
+        });
+
+        result.append("}");
+        return result.toString();
+    }
+
     public String renderDirectedGraph(Graph graph) {
         result.append("di");
         return renderGraph(graph, true);
@@ -144,7 +180,13 @@ public class DotRenderer {
     }
 
     private void indent() {
-        result.append("  ");
+        indent(1);
+    }
+
+    private void indent(int times) {
+        for (int i = 0; i < times; i++) {
+            result.append("  ");
+        }
     }
 
     private void newline() {

@@ -1,5 +1,9 @@
 package com.github.frtu.dot.model;
 
+import com.github.frtu.dot.SuperGraph;
+import com.github.frtu.dot.attributes.EdgeAttributes;
+import com.github.frtu.dot.attributes.GraphAttributes;
+import com.github.frtu.dot.attributes.NodeAttributes;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -103,5 +107,72 @@ public class GraphTest {
         final GraphEdge graphEdge = allEdges.get(0);
         Assert.assertEquals("child2_2", graphEdge.getSourceId());
         Assert.assertEquals("subchild3_2_1", graphEdge.getTargetId());
+    }
+
+    @Test
+    public void testSuperGraph() {
+        SuperGraph superGraph = buildSuperGraph();
+
+        if (LOGGER.isDebugEnabled()) {
+            // Graph::toString is a long method
+            LOGGER.debug(superGraph.toString());
+        }
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        Assert.assertEquals(2, superGraph.getSubgraphs().size());
+        // TODO Add more tests
+    }
+
+    public static SuperGraph buildSuperGraph() {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        final Graph cluster_0 = new Graph("cluster_0");
+
+        final GraphAttributes graphAttributes = new GraphAttributes();
+        graphAttributes.setStyle("filled");
+        graphAttributes.setColor("lightgrey");
+        cluster_0.setGraphAttributes(graphAttributes);
+
+        final NodeAttributes nodeAttributes = new NodeAttributes();
+        nodeAttributes.setStyle("filled");
+        graphAttributes.setColor("white");
+        cluster_0.setNodeAttributes(nodeAttributes);
+
+        cluster_0.addEdge("a0", "a1", "a2", "a3");
+
+
+        final Graph cluster_1 = new Graph("cluster_1");
+
+        final NodeAttributes nodeAttributes1 = new NodeAttributes();
+        nodeAttributes.setStyle("filled");
+        cluster_1.setNodeAttributes(nodeAttributes1);
+
+        final EdgeAttributes edgeAttributes = new EdgeAttributes();
+        edgeAttributes.setColor("red");
+        cluster_1.setEdgeAttributes(edgeAttributes);
+
+        cluster_1.addEdge("b0", "b1", "b2", "b3");
+        //--------------------------------------
+        // 2. Run tests
+        //--------------------------------------
+        SuperGraph superGraph = new SuperGraph("G");
+        superGraph.setRankdir("LR");
+
+        superGraph.addSubgraph(cluster_0);
+        superGraph.addSubgraph(cluster_1);
+
+        final GraphNode start = superGraph.addNode("start", PolygonShapeDotEnum.MDIAMOND);
+        final GraphNode end = superGraph.addNode("end", PolygonShapeDotEnum.MDIAMOND);
+
+        superGraph.addEdge(start, "a0");
+        superGraph.addEdge(start, "b0");
+        superGraph.addEdge("a1", "b3");
+        superGraph.addEdge("b2", "a3");
+        superGraph.addEdge("a3", "a0");
+        superGraph.addEdge("a3", end);
+        superGraph.addEdge("b3", end);
+        return superGraph;
     }
 }

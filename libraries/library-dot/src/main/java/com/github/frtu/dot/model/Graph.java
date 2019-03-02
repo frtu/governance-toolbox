@@ -17,11 +17,11 @@ import java.util.List;
  * @since 0.3.6
  */
 public class Graph extends Element {
-    private HashMap<String, GraphNode> allNodes = new HashMap<String, GraphNode>();
-    private List<GraphEdge> edges = new ArrayList<>();
+    protected HashMap<String, GraphNode> allNodes = new HashMap<String, GraphNode>();
+    protected List<GraphEdge> edges = new ArrayList<>();
 
-    private GraphNode rootNode;
-    private GraphNode currentParentNode;
+    protected GraphNode rootNode;
+    protected GraphNode currentParentNode;
 
     private GraphAttributes graphAttributes;
     private NodeAttributes nodeAttributes;
