@@ -34,7 +34,8 @@ public class DotRenderer {
     private DotRenderer renderComment(Element element) {
         if (element.hasComment()) {
             indent();
-            result.append("/* ").append(element.getComment()).append(" */ \n");
+            result.append("/* ").append(element.getComment()).append(" */");
+            newline();
         }
         return this;
     }
@@ -112,6 +113,6 @@ public class DotRenderer {
     }
 
     private void newline() {
-        result.append(";\n");
+        result.append("\n");
     }
 }

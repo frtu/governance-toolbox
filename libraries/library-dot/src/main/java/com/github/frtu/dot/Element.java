@@ -2,7 +2,7 @@ package com.github.frtu.dot;
 
 import java.util.regex.Pattern;
 
-public class Element {
+public abstract class Element {
     public static final String ID_PATTERN_STR = "[_a-zA-Z\\\\200-\\\\377][0-9_a-zA-Z\\\\200-\\\\377]*";
     private Pattern idPattern = Pattern.compile(ID_PATTERN_STR);
 

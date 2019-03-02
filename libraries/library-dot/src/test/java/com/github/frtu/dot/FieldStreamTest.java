@@ -46,7 +46,7 @@ public class FieldStreamTest {
         //--------------------------------------
         // 1. Prepare data
         //--------------------------------------
-        final GraphEdge graphEdge = new GraphEdge(new Element("sourceId"), new Element("targetId"));
+        final GraphEdge graphEdge = new GraphEdge(new Graph("sourceId"), new Graph("targetId"));
         //--------------------------------------
         // 2. Run tests
         //--------------------------------------
