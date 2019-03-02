@@ -21,7 +21,7 @@
 
     <dependencies>
         <!--===========================-->
-        <!-- UNCOMMENT for Internal domain dependencies -->
+        <!-- Internal domain dependencies -->
         <!--===========================-->
         <dependency>
             <groupId>${project.groupId}</groupId>
