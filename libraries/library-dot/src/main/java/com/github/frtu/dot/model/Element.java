@@ -2,6 +2,12 @@ package com.github.frtu.dot.model;
 
 import java.util.regex.Pattern;
 
+/**
+ * Dot Element containing all common fields like ID, comment.
+ *
+ * @author frtu
+ * @since 0.3.6
+ */
 public abstract class Element {
     public static final String ID_PATTERN_STR = "[_a-zA-Z\\\\200-\\\\377][0-9_a-zA-Z\\\\200-\\\\377]*";
     private Pattern idPattern = Pattern.compile(ID_PATTERN_STR);

@@ -9,6 +9,12 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
 
+/**
+ * Util method to auto parse all class fields for rendering.
+ *
+ * @author frtu
+ * @since 0.3.6
+ */
 public class FieldStream<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FieldStream.class);
 
@@ -26,7 +32,7 @@ public class FieldStream<T> {
 
     private T value;
     private Field[] fields;
-    private int firstVisibleField;
+    private int firstVisibleField = 0;
 
     FieldStream(GraphNode graphNode) {
         this.value = (T) graphNode;
@@ -58,7 +64,9 @@ public class FieldStream<T> {
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("SHOULD NEVER HAPPEN");
             }
-            consumer.accept(nodeField.getName(), value);
+            if (value != null) {
+                consumer.accept(nodeField.getName(), value);
+            }
         }
     }
 }

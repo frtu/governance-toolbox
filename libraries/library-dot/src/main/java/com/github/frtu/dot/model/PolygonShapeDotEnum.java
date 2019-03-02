@@ -10,5 +10,7 @@ public enum PolygonShapeDotEnum {
     ELLIPSE,
     OVAL,
     CIRCLE,
-    POINT;
+    POINT,
+    MDIAMOND,
+    MSQUARE;
 }
