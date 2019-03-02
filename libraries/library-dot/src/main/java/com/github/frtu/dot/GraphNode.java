@@ -13,32 +13,23 @@ import java.util.List;
  * @author frtu
  * @since 0.3.6
  */
-public class GraphNode {
+public class GraphNode extends Element {
     // DO NOT CHANGE THESE FIELDS ORDER
-    final static int FIRST_VISIBLE_FIELD_INDEX = 3;
+    final static int FIRST_VISIBLE_FIELD_INDEX = 2;
     List<GraphNode> children = new ArrayList<>();
-    private String id;
     // DO NOT CHANGE THESE FIELDS ORDER
 
     String label;
     PolygonShapeDotEnum shape;
 
     GraphNode(String id, String label, PolygonShapeDotEnum shape) {
-        this.id = id;
+        super(id);
         this.label = label;
         this.shape = shape;
     }
 
     void addChild(GraphNode child) {
         this.children.add(child);
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public void setShape(PolygonShapeDotEnum shape) {
@@ -48,7 +39,7 @@ public class GraphNode {
     @Override
     public String toString() {
         return "GraphNode{" +
-                "id='" + id + '\'' +
+                super.toString() +
                 ", label='" + label + '\'' +
                 ", shape=" + shape +
                 '}';

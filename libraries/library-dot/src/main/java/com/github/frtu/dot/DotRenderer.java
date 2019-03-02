@@ -1,9 +1,5 @@
 package com.github.frtu.dot;
 
-import java.lang.reflect.Field;
-
-import static com.github.frtu.dot.GraphNode.FIRST_VISIBLE_FIELD_INDEX;
-
 /**
  * From a {@link Graph} object, create a Dot language.
  *
@@ -13,8 +9,6 @@ import static com.github.frtu.dot.GraphNode.FIRST_VISIBLE_FIELD_INDEX;
  * @since 0.3.6
  */
 public class DotRenderer {
-    private static Field[] nodeFields = GraphNode.class.getDeclaredFields();
-
     private StringBuilder result;
 
     public DotRenderer() {
@@ -25,13 +19,28 @@ public class DotRenderer {
         if (directed) {
             result.append("di");
         }
-        result.append("graph ").append(graph.getGraphID()).append(" {\n");
+        result.append("graph ").append(graph.getId()).append(" {\n");
+        renderComment(graph);
+
         renderGraphNode(graph.getRootNode(), directed);
+        graph.getAllEdges().stream().forEach(graphEdge -> {
+            renderStatementEdge(graphEdge, directed);
+        });
+
         result.append("}");
         return result.toString();
     }
 
+    private DotRenderer renderComment(Element element) {
+        if (element.hasComment()) {
+            indent();
+            result.append("/* ").append(element.getComment()).append(" */ \n");
+        }
+        return this;
+    }
+
     private DotRenderer renderGraphNode(GraphNode node, boolean directed) {
+        renderComment(node);
         // statement : node_stmt
         renderStatementNode(node);
         node.children.forEach(childNode -> {
@@ -43,41 +52,66 @@ public class DotRenderer {
         return this;
     }
 
+    private DotRenderer renderStatementEdge(GraphEdge graphEdge, boolean directed) {
+        renderStatementEdge(graphEdge.getSourceId(), graphEdge.getTargetId(), directed, false);
+
+        if (graphEdge.hasAttributes()) {
+            result.append(" [");
+            FieldStream.edge(graphEdge).apply((name, value) -> {
+                result.append(name).append('=').append(value).append(',');
+            });
+            result.deleteCharAt(result.length() - 1).append("]");
+        }
+        newline();
+        return this;
+    }
+
     private DotRenderer renderStatementEdge(String sourceId, String targetId, boolean directed) {
-        result.append("  ").append(sourceId);
+        return renderStatementEdge(sourceId, targetId, directed, true);
+    }
+
+    private DotRenderer renderStatementEdge(String sourceId, String targetId, boolean directed, boolean terminateLine) {
+        indent();
+        result.append(sourceId);
         if (directed) {
             result.append(" -> ");
         } else {
             result.append(" -- ");
         }
-        result.append(targetId).append(";\n");
+        result.append(targetId);
+        if (terminateLine) {
+            newline();
+        }
         return this;
     }
 
-    private DotRenderer renderStatementNode(GraphNode node) {
-        result.append("  ").append(node.getId()).append(" [");
-        for (int i = FIRST_VISIBLE_FIELD_INDEX; i < nodeFields.length; i++) {
-            if (i != FIRST_VISIBLE_FIELD_INDEX) result.append(", ");
+    private DotRenderer renderStatementNode(GraphNode graphNode) {
+        indent();
+        result.append(graphNode.getId()).append(" [");
 
-            final Field nodeField = nodeFields[i];
-
-            final Object value;
-            try {
-                nodeField.setAccessible(true);
-                value = nodeField.get(node);
-            } catch (IllegalAccessException e) {
-                throw new IllegalStateException("SHOULD NEVER HAPPEN");
-            }
-            result.append(nodeField.getName()).append('=');
+        FieldStream.node(graphNode).apply((name, value) -> {
+            result.append(name).append('=');
             if (value instanceof String) {
                 result.append('"');
             }
+
             result.append(value);
+
             if (value instanceof String) {
                 result.append('"');
             }
-        }
-        result.append("];\n");
+            result.append(',');
+        });
+        result.deleteCharAt(result.length() - 1).append(']');
+        newline();
         return this;
+    }
+
+    private void indent() {
+        result.append("  ");
+    }
+
+    private void newline() {
+        result.append(";\n");
     }
 }

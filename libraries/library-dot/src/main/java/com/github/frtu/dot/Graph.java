@@ -1,7 +1,8 @@
 package com.github.frtu.dot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.Pattern;
+import java.util.List;
 
 /**
  * Object representing a Graph in memory that contains {@link GraphNode}.
@@ -11,33 +12,23 @@ import java.util.regex.Pattern;
  * @author frtu
  * @since 0.3.6
  */
-public class Graph {
-    public static final String ID_PATTERN_STR = "[_a-zA-Z\\\\200-\\\\377][0-9_a-zA-Z\\\\200-\\\\377]*";
-    Pattern idPattern = Pattern.compile(ID_PATTERN_STR);
+public class Graph extends Element {
+    private HashMap<String, GraphNode> allNodes = new HashMap<String, GraphNode>();
+    private List<GraphEdge> edges = new ArrayList<>();
 
-    private String graphID;
-
-    HashMap<String, GraphNode> allNodes = new HashMap<String, GraphNode>();
     private GraphNode rootNode;
     private GraphNode currentParentNode;
 
-    public Graph(String graphID) {
-        assertFormatId(graphID);
-        this.graphID = graphID;
-    }
-
-    private void assertFormatId(String id) {
-        if (!idPattern.matcher(id).matches()) {
-            throw new IllegalStateException("IDs MUST match pattern " + ID_PATTERN_STR + " parameter passed " + id);
-        }
-    }
-
-    public String getGraphID() {
-        return graphID;
+    public Graph(String id) {
+        super(id);
     }
 
     public HashMap<String, GraphNode> getAllNodes() {
         return allNodes;
+    }
+
+    public List<GraphEdge> getAllEdges() {
+        return edges;
     }
 
     public GraphNode getNode(String id) {
@@ -50,6 +41,16 @@ public class Graph {
 
     public GraphNode getCurrentParentNode() {
         return currentParentNode;
+    }
+
+    public GraphEdge addEdge(String sourceId, String targetId) {
+        return addEdge(getNode(sourceId), getNode(targetId));
+    }
+
+    public GraphEdge addEdge(Element source, Element target) {
+        final GraphEdge graphEdge = new GraphEdge(source, target);
+        edges.add(graphEdge);
+        return graphEdge;
     }
 
     public GraphNode addNode(String id, String label, PolygonShapeDotEnum polygonShape) {
@@ -77,7 +78,6 @@ public class Graph {
     }
 
     private GraphNode buildGraphNode(String id, String label, PolygonShapeDotEnum polygonShape) {
-        assertFormatId(id);
         final GraphNode graphNode = new GraphNode(id, label, polygonShape);
         if (rootNode == null) {
             rootNode = graphNode;
@@ -92,7 +92,7 @@ public class Graph {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[graphID='").append(graphID).append("\']\n");
+        stringBuilder.append("[id='").append(getId()).append("\']\n");
         stringBuilder.append(this.rootNode.toString()).append('\n');
         buildChildren(stringBuilder, this.rootNode, 1);
         return stringBuilder.toString();

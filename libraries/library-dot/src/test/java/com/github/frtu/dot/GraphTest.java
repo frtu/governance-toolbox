@@ -15,7 +15,7 @@ public class GraphTest {
     @Test
     public void createBaseGraph() {
         Graph graph = new Graph(GRAPH_ID);
-        Assert.assertEquals(GRAPH_ID, graph.getGraphID());
+        Assert.assertEquals(GRAPH_ID, graph.getId());
         Assert.assertNotNull("List should not be null", graph.getAllNodes());
         Assert.assertNull("Not initialized", graph.getRootNode());
         Assert.assertNull("Not initialized", graph.getCurrentParentNode());
@@ -23,12 +23,12 @@ public class GraphTest {
     }
 
     @Test
-    public void testComplexGraph() {
+    public void testGraph() {
         //--------------------------------------
         // 1. Prepare data
         //--------------------------------------
         Graph graph = new Graph(GRAPH_ID);
-        final GraphNode expectedRootNode = buildComplexGraph(graph);
+        final GraphNode expectedRootNode = buildGraph(graph);
 
         //--------------------------------------
         // 3. Validate
@@ -52,7 +52,7 @@ public class GraphTest {
         Assert.assertTrue(children32.stream().allMatch(node -> node.label.startsWith("subchildLabel3-2-")));
     }
 
-    static GraphNode buildComplexGraph(Graph graph) {
+    static GraphNode buildGraph(Graph graph) {
         //--------------------------------------
         // 2. Run tests
         //--------------------------------------
@@ -79,8 +79,29 @@ public class GraphTest {
 
 
         if (LOGGER.isDebugEnabled()) {
+            // Graph::toString is a long method
             LOGGER.debug(graph.toString());
         }
         return expectedRootNode;
+    }
+
+    @Test
+    public void testGraphWithEdge() {
+        //--------------------------------------
+        // 1. Prepare data
+        //--------------------------------------
+        Graph graph = new Graph(GRAPH_ID);
+        final GraphNode expectedRootNode = buildGraph(graph);
+        graph.addEdge("child2_2", "subchild3_2_1");
+
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
+        final List<GraphEdge> allEdges = graph.getAllEdges();
+        Assert.assertEquals(1, allEdges.size());
+
+        final GraphEdge graphEdge = allEdges.get(0);
+        Assert.assertEquals("childLabel2-2", ((GraphNode) graphEdge.getSource()).label);
+        Assert.assertEquals("subchildLabel3-2-1", ((GraphNode) graphEdge.getTarget()).label);
     }
 }
