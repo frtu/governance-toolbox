@@ -1,5 +1,6 @@
 package com.github.frtu.dot;
 
+import com.github.frtu.dot.model.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,7 +24,7 @@ public class FieldStreamTest {
         final String label = "aLabel";
         final PolygonShapeDotEnum polygonShapeDotEnum = PolygonShapeDotEnum.BOX;
 
-        final GraphNode graphNode = new GraphNode("anId", label, polygonShapeDotEnum);
+        final GraphNode graphNode = new PublicGraphNode("anId", label, polygonShapeDotEnum);
         //--------------------------------------
         // 2. Run tests
         //--------------------------------------
@@ -46,7 +47,7 @@ public class FieldStreamTest {
         //--------------------------------------
         // 1. Prepare data
         //--------------------------------------
-        final GraphEdge graphEdge = new GraphEdge(new Graph("sourceId"), new Graph("targetId"));
+        final GraphEdge graphEdge = new PublicGraphEdge(new Graph("sourceId"), new Graph("targetId"));
         //--------------------------------------
         // 2. Run tests
         //--------------------------------------

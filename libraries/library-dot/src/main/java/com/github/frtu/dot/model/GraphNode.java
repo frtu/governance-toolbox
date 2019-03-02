@@ -1,4 +1,4 @@
-package com.github.frtu.dot;
+package com.github.frtu.dot.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class GraphNode extends Element {
     // DO NOT CHANGE THESE FIELDS ORDER
-    final static int FIRST_VISIBLE_FIELD_INDEX = 2;
+    public final static int FIRST_VISIBLE_FIELD_INDEX = 2;
     List<GraphNode> children = new ArrayList<>();
     // DO NOT CHANGE THESE FIELDS ORDER
 
@@ -30,6 +30,10 @@ public class GraphNode extends Element {
 
     void addChild(GraphNode child) {
         this.children.add(child);
+    }
+
+    public List<GraphNode> getChildren() {
+        return children;
     }
 
     public void setShape(PolygonShapeDotEnum shape) {

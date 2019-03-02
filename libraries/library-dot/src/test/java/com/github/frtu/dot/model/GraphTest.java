@@ -1,4 +1,4 @@
-package com.github.frtu.dot;
+package com.github.frtu.dot.model;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -52,7 +52,7 @@ public class GraphTest {
         Assert.assertTrue(children32.stream().allMatch(node -> node.label.startsWith("subchildLabel3-2-")));
     }
 
-    static GraphNode buildGraph(Graph graph) {
+    public static GraphNode buildGraph(Graph graph) {
         //--------------------------------------
         // 2. Run tests
         //--------------------------------------

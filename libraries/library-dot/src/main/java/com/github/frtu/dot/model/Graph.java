@@ -1,4 +1,4 @@
-package com.github.frtu.dot;
+package com.github.frtu.dot.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

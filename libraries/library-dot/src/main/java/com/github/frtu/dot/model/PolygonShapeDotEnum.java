@@ -1,4 +1,4 @@
-package com.github.frtu.dot;
+package com.github.frtu.dot.model;
 
 /**
  * @see <a href="https://www.graphviz.org/doc/info/shapes.html">GraphViz Shapes</a>

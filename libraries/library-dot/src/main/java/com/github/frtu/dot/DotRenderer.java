@@ -1,5 +1,10 @@
 package com.github.frtu.dot;
 
+import com.github.frtu.dot.model.Element;
+import com.github.frtu.dot.model.Graph;
+import com.github.frtu.dot.model.GraphEdge;
+import com.github.frtu.dot.model.GraphNode;
+
 /**
  * From a {@link Graph} object, create a Dot language.
  *
@@ -44,7 +49,7 @@ public class DotRenderer {
         renderComment(node);
         // statement : node_stmt
         renderStatementNode(node);
-        node.children.forEach(childNode -> {
+        node.getChildren().forEach(childNode -> {
                     renderGraphNode(childNode, directed);
                     // statement : edge_stmt
                     renderStatementEdge(node.getId(), childNode.getId(), directed);

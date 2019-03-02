@@ -1,8 +1,8 @@
-package com.github.frtu.dot;
+package com.github.frtu.dot.model;
 
 public class GraphEdge {
     // DO NOT CHANGE THESE FIELDS ORDER
-    final static int FIRST_VISIBLE_FIELD_INDEX = 3;
+    public final static int FIRST_VISIBLE_FIELD_INDEX = 3;
     private Element target;
     private Element source;
     // DO NOT CHANGE THESE FIELDS ORDER

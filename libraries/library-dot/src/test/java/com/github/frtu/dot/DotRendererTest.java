@@ -1,5 +1,9 @@
 package com.github.frtu.dot;
 
+import com.github.frtu.dot.model.Graph;
+import com.github.frtu.dot.model.GraphEdge;
+import com.github.frtu.dot.model.GraphNode;
+import com.github.frtu.dot.model.GraphTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
