@@ -1,5 +1,6 @@
 package com.github.frtu.dot;
 
+import com.github.frtu.dot.attributes.Attributes;
 import com.github.frtu.dot.model.Element;
 import com.github.frtu.dot.model.Graph;
 import com.github.frtu.dot.model.GraphEdge;
@@ -20,20 +21,49 @@ public class DotRenderer {
         result = new StringBuilder();
     }
 
+    public String renderDirectedGraph(Graph graph) {
+        result.append("di");
+        return renderGraph(graph, true);
+    }
+
+    public String renderUndirectedGraph(Graph graph) {
+        return renderGraph(graph, false);
+    }
+
     public String renderGraph(Graph graph, boolean directed) {
-        if (directed) {
-            result.append("di");
-        }
         result.append("graph ").append(graph.getId()).append(" {\n");
         renderComment(graph);
 
-        renderGraphNode(graph.getRootNode(), directed);
+        renderAttributes("graph", graph.getGraphAttributes());
+        renderAttributes("node", graph.getGraphAttributes());
+        renderAttributes("edge", graph.getGraphAttributes());
+
+        final GraphNode rootNode = graph.getRootNode();
+        if (rootNode != null) {
+            renderGraphNode(rootNode, directed);
+        }
         graph.getAllEdges().stream().forEach(graphEdge -> {
             renderStatementEdge(graphEdge, directed);
         });
 
         result.append("}");
         return result.toString();
+    }
+
+    private DotRenderer renderAttributes(String section, Attributes attributes) {
+        if (attributes != null) {
+            final StringBuilder stringBuilder = new StringBuilder();
+            FieldStream.attributes(attributes).apply((name, value) -> {
+                stringBuilder.append(name).append('=').append(value).append(',');
+            });
+
+            if (stringBuilder.length() > 1) {
+                indent();
+                result.append(section).append(" [").append(stringBuilder.deleteCharAt(stringBuilder.length() - 1)).append("]");
+                newline();
+            }
+        }
+        return this;
     }
 
     private DotRenderer renderComment(Element element) {

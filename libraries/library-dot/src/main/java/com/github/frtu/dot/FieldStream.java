@@ -1,5 +1,6 @@
 package com.github.frtu.dot;
 
+import com.github.frtu.dot.attributes.Attributes;
 import com.github.frtu.dot.model.GraphEdge;
 import com.github.frtu.dot.model.GraphNode;
 import org.slf4j.Logger;
@@ -44,6 +45,15 @@ public class FieldStream<T> {
         this.value = (T) graphEdge;
         this.fields = edgeFields;
         this.firstVisibleField = GraphEdge.FIRST_VISIBLE_FIELD_INDEX;
+    }
+
+    FieldStream(Attributes attributes) {
+        this.value = (T) attributes;
+        this.fields = attributes.getClass().getDeclaredFields();
+    }
+
+    public static FieldStream<Attributes> attributes(Attributes attributes) {
+        return new FieldStream(attributes);
     }
 
     public static FieldStream<GraphNode> node(GraphNode graphNode) {

@@ -101,7 +101,7 @@ public class GraphTest {
         Assert.assertEquals(1, allEdges.size());
 
         final GraphEdge graphEdge = allEdges.get(0);
-        Assert.assertEquals("childLabel2-2", ((GraphNode) graphEdge.getSource()).label);
-        Assert.assertEquals("subchildLabel3-2-1", ((GraphNode) graphEdge.getTarget()).label);
+        Assert.assertEquals("child2_2", graphEdge.getSourceId());
+        Assert.assertEquals("subchild3_2_1", graphEdge.getTargetId());
     }
 }

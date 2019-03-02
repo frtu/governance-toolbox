@@ -1,5 +1,9 @@
 package com.github.frtu.dot.model;
 
+import com.github.frtu.dot.attributes.EdgeAttributes;
+import com.github.frtu.dot.attributes.GraphAttributes;
+import com.github.frtu.dot.attributes.NodeAttributes;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +22,10 @@ public class Graph extends Element {
 
     private GraphNode rootNode;
     private GraphNode currentParentNode;
+
+    private GraphAttributes graphAttributes;
+    private NodeAttributes nodeAttributes;
+    private EdgeAttributes edgeAttributes;
 
     public Graph(String id) {
         super(id);
@@ -43,14 +51,32 @@ public class Graph extends Element {
         return currentParentNode;
     }
 
-    public GraphEdge addEdge(String sourceId, String targetId) {
-        return addEdge(getNode(sourceId), getNode(targetId));
+    public GraphEdge addEdge(String sourceId, String... targetIds) {
+        GraphEdge graphEdge = null;
+
+        String baseId = sourceId;
+        for (String targetId : targetIds) {
+            graphEdge = new GraphEdge(baseId, targetId);
+            edges.add(graphEdge);
+            baseId = targetId;
+        }
+        return graphEdge;
     }
 
     public GraphEdge addEdge(Element source, Element target) {
-        final GraphEdge graphEdge = new GraphEdge(source, target);
-        edges.add(graphEdge);
-        return graphEdge;
+        return addEdge(source.getId(), target.getId());
+    }
+
+    public GraphEdge addEdge(String sourceId, Element target) {
+        return addEdge(sourceId, target.getId());
+    }
+
+    public GraphEdge addEdge(Element source, String targetId) {
+        return addEdge(source.getId(), targetId);
+    }
+
+    public GraphNode addNode(String id, PolygonShapeDotEnum polygonShape) {
+        return addNode(id, id, polygonShape);
     }
 
     public GraphNode addNode(String id, String label, PolygonShapeDotEnum polygonShape) {
@@ -93,8 +119,10 @@ public class Graph extends Element {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[id='").append(getId()).append("\']\n");
-        stringBuilder.append(this.rootNode.toString()).append('\n');
-        buildChildren(stringBuilder, this.rootNode, 1);
+        if (this.rootNode != null) {
+            stringBuilder.append(this.rootNode.toString()).append('\n');
+            buildChildren(stringBuilder, this.rootNode, 1);
+        }
         return stringBuilder.toString();
     }
 
@@ -109,5 +137,29 @@ public class Graph extends Element {
                 buildChildren(stringBuilder, child, level + 1);
             }
         });
+    }
+
+    public GraphAttributes getGraphAttributes() {
+        return graphAttributes;
+    }
+
+    public void setGraphAttributes(GraphAttributes graphAttributes) {
+        this.graphAttributes = graphAttributes;
+    }
+
+    public NodeAttributes getNodeAttributes() {
+        return nodeAttributes;
+    }
+
+    public void setNodeAttributes(NodeAttributes nodeAttributes) {
+        this.nodeAttributes = nodeAttributes;
+    }
+
+    public EdgeAttributes getEdgeAttributes() {
+        return edgeAttributes;
+    }
+
+    public void setEdgeAttributes(EdgeAttributes edgeAttributes) {
+        this.edgeAttributes = edgeAttributes;
     }
 }

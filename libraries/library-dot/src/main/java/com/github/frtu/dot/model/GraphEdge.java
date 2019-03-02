@@ -13,36 +13,32 @@ package com.github.frtu.dot.model;
 public class GraphEdge {
     // DO NOT CHANGE THESE FIELDS ORDER
     public final static int FIRST_VISIBLE_FIELD_INDEX = 3;
-    private Element target;
-    private Element source;
+    private String sourceId;
+    private String targetId;
     // DO NOT CHANGE THESE FIELDS ORDER
 
     private String color;
     private String style;
 
     GraphEdge(Element source, Element target) {
-        this.source = source;
-        this.target = target;
+        this(source.getId(), target.getId());
+    }
+
+    GraphEdge(String sourceId, String targetId) {
+        this.sourceId = sourceId;
+        this.targetId = targetId;
     }
 
     public boolean hasAttributes() {
         return color != null || style != null;
     }
 
-    public Element getSource() {
-        return source;
-    }
-
     public String getSourceId() {
-        return getSource().getId();
-    }
-
-    public Element getTarget() {
-        return target;
+        return sourceId;
     }
 
     public String getTargetId() {
-        return getTarget().getId();
+        return targetId;
     }
 
     public String getColor() {

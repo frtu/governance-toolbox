@@ -24,7 +24,7 @@ public class DotRendererTest {
         // 2. Run tests
         //--------------------------------------
         final DotRenderer dotRenderer = new DotRenderer();
-        final String renderGraph = dotRenderer.renderGraph(graph, true);
+        final String renderGraph = dotRenderer.renderDirectedGraph(graph);
 
         LOGGER.debug(renderGraph);
         //--------------------------------------
@@ -77,7 +77,7 @@ public class DotRendererTest {
         // 2. Run tests
         //--------------------------------------
         final DotRenderer dotRenderer = new DotRenderer();
-        final String renderGraph = dotRenderer.renderGraph(graph, false);
+        final String renderGraph = dotRenderer.renderUndirectedGraph(graph);
 
         LOGGER.debug(renderGraph);
         //--------------------------------------
