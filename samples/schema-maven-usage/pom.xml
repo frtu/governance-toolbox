@@ -59,7 +59,7 @@
                                     <goal>avro2dot</goal>
                                 </goals>
                                 <configuration>
-                                    <!--<schemaPath>${project.basedir}/src/main/resources/</schemaPath>-->
+                                    <schemaPath>${project.basedir}/src/main/resources/</schemaPath>
                                     <outputDirectory>${basedir}/target/generated-sources/</outputDirectory>
                                 </configuration>
                             </execution>

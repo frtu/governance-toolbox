@@ -11,6 +11,63 @@ Provide libraries for :
 
 ## Libraries
 
+### Dot language library
+
+[Dot notation](https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) graph generator library. Implement [DOT Grammar](https://graphviz.gitlab.io/_pages/doc/info/lang.html) description in Java.
+
+Import using :
+
+```XML
+<dependency>
+  <groupId>com.github.frtu.governance</groupId>
+  <artifactId>library-dot</artifactId>
+  <version>${library-serdes.version}</version>
+</dependency>
+```
+
+Usage :
+
+```Java
+final Graph cluster_0 = new Graph("cluster_0");
+
+cluster_0.newGraphAttributes()
+        .setStyle("filled")
+        .setColor("lightgrey");
+
+cluster_0.newNodeAttributes()
+        .setStyle("filled")
+        .setColor("white");
+
+cluster_0.addEdge("a0", "a1", "a3");
+
+
+final Graph cluster_1 = new Graph("cluster_1");
+cluster_1.newEdgeAttributes().setColor("red");
+cluster_1.addEdge("b0", "b1", "b2", "b3");
+
+SuperGraph superGraph = new SuperGraph("G");
+superGraph.setRankdir("LR");
+
+superGraph.addSubgraph(cluster_0);
+superGraph.addSubgraph(cluster_1);
+
+final GraphNode start = superGraph.addSingleNode("start", PolygonShapeDotEnum.MDIAMOND);
+final GraphNode end = superGraph.addSingleNode("end", PolygonShapeDotEnum.MSQUARE);
+
+superGraph.addEdge(start, "a0");
+superGraph.addEdge(start, "b0");
+superGraph.addEdge("a1", "b3");
+superGraph.addEdge("b2", "a3");
+superGraph.addEdge("a3", "a0");
+superGraph.addEdge("a3", end);
+superGraph.addEdge("b3", end);
+```
+
+
+Check the latest version (clickable) :
+
+[<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/library-dot.svg?label=latest%20release%20:%20library-dot"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22library-dot%22+g%3A%22com.github.frtu.governance%22)
+
 ### Avro SerDes standalone library
 
 Very lightweight Avro SerDes library (no dependency to Kafka libs) that you can use for :
@@ -30,7 +87,7 @@ Import using :
 ```
 Check the latest version (clickable) :
 
-[<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/library-serdes.svg?label=latest%20release%20:%20library-kafka"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22library-serdes%22+g%3A%22com.github.frtu.governance%22)
+[<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/library-serdes.svg?label=latest%20release%20:%20library-serdes"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22library-serdes%22+g%3A%22com.github.frtu.governance%22)
 
 
 ### Kafka SerDes library
@@ -96,3 +153,4 @@ Import using :
 **Notes** : Please do not use the version **0.3.5 of library-kafka**, since some classes has been renamed, to avoid visual confusion with Confluent Avro serdes (Don't have the 2 chances to make things right) ;).
 
 [<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/library-kafka.svg?label=latest%20release%20:%20library-kafka"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22library-kafka%22+g%3A%22com.github.frtu.governance%22)
+
