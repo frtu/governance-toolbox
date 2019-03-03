@@ -1,18 +1,15 @@
 package com.github.frtu.schema;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Set;
-
+import com.github.frtu.schema.utils.FileUtil;
 import com.github.frtu.schema.utils.SchemaUtil;
-import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.Set;
 
 /**
  * Generate Avro schema from all the POJOs that subtype a classname pass in parameter.
@@ -30,9 +27,8 @@ public class SchemaGenPojo2AvroMojo extends AbstractPojo2xxxMojo {
         for (Class<?> classInstance : classSet) {
             final String canonicalName = classInstance.getCanonicalName();
             try {
-                String asJson = SchemaUtil.genAvroSchemaStringFrom(classInstance);
-                final File avroSchemaFile = new File(outputDirectory, canonicalName + ".avsc");
-                IOUtils.write(asJson, new FileOutputStream(avroSchemaFile), Charset.forName("UTF-8"));
+                String fileContent = SchemaUtil.genAvroSchemaStringFrom(classInstance);
+                FileUtil.writeIntoFile(fileContent, canonicalName + ".avsc", this.outputDirectory);
             } catch (Exception e) {
                 LOGGER.error("Error on parsing & writing class {}", canonicalName, e);
             }
