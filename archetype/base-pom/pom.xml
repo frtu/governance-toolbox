@@ -42,7 +42,7 @@
         <avro.version>1.8.2</avro.version>
         <jackson-binding.version>2.8.11</jackson-binding.version>
         <!--===========================-->
-        <frdtu.lib.version>0.3.7-SNAPSHOT</frdtu.lib.version>
+        <frdtu.lib.version>0.3.6</frdtu.lib.version>
     </properties>
 
 
