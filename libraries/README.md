@@ -1,11 +1,12 @@
 # Libraries
 
-Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/0.3.5/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
+Note : The artefacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/0.3.5/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
 
 ## Overview
 
 Provide libraries for :
 
+- Dot notation generator : [Dot notation](https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) graph generator library.
 - Standalone project : Avro (Object vs bytes) & JSON serialization / deserialization
 - Kafka SerDes project : Serialize & deserialize Avro into Kafka
 
@@ -13,7 +14,7 @@ Provide libraries for :
 
 ### Dot language library
 
-[Dot notation](https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) graph generator library. Implement [DOT Grammar](https://graphviz.gitlab.io/_pages/doc/info/lang.html) description in Java.
+Implement [DOT Grammar](https://graphviz.gitlab.io/_pages/doc/info/lang.html) description in Java.
 
 Import using :
 
