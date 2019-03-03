@@ -30,7 +30,6 @@
         <dependency>
             <groupId>com.github.frtu.simple</groupId>
             <artifactId>simple-scan</artifactId>
-            <version>${simple-scan.version}</version>
         </dependency>
 
         <dependency>
@@ -57,17 +56,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <!--Internal domain dependencies -->
-            <dependency>
-                <groupId>com.github.frtu.archetype</groupId>
-                <artifactId>base-pom</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

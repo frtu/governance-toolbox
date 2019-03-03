@@ -1,44 +1,41 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.github.frtu.governance</groupId>
-		<artifactId>schema-registries-toolbox-pom</artifactId>
-		<version>0.3.7-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.frtu.governance</groupId>
+        <artifactId>schema-registries-toolbox-pom</artifactId>
+        <version>0.3.7-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
-	<artifactId>schema-registries-maven-plugin</artifactId>
-	<packaging>maven-plugin</packaging>
+    <artifactId>schema-registries-maven-plugin</artifactId>
+    <packaging>maven-plugin</packaging>
 
-	<name>schema-registries-maven-plugin Maven Plugin</name>
-	<description>A maven plugin to register schemas into a Schema Registry.</description>
+    <name>schema-registries-maven-plugin Maven Plugin</name>
+    <description>A maven plugin to register schemas into a Schema Registry.</description>
 
-	<properties>
-		<hortonworks.registries.version>0.3.0</hortonworks.registries.version>
-		<avro.version>1.7.7</avro.version>
-	</properties>
+    <properties>
+        <hortonworks.registries.version>0.3.0</hortonworks.registries.version>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.avro</groupId>
-			<artifactId>avro</artifactId>
-			<version>${avro.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.hortonworks.registries</groupId>
-			<artifactId>schema-registry-client</artifactId>
-			<version>${hortonworks.registries.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.hortonworks.registries</groupId>
-			<artifactId>schema-registry-serdes</artifactId>
-			<version>${hortonworks.registries.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.frtu.simple</groupId>
-			<artifactId>simple-scan</artifactId>
-			<version>${simple-scan.version}</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.frtu.simple</groupId>
+            <artifactId>simple-scan</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hortonworks.registries</groupId>
+            <artifactId>schema-registry-client</artifactId>
+            <version>${hortonworks.registries.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hortonworks.registries</groupId>
+            <artifactId>schema-registry-serdes</artifactId>
+            <version>${hortonworks.registries.version}</version>
+        </dependency>
+    </dependencies>
 </project>
