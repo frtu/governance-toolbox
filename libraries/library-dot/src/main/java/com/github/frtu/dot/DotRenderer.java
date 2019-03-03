@@ -48,7 +48,9 @@ public class DotRenderer {
         });
         // SuperGraph
 
-        renderGraphNode(graph.getRootNode(), directed);
+        graph.getPrimoNodes().forEach(primoNode -> {
+            renderGraphNode(primoNode, directed);
+        });
         graph.getAllEdges().stream().forEach(graphEdge -> {
             renderStatementEdge(graphEdge, directed);
         });
@@ -74,10 +76,9 @@ public class DotRenderer {
         renderAttributes("node", graph.getNodeAttributes());
         renderAttributes("edge", graph.getEdgeAttributes());
 
-        final GraphNode rootNode = graph.getRootNode();
-        if (rootNode != null) {
-            renderGraphNode(rootNode, directed);
-        }
+        graph.getPrimoNodes().forEach(primoNode -> {
+            renderGraphNode(primoNode, directed);
+        });
         graph.getAllEdges().stream().forEach(graphEdge -> {
             renderStatementEdge(graphEdge, directed);
         });

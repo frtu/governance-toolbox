@@ -3,6 +3,8 @@ package com.github.frtu.dot.model;
 import com.github.frtu.dot.attributes.EdgeAttributes;
 import com.github.frtu.dot.attributes.GraphAttributes;
 import com.github.frtu.dot.attributes.NodeAttributes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,10 +19,12 @@ import java.util.List;
  * @since 0.3.6
  */
 public class Graph extends Element {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Graph.class);
+
     protected HashMap<String, GraphNode> allNodes = new HashMap<String, GraphNode>();
     protected List<GraphEdge> edges = new ArrayList<>();
 
-    protected GraphNode rootNode;
+    protected List<GraphNode> primoNodes = new ArrayList<>();
     protected GraphNode currentParentNode;
 
     private GraphAttributes graphAttributes;
@@ -31,24 +35,28 @@ public class Graph extends Element {
         super(id);
     }
 
-    public HashMap<String, GraphNode> getAllNodes() {
-        return allNodes;
+    public boolean hasPrimoNodes() {
+        return !primoNodes.isEmpty();
     }
 
-    public List<GraphEdge> getAllEdges() {
-        return edges;
+    public List<GraphNode> getPrimoNodes() {
+        return primoNodes;
+    }
+
+    public GraphNode getCurrentParentNode() {
+        return currentParentNode;
     }
 
     public GraphNode getNode(String id) {
         return allNodes.get(id);
     }
 
-    public GraphNode getRootNode() {
-        return rootNode;
+    public HashMap<String, GraphNode> getAllNodes() {
+        return allNodes;
     }
 
-    public GraphNode getCurrentParentNode() {
-        return currentParentNode;
+    public List<GraphEdge> getAllEdges() {
+        return edges;
     }
 
     public GraphEdge addEdge(String sourceId, String... targetIds) {
@@ -104,22 +112,24 @@ public class Graph extends Element {
     }
 
     private GraphNode addNodeToParent(String id, String label, PolygonShapeDotEnum polygonShape, GraphNode parentNode) {
-        final GraphNode graphNode = buildGraphNode(id, label, polygonShape);
-        if (parentNode != null && !parentNode.getId().equals(id)) {
+        if (parentNode != null && parentNode.getId().equals(id)) {
+            final IllegalArgumentException e = new IllegalArgumentException("Cannot add a node with the same name with Parent!!");
+            LOGGER.error(e.getMessage(), e);
+            throw e;
+        }
+
+        final GraphNode graphNode = new GraphNode(id, label, polygonShape);
+        allNodes.put(graphNode.getId(), graphNode);
+
+        if (parentNode == null) {
+            primoNodes.add(graphNode);
+        } else {
             parentNode.addChild(graphNode);
         }
-        return graphNode;
-    }
 
-    private GraphNode buildGraphNode(String id, String label, PolygonShapeDotEnum polygonShape) {
-        final GraphNode graphNode = new GraphNode(id, label, polygonShape);
-        if (rootNode == null) {
-            rootNode = graphNode;
-        }
         if (currentParentNode == null) {
             currentParentNode = graphNode;
         }
-        allNodes.put(graphNode.getId(), graphNode);
         return graphNode;
     }
 
@@ -130,13 +140,13 @@ public class Graph extends Element {
 
         stringBuilder.append("- graphAttributes=").append(graphAttributes).append("\n");
         stringBuilder.append("- nodeAttributes=").append(nodeAttributes).append("\n");
-        stringBuilder.append("- edgeAttributes=").append( edgeAttributes).append("\n");
+        stringBuilder.append("- edgeAttributes=").append(edgeAttributes).append("\n");
 
-        if (this.rootNode != null) {
-            stringBuilder.append(this.rootNode.toString()).append('\n');
-            buildChildren(stringBuilder, this.rootNode, 1);
-        }
-        edges.forEach(edge -> {
+        this.getPrimoNodes().forEach(primoNode -> {
+            stringBuilder.append(primoNode.toString()).append('\n');
+            buildChildren(stringBuilder, primoNode, 1);
+        });
+        this.getAllEdges().forEach(edge -> {
             stringBuilder.append("-> ").append(edge).append("\n");
         });
         return stringBuilder.toString();

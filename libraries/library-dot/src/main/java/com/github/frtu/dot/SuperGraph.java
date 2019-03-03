@@ -16,26 +16,26 @@ public class SuperGraph extends Graph {
     private List<Graph> subgraphs = new ArrayList<>();
     private String rankdir;
 
-    /**
-     * ATTENTION SIDE EFFECT : Use soft copy so ensure to ONLY call after all modification is done on the original object.
-     *
-     * @param graph
-     */
-    public SuperGraph(Graph graph) {
-        super(graph.getId());
-        this.allNodes = graph.getAllNodes();
-        this.edges = graph.getAllEdges();
-        this.rootNode = graph.getRootNode();
-        this.currentParentNode = graph.getCurrentParentNode();
-    }
-
     public SuperGraph(String id) {
         super(id);
     }
 
     public SuperGraph(String id, String rankdir) {
         super(id);
-        this.rankdir = rankdir;
+        this.setRankdir(rankdir);
+    }
+
+    /**
+     * ATTENTION SIDE EFFECT : Use soft copy so ensure to ONLY call after all modification is done on the original object.
+     *
+     * @param graph
+     */
+    protected SuperGraph(Graph graph) {
+        super(graph.getId());
+        this.allNodes = graph.getAllNodes();
+        this.edges = graph.getAllEdges();
+        this.primoNodes = graph.getPrimoNodes();
+        this.currentParentNode = graph.getCurrentParentNode();
     }
 
     public void addSubgraph(Graph subgraph) {
@@ -64,11 +64,10 @@ public class SuperGraph extends Graph {
             stringBuilder.append(graph.toString());
             stringBuilder.append("---------------------\n");
         }
-        final GraphNode rootNode = this.getRootNode();
-        if (rootNode != null) {
-            stringBuilder.append(rootNode.toString()).append('\n');
-            buildChildren(stringBuilder, rootNode, 1);
-        }
+        this.getPrimoNodes().forEach(primoNode -> {
+            stringBuilder.append(primoNode.toString()).append('\n');
+            buildChildren(stringBuilder, primoNode, 1);
+        });
         return stringBuilder.toString();
     }
 

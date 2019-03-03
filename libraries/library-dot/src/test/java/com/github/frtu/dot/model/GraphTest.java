@@ -18,7 +18,7 @@ public class GraphTest {
         Graph graph = new Graph(GRAPH_ID);
         Assert.assertEquals(GRAPH_ID, graph.getId());
         Assert.assertNotNull("List should not be null", graph.getAllNodes());
-        Assert.assertNull("Not initialized", graph.getRootNode());
+        Assert.assertTrue("Not initialized", !graph.hasPrimoNodes());
         Assert.assertNull("Not initialized", graph.getCurrentParentNode());
         Assert.assertTrue("Not initialized", graph.getAllNodes().isEmpty());
     }
@@ -34,10 +34,11 @@ public class GraphTest {
         //--------------------------------------
         // 3. Validate
         //--------------------------------------
-        final GraphNode actualRootNode = graph.getRootNode();
-        Assert.assertEquals(expectedRootNode, actualRootNode);
-        Assert.assertEquals(3, actualRootNode.children.size());
-        Assert.assertTrue(actualRootNode.children.stream().allMatch(node -> node.label.startsWith("label")));
+        final GraphNode firstPrimoNode = graph.getPrimoNodes().get(0);
+
+        Assert.assertEquals(expectedRootNode, firstPrimoNode);
+        Assert.assertEquals(3, firstPrimoNode.children.size());
+        Assert.assertTrue(firstPrimoNode.children.stream().allMatch(node -> node.label.startsWith("label")));
 
         // ORDERED ADD
         final List<GraphNode> node3Children = graph.getNode("id3").children;
