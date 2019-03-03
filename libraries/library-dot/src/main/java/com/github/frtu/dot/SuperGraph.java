@@ -59,12 +59,17 @@ public class SuperGraph extends Graph {
         return subgraphs;
     }
 
-    public String getRankdir() {
-        return rankdir;
+    /**
+     * @param rankdir
+     * @return itself (since 0.3.7)
+     */
+    public SuperGraph setRankdir(String rankdir) {
+        this.rankdir = rankdir;
+        return this;
     }
 
-    public void setRankdir(String rankdir) {
-        this.rankdir = rankdir;
+    public String getRankdir() {
+        return rankdir;
     }
 
     @Override
