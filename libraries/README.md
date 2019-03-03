@@ -29,29 +29,35 @@ Import using :
 Usage :
 
 ```Java
-final Graph cluster_0 = new Graph("cluster_0");
+SuperGraph superGraph = new SuperGraph("G");
+superGraph.setRankdir("LR");
 
+//--------------------------------------
+// Subgraph : cluster_0
+//--------------------------------------
+final Graph cluster_0 = new Graph("cluster_0");
 cluster_0.newGraphAttributes()
         .setStyle("filled")
         .setColor("lightgrey");
-
 cluster_0.newNodeAttributes()
         .setStyle("filled")
         .setColor("white");
-
 cluster_0.addEdge("a0", "a1", "a3");
 
+superGraph.addSubgraph(cluster_0);
 
+//--------------------------------------
+// Subgraph : cluster_1
+//--------------------------------------
 final Graph cluster_1 = new Graph("cluster_1");
 cluster_1.newEdgeAttributes().setColor("red");
 cluster_1.addEdge("b0", "b1", "b2", "b3");
 
-SuperGraph superGraph = new SuperGraph("G");
-superGraph.setRankdir("LR");
-
-superGraph.addSubgraph(cluster_0);
 superGraph.addSubgraph(cluster_1);
 
+//--------------------------------------
+// Super graph itself
+//--------------------------------------
 final GraphNode start = superGraph.addSingleNode("start", PolygonShapeDotEnum.MDIAMOND);
 final GraphNode end = superGraph.addSingleNode("end", PolygonShapeDotEnum.MSQUARE);
 
@@ -62,7 +68,17 @@ superGraph.addEdge("b2", "a3");
 superGraph.addEdge("a3", "a0");
 superGraph.addEdge("a3", end);
 superGraph.addEdge("b3", end);
+
+//--------------------------------------
+// Render
+//--------------------------------------
+final DotRenderer dotRenderer = new DotRenderer();
+// boolean : directed graphs or undirected graphs
+final String renderGraph = dotRenderer.renderGraph(graph, true);
 ```
+
+
+See sample usage, generate a dot graph [with only a few lines of Avro Record navigation logic](https://github.com/frtu/governance-toolbox/blob/master/schema-registries/schema-maven-plugin/src/main/java/com/github/frtu/schema/utils/AvroDotGenerator.java#L51-L91).
 
 
 Check the latest version (clickable) :
