@@ -128,7 +128,7 @@ public class GraphTest {
         // 3. Validate
         //--------------------------------------
         Assert.assertEquals("LR", superGraph.getRankdir());
-        Assert.assertEquals(2, superGraph.getSubgraphs().size());
+        Assert.assertEquals(3, superGraph.getSubgraphs().size());
         // Only those added to the SuperGraph
         Assert.assertEquals(7, superGraph.getAllEdges().size());
 
@@ -145,6 +145,14 @@ public class GraphTest {
         Assert.assertNull(cluster_1.getNodeAttributes());
         Assert.assertEquals("red", cluster_1.getEdgeAttributes().getColor());
         Assert.assertEquals(3, cluster_1.getAllEdges().size());
+
+        final Graph cluster_2 = superGraph.getSubgraphs().get(2);
+        Assert.assertNull(cluster_2.getEdgeAttributes());
+        Assert.assertEquals(3, cluster_2.getAllEdges().size());
+
+        final GraphEdge lastEdge = cluster_2.getAllEdges().get(2);
+        Assert.assertEquals("blue", lastEdge.getColor());
+        Assert.assertEquals("dotted", lastEdge.getStyle());
     }
 
     public static SuperGraph buildSuperGraph() {
@@ -175,6 +183,11 @@ public class GraphTest {
 
         superGraph.addSubgraph(cluster_0);
         superGraph.addSubgraph(cluster_1);
+        superGraph.newSubgraph("cluster_2")
+                .addEdge("c0", "c1", "c2", "c3")
+                .setStyle("dotted")
+                .setColor("blue");
+
 
         final GraphNode start = superGraph.addSingleNode("start", PolygonShapeDotEnum.MDIAMOND);
         final GraphNode end = superGraph.addSingleNode("end", PolygonShapeDotEnum.MSQUARE);
