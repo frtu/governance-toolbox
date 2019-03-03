@@ -30,8 +30,8 @@ public class DotRenderer {
         renderComment(graph);
 
         renderAttributes("graph", graph.getGraphAttributes());
-        renderAttributes("node", graph.getGraphAttributes());
-        renderAttributes("edge", graph.getGraphAttributes());
+        renderAttributes("node", graph.getNodeAttributes());
+        renderAttributes("edge", graph.getEdgeAttributes());
 
         // SuperGraph
         final String rankdir = graph.getRankdir();
@@ -71,8 +71,8 @@ public class DotRenderer {
         renderComment(graph);
 
         renderAttributes("graph", graph.getGraphAttributes());
-        renderAttributes("node", graph.getGraphAttributes());
-        renderAttributes("edge", graph.getGraphAttributes());
+        renderAttributes("node", graph.getNodeAttributes());
+        renderAttributes("edge", graph.getEdgeAttributes());
 
         final GraphNode rootNode = graph.getRootNode();
         if (rootNode != null) {

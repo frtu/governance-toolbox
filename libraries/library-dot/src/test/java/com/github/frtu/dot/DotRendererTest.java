@@ -105,7 +105,9 @@ public class DotRendererTest {
         //--------------------------------------
         // 3. Validate
         //--------------------------------------
-        System.out.println(superGraph);
+        Assert.assertTrue(renderGraph.contains("->"));
+        Assert.assertTrue(!renderGraph.contains("--"));
+        Assert.assertTrue(renderGraph.contains("digraph "));
     }
 
 }
