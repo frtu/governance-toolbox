@@ -10,7 +10,7 @@
 
 	<groupId>com.github.frtu.governance</groupId>
 	<artifactId>master-pom</artifactId>
-	<version>0.3.7-SNAPSHOT</version>
+	<version>0.3.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Governance toolbox</name>
