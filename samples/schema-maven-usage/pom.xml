@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.frtu.governance</groupId>
@@ -35,6 +36,31 @@
                                 <configuration>
                                     <includePackage>tests</includePackage>
                                     <subtypesOf>tests.pojo.UserInterface</subtypesOf>
+                                    <outputDirectory>${basedir}/target/generated-sources/</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>generateDot</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>schema-maven-plugin</artifactId>
+                        <version>${project.version}</version>
+                        <executions>
+                            <execution>
+                                <!-- https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Setting_Up_Your_Project_to_Use_the_Build_Lifecycle -->
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>avro2dot</goal>
+                                </goals>
+                                <configuration>
+                                    <!--<schemaPath>${project.basedir}/src/main/resources/</schemaPath>-->
                                     <outputDirectory>${basedir}/target/generated-sources/</outputDirectory>
                                 </configuration>
                             </execution>

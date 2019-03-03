@@ -28,6 +28,11 @@
             <artifactId>library-dot</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.frtu.simple</groupId>
+            <artifactId>simple-scan</artifactId>
+            <version>${simple-scan.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
