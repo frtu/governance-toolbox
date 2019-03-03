@@ -42,6 +42,8 @@ cluster_0.newGraphAttributes()
 cluster_0.newNodeAttributes()
         .setStyle("filled")
         .setColor("white");
+
+// Short syntax
 cluster_0.addEdge("a0", "a1", "a3");
 
 superGraph.addSubgraph(cluster_0);
@@ -61,13 +63,14 @@ superGraph.addSubgraph(cluster_1);
 final GraphNode start = superGraph.addSingleNode("start", PolygonShapeDotEnum.MDIAMOND);
 final GraphNode end = superGraph.addSingleNode("end", PolygonShapeDotEnum.MSQUARE);
 
-superGraph.addEdge(start, "a0");
+// Long syntax
+superGraph.addEdge(start, "a0").setStyle("dotted");
 superGraph.addEdge(start, "b0");
 superGraph.addEdge("a1", "b3");
-superGraph.addEdge("b2", "a3");
+superGraph.addEdge("b2", "a3").setColor("red");
 superGraph.addEdge("a3", "a0");
 superGraph.addEdge("a3", end);
-superGraph.addEdge("b3", end);
+superGraph.addEdge("b3", end).setStyle("dotted").setColor("blue");
 
 //--------------------------------------
 // Render

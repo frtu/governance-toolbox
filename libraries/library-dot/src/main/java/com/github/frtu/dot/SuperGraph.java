@@ -38,6 +38,13 @@ public class SuperGraph extends Graph {
         this.currentParentNode = graph.getCurrentParentNode();
     }
 
+    /**
+     * Allow to create and add a subgraph into SuperGraph.
+     *
+     * @param subgraphName name of the subgraph
+     * @return newly built graph
+     * @since 0.3.7
+     */
     public Graph newSubgraph(String subgraphName) {
         Graph subgraph = new Graph(subgraphName);
         this.addSubgraph(subgraph);

@@ -83,6 +83,15 @@ public class Graph extends Element {
         return addEdge(source.getId(), targetId);
     }
 
+    /**
+     * @param id and label
+     * @return newly create node
+     * @since 0.3.7
+     */
+    public GraphNode addSingleNode(String id) {
+        return addSingleNode(id, PolygonShapeDotEnum.PLAIN);
+    }
+
     public GraphNode addSingleNode(String id, PolygonShapeDotEnum polygonShape) {
         return addSingleNode(id, id, polygonShape);
     }
