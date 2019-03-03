@@ -177,7 +177,7 @@ public class GraphTest {
         superGraph.addSubgraph(cluster_1);
 
         final GraphNode start = superGraph.addSingleNode("start", PolygonShapeDotEnum.MDIAMOND);
-        final GraphNode end = superGraph.addSingleNode("end", PolygonShapeDotEnum.MDIAMOND);
+        final GraphNode end = superGraph.addSingleNode("end", PolygonShapeDotEnum.MSQUARE);
 
         superGraph.addEdge(start, "a0");
         superGraph.addEdge(start, "b0");

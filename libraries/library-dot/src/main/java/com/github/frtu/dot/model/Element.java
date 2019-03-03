@@ -1,6 +1,6 @@
 package com.github.frtu.dot.model;
 
-import java.util.regex.Pattern;
+import com.github.frtu.dot.utils.IdUtil;
 
 /**
  * Dot Element containing all common fields like ID, comment.
@@ -9,21 +9,12 @@ import java.util.regex.Pattern;
  * @since 0.3.6
  */
 public abstract class Element {
-    public static final String ID_PATTERN_STR = "[_a-zA-Z\\\\200-\\\\377][0-9_a-zA-Z\\\\200-\\\\377]*";
-    private Pattern idPattern = Pattern.compile(ID_PATTERN_STR);
-
     private String id;
     private String comment;
 
     protected Element(String id) {
-        assertFormatId(id);
+        IdUtil.assertFormatId(id);
         this.id = id;
-    }
-
-    private void assertFormatId(String id) {
-        if (!idPattern.matcher(id).matches()) {
-            throw new IllegalStateException("IDs MUST match pattern " + ID_PATTERN_STR + " parameter passed " + id);
-        }
     }
 
     public void setId(String id) {

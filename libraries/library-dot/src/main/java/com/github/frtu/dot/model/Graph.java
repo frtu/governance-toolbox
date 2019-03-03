@@ -112,8 +112,9 @@ public class Graph extends Element {
     }
 
     private GraphNode addNodeToParent(String id, String label, PolygonShapeDotEnum polygonShape, GraphNode parentNode) {
+        LOGGER.debug("id={} label={} polygonShape={} parentNode={}", id, label, polygonShape, parentNode);
         if (parentNode != null && parentNode.getId().equals(id)) {
-            final IllegalArgumentException e = new IllegalArgumentException("Cannot add a node with the same name with Parent!!");
+            final IllegalArgumentException e = new IllegalArgumentException("Cannot add a node with the same name with Parent!! id=" + id);
             LOGGER.error(e.getMessage(), e);
             throw e;
         }

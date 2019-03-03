@@ -42,6 +42,10 @@ public class GraphNode extends Element {
         return children;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
     public PolygonShapeDotEnum getShape() {
         return shape;
     }
