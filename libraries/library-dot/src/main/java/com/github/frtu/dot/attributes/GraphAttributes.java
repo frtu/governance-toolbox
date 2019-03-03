@@ -21,31 +21,58 @@ public class GraphAttributes extends Attributes<Graph> {
 
     Boolean center;
 
-    public void setStyle(String style) {
+    private GraphAttributes() {
+    }
+
+    public final static GraphAttributes build() {
+        return new GraphAttributes();
+    }
+
+    public GraphAttributes setStyle(String style) {
         this.style = style;
+        return this;
     }
 
-    public void setBgcolor(String bgcolor) {
+    public GraphAttributes setBgcolor(String bgcolor) {
         this.bgcolor = bgcolor;
+        return this;
     }
 
-    public void setColor(String color) {
+    public GraphAttributes setColor(String color) {
         this.color = color;
+        return this;
     }
 
-    public void setFontcolor(String fontcolor) {
+    public GraphAttributes setFontcolor(String fontcolor) {
         this.fontcolor = fontcolor;
+        return this;
     }
 
-    public void setFontname(String fontname) {
+    public GraphAttributes setFontname(String fontname) {
         this.fontname = fontname;
+        return this;
     }
 
-    public void setFontsize(Double fontsize) {
+    public GraphAttributes setFontsize(Double fontsize) {
         this.fontsize = fontsize;
+        return this;
     }
 
-    public void setCenter(Boolean center) {
+    public GraphAttributes setCenter(Boolean center) {
         this.center = center;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "GraphAttributes{" +
+                "style='" + style + '\'' +
+                ", bgcolor='" + bgcolor + '\'' +
+                ", color='" + color + '\'' +
+                ", fontcolor='" + fontcolor + '\'' +
+                ", fontname='" + fontname + '\'' +
+                ", fontsize=" + fontsize +
+                ", center=" + center +
+                '}';
     }
 }

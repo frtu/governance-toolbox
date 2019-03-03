@@ -23,35 +23,64 @@ public class NodeAttributes extends Attributes<GraphNode> {
 
     PolygonShapeDotEnum shape;
 
-    public void setStyle(String style) {
+    private NodeAttributes() {
+    }
+
+    public final static NodeAttributes build() {
+        return new NodeAttributes();
+    }
+
+    public NodeAttributes setStyle(String style) {
         this.style = style;
+        return this;
     }
 
-    public void setBgcolor(String bgcolor) {
+    public NodeAttributes setBgcolor(String bgcolor) {
         this.bgcolor = bgcolor;
+        return this;
     }
 
-    public void setColor(String color) {
+    public NodeAttributes setColor(String color) {
         this.color = color;
+        return this;
     }
 
-    public void setFillcolor(String fillcolor) {
+    public NodeAttributes setFillcolor(String fillcolor) {
         this.fillcolor = fillcolor;
+        return this;
     }
 
-    public void setFontcolor(String fontcolor) {
+    public NodeAttributes setFontcolor(String fontcolor) {
         this.fontcolor = fontcolor;
+        return this;
     }
 
-    public void setFontname(String fontname) {
+    public NodeAttributes setFontname(String fontname) {
         this.fontname = fontname;
+        return this;
     }
 
-    public void setFontsize(Double fontsize) {
+    public NodeAttributes setFontsize(Double fontsize) {
         this.fontsize = fontsize;
+        return this;
     }
 
-    public void setShape(PolygonShapeDotEnum shape) {
+    public NodeAttributes setShape(PolygonShapeDotEnum shape) {
         this.shape = shape;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "NodeAttributes{" +
+                "style='" + style + '\'' +
+                ", bgcolor='" + bgcolor + '\'' +
+                ", color='" + color + '\'' +
+                ", fillcolor='" + fillcolor + '\'' +
+                ", fontcolor='" + fontcolor + '\'' +
+                ", fontname='" + fontname + '\'' +
+                ", fontsize=" + fontsize +
+                ", shape=" + shape +
+                '}';
     }
 }

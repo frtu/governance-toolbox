@@ -1,9 +1,6 @@
 package com.github.frtu.dot.model;
 
 import com.github.frtu.dot.SuperGraph;
-import com.github.frtu.dot.attributes.EdgeAttributes;
-import com.github.frtu.dot.attributes.GraphAttributes;
-import com.github.frtu.dot.attributes.NodeAttributes;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -130,28 +127,21 @@ public class GraphTest {
         //--------------------------------------
         final Graph cluster_0 = new Graph("cluster_0");
 
-        final GraphAttributes graphAttributes = new GraphAttributes();
-        graphAttributes.setStyle("filled");
-        graphAttributes.setColor("lightgrey");
-        cluster_0.setGraphAttributes(graphAttributes);
+        cluster_0.newGraphAttributes()
+                .setStyle("filled")
+                .setColor("lightgrey");
 
-        final NodeAttributes nodeAttributes = new NodeAttributes();
-        nodeAttributes.setStyle("filled");
-        graphAttributes.setColor("white");
-        cluster_0.setNodeAttributes(nodeAttributes);
+        cluster_0.newNodeAttributes()
+                .setStyle("filled")
+                .setColor("white");
 
         cluster_0.addEdge("a0", "a1", "a2", "a3");
 
 
         final Graph cluster_1 = new Graph("cluster_1");
 
-        final NodeAttributes nodeAttributes1 = new NodeAttributes();
-        nodeAttributes.setStyle("filled");
-        cluster_1.setNodeAttributes(nodeAttributes1);
-
-        final EdgeAttributes edgeAttributes = new EdgeAttributes();
-        edgeAttributes.setColor("red");
-        cluster_1.setEdgeAttributes(edgeAttributes);
+        cluster_1.newNodeAttributes().setStyle("filled");
+        cluster_1.newEdgeAttributes().setColor("red");
 
         cluster_1.addEdge("b0", "b1", "b2", "b3");
         //--------------------------------------

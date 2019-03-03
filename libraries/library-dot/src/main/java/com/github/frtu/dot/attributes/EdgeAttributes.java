@@ -18,27 +18,52 @@ public class EdgeAttributes extends Attributes<GraphEdge> {
     String fontname;
     Double fontsize;
 
-    public void setStyle(String style) {
+    private EdgeAttributes() {
+    }
+
+    public final static EdgeAttributes build() {
+        return new EdgeAttributes();
+    }
+
+    public EdgeAttributes setStyle(String style) {
         this.style = style;
+        return this;
     }
 
-    public void setColor(String color) {
+    public EdgeAttributes setColor(String color) {
         this.color = color;
+        return this;
     }
 
-    public void setArrowsize(Double arrowsize) {
+    public EdgeAttributes setArrowsize(Double arrowsize) {
         this.arrowsize = arrowsize;
+        return this;
     }
 
-    public void setFontcolor(String fontcolor) {
+    public EdgeAttributes setFontcolor(String fontcolor) {
         this.fontcolor = fontcolor;
+        return this;
     }
 
-    public void setFontname(String fontname) {
+    public EdgeAttributes setFontname(String fontname) {
         this.fontname = fontname;
+        return this;
     }
 
-    public void setFontsize(Double fontsize) {
+    public EdgeAttributes setFontsize(Double fontsize) {
         this.fontsize = fontsize;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "EdgeAttributes{" +
+                "style='" + style + '\'' +
+                ", color='" + color + '\'' +
+                ", arrowsize=" + arrowsize +
+                ", fontcolor='" + fontcolor + '\'' +
+                ", fontname='" + fontname + '\'' +
+                ", fontsize=" + fontsize +
+                '}';
     }
 }

@@ -119,10 +119,18 @@ public class Graph extends Element {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[id='").append(getId()).append("\']\n");
+
+        stringBuilder.append("- graphAttributes=").append(graphAttributes).append("\n");
+        stringBuilder.append("- nodeAttributes=").append(nodeAttributes).append("\n");
+        stringBuilder.append("- edgeAttributes=").append( edgeAttributes).append("\n");
+
         if (this.rootNode != null) {
             stringBuilder.append(this.rootNode.toString()).append('\n');
             buildChildren(stringBuilder, this.rootNode, 1);
         }
+        edges.forEach(edge -> {
+            stringBuilder.append("-> ").append(edge).append("\n");
+        });
         return stringBuilder.toString();
     }
 
@@ -139,6 +147,12 @@ public class Graph extends Element {
         });
     }
 
+    public GraphAttributes newGraphAttributes() {
+        final GraphAttributes graphAttributes = GraphAttributes.build();
+        setGraphAttributes(graphAttributes);
+        return graphAttributes;
+    }
+
     public GraphAttributes getGraphAttributes() {
         return graphAttributes;
     }
@@ -147,12 +161,24 @@ public class Graph extends Element {
         this.graphAttributes = graphAttributes;
     }
 
+    public NodeAttributes newNodeAttributes() {
+        final NodeAttributes nodeAttributes = NodeAttributes.build();
+        setNodeAttributes(nodeAttributes);
+        return nodeAttributes;
+    }
+
     public NodeAttributes getNodeAttributes() {
         return nodeAttributes;
     }
 
     public void setNodeAttributes(NodeAttributes nodeAttributes) {
         this.nodeAttributes = nodeAttributes;
+    }
+
+    public EdgeAttributes newEdgeAttributes() {
+        final EdgeAttributes edgeAttributes = EdgeAttributes.build();
+        setEdgeAttributes(edgeAttributes);
+        return edgeAttributes;
     }
 
     public EdgeAttributes getEdgeAttributes() {
