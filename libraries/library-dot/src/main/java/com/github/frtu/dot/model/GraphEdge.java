@@ -29,6 +29,16 @@ public class GraphEdge {
         this.targetId = targetId;
     }
 
+    public GraphEdge setColor(String color) {
+        this.color = color;
+        return this;
+    }
+
+    public GraphEdge setStyle(String style) {
+        this.style = style;
+        return this;
+    }
+
     public boolean hasAttributes() {
         return color != null || style != null;
     }
@@ -45,16 +55,8 @@ public class GraphEdge {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public String getStyle() {
         return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
     }
 
     @Override

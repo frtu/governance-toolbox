@@ -91,19 +91,28 @@ public class GraphTest {
         //--------------------------------------
         // 1. Prepare data
         //--------------------------------------
+        final PolygonShapeDotEnum expectedShape = PolygonShapeDotEnum.ELLIPSE;
+
         Graph graph = new Graph(GRAPH_ID);
-        final GraphNode expectedRootNode = buildGraph(graph);
-        graph.addEdge("child2_2", "subchild3_2_1");
+        final GraphNode rootNode = buildGraph(graph)
+                .setShape(expectedShape);
+
+        graph.addEdge("child2_2", "subchild3_2_1")
+                .setColor("red")
+                .setStyle("dotted");
 
         //--------------------------------------
         // 3. Validate
         //--------------------------------------
+        Assert.assertEquals(expectedShape, rootNode.getShape());
+
         final List<GraphEdge> allEdges = graph.getAllEdges();
         Assert.assertEquals(1, allEdges.size());
 
         final GraphEdge graphEdge = allEdges.get(0);
         Assert.assertEquals("child2_2", graphEdge.getSourceId());
-        Assert.assertEquals("subchild3_2_1", graphEdge.getTargetId());
+        Assert.assertEquals("red", graphEdge.getColor());
+        Assert.assertEquals("dotted", graphEdge.getStyle());
     }
 
     @Test
@@ -117,8 +126,24 @@ public class GraphTest {
         //--------------------------------------
         // 3. Validate
         //--------------------------------------
+        Assert.assertEquals("LR", superGraph.getRankdir());
         Assert.assertEquals(2, superGraph.getSubgraphs().size());
-        // TODO Add more tests
+        // Only those added to the SuperGraph
+        Assert.assertEquals(7, superGraph.getAllEdges().size());
+
+        final Graph cluster_0 = superGraph.getSubgraphs().get(0);
+        Assert.assertEquals("filled", cluster_0.getGraphAttributes().getStyle());
+        Assert.assertEquals("lightgrey", cluster_0.getGraphAttributes().getColor());
+        Assert.assertEquals("filled", cluster_0.getNodeAttributes().getStyle());
+        Assert.assertEquals("white", cluster_0.getNodeAttributes().getColor());
+        Assert.assertNull(cluster_0.getEdgeAttributes());
+        Assert.assertEquals(2, cluster_0.getAllEdges().size());
+
+        final Graph cluster_1 = superGraph.getSubgraphs().get(1);
+        Assert.assertNull(cluster_1.getGraphAttributes());
+        Assert.assertNull(cluster_1.getNodeAttributes());
+        Assert.assertEquals("red", cluster_1.getEdgeAttributes().getColor());
+        Assert.assertEquals(3, cluster_1.getAllEdges().size());
     }
 
     public static SuperGraph buildSuperGraph() {
@@ -135,14 +160,11 @@ public class GraphTest {
                 .setStyle("filled")
                 .setColor("white");
 
-        cluster_0.addEdge("a0", "a1", "a2", "a3");
+        cluster_0.addEdge("a0", "a1", "a3");
 
 
         final Graph cluster_1 = new Graph("cluster_1");
-
-        cluster_1.newNodeAttributes().setStyle("filled");
         cluster_1.newEdgeAttributes().setColor("red");
-
         cluster_1.addEdge("b0", "b1", "b2", "b3");
         //--------------------------------------
         // 2. Run tests

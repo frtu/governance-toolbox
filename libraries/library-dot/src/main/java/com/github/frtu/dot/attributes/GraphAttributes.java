@@ -63,6 +63,34 @@ public class GraphAttributes extends Attributes<Graph> {
         return this;
     }
 
+    public String getStyle() {
+        return style;
+    }
+
+    public String getBgcolor() {
+        return bgcolor;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getFontcolor() {
+        return fontcolor;
+    }
+
+    public String getFontname() {
+        return fontname;
+    }
+
+    public Double getFontsize() {
+        return fontsize;
+    }
+
+    public Boolean getCenter() {
+        return center;
+    }
+
     @Override
     public String toString() {
         return "GraphAttributes{" +

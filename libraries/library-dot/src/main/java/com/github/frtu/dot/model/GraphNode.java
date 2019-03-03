@@ -28,16 +28,22 @@ public class GraphNode extends Element {
         this.shape = shape;
     }
 
-    void addChild(GraphNode child) {
+    public GraphNode setShape(PolygonShapeDotEnum shape) {
+        this.shape = shape;
+        return this;
+    }
+
+    GraphNode addChild(GraphNode child) {
         this.children.add(child);
+        return this;
     }
 
     public List<GraphNode> getChildren() {
         return children;
     }
 
-    public void setShape(PolygonShapeDotEnum shape) {
-        this.shape = shape;
+    public PolygonShapeDotEnum getShape() {
+        return shape;
     }
 
     @Override

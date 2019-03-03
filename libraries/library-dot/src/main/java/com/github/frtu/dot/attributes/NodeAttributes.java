@@ -70,6 +70,38 @@ public class NodeAttributes extends Attributes<GraphNode> {
         return this;
     }
 
+    public String getStyle() {
+        return style;
+    }
+
+    public String getBgcolor() {
+        return bgcolor;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getFillcolor() {
+        return fillcolor;
+    }
+
+    public String getFontcolor() {
+        return fontcolor;
+    }
+
+    public String getFontname() {
+        return fontname;
+    }
+
+    public Double getFontsize() {
+        return fontsize;
+    }
+
+    public PolygonShapeDotEnum getShape() {
+        return shape;
+    }
+
     @Override
     public String toString() {
         return "NodeAttributes{" +

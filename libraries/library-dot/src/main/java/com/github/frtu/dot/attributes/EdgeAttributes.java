@@ -55,6 +55,30 @@ public class EdgeAttributes extends Attributes<GraphEdge> {
         return this;
     }
 
+    public String getStyle() {
+        return style;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Double getArrowsize() {
+        return arrowsize;
+    }
+
+    public String getFontcolor() {
+        return fontcolor;
+    }
+
+    public String getFontname() {
+        return fontname;
+    }
+
+    public Double getFontsize() {
+        return fontsize;
+    }
+
     @Override
     public String toString() {
         return "EdgeAttributes{" +
