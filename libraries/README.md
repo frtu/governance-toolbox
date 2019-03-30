@@ -35,7 +35,7 @@ superGraph.setRankdir("LR");
 //--------------------------------------
 // Subgraph : cluster_0
 //--------------------------------------
-final Graph cluster_0 = new Graph("cluster_0");
+final Graph cluster_0 = superGraph.newSubgraph("cluster_0");
 cluster_0.newGraphAttributes()
         .setStyle("filled")
         .setColor("lightgrey");
@@ -46,16 +46,12 @@ cluster_0.newNodeAttributes()
 // Short syntax
 cluster_0.addEdge("a0", "a1", "a3");
 
-superGraph.addSubgraph(cluster_0);
-
 //--------------------------------------
 // Subgraph : cluster_1
 //--------------------------------------
-final Graph cluster_1 = new Graph("cluster_1");
+final Graph cluster_1 = superGraph.newSubgraph("cluster_1");
 cluster_1.newEdgeAttributes().setColor("red");
 cluster_1.addEdge("b0", "b1", "b2", "b3");
-
-superGraph.addSubgraph(cluster_1);
 
 //--------------------------------------
 // Super graph itself
