@@ -10,7 +10,7 @@
 
 	<groupId>com.github.frtu.archetype</groupId>
 	<artifactId>archetype-pom</artifactId>
-	<version>0.3.8-SNAPSHOT</version>
+	<version>0.3.7-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Archetypes parent pom</name>
