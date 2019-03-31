@@ -31,7 +31,7 @@
         <commons-compress.version>1.18</commons-compress.version>
 
         <!--https://search.maven.org/search?q=g:org.springframework.boot%20a:spring-boot-dependencies-->
-        <spring.version>5.0.12.RELEASE</spring.version>
+        <spring.version>5.1.5.RELEASE</spring.version>
         <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
 
         <reflections.version>0.9.11</reflections.version>
@@ -130,6 +130,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
