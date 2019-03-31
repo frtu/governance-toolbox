@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Bootstrap for kafka configuration using property files & override method.
+ * Bootstrap for kafka configuration using property files and override method.
  * <p>
  * Refer to {@link #baseKafkaConfigs()} for overriding sequence.
  *
@@ -51,7 +51,7 @@ public class BaseKafkaConfiguration<K, V> {
      * <p>
      * If {@link #getBootstrapServers()} has value, always use it as primary !
      *
-     * @return
+     * @return All the properties needed for Kafka
      */
     public Properties baseKafkaConfigs() {
         Properties properties = new Properties();
