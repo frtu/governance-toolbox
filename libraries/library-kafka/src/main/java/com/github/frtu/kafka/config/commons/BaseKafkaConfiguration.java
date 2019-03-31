@@ -23,7 +23,6 @@ import java.util.Properties;
  * @author fred
  * @since 0.3.7
  */
-@EnableKafka
 @Configuration
 public class BaseKafkaConfiguration<K, V> {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseKafkaConfiguration.class);
@@ -84,5 +83,11 @@ public class BaseKafkaConfiguration<K, V> {
             properties.putAll(PropertiesLoaderUtils.loadProperties(resource));
         }
         return properties;
+    }
+
+    protected void checkKeyAndCopyIfEmpty(Properties properties, String key, String copyFromKey) {
+        if (StringUtils.isEmpty(properties.getProperty(key))) {
+            properties.put(key, properties.getProperty(copyFromKey));
+        }
     }
 }
