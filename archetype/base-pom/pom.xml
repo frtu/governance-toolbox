@@ -39,7 +39,7 @@
         <jackson.version>2.9.8</jackson.version>
         <jackson-binding.version>${jackson.version}</jackson-binding.version>
         <!--===========================-->
-        <frdtu.lib.version>${project.version}</frdtu.lib.version>
+        <frdtu.lib.version>%PROJECT_VERSION%</frdtu.lib.version>
         <frdtu.simple-scan.version>0.2.0</frdtu.simple-scan.version>
     </properties>
 
@@ -252,4 +252,42 @@
             </plugins>
         </pluginManagement>
     </build>
+    <profiles>
+        <profile>
+            <id>release-change-version</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <version>1.5.2</version>
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <ignoreMissingFile>false</ignoreMissingFile>
+                            <file>${project.basedir}/pom.xml</file>
+                            <replacements>
+                                <replacement>
+                                    <token>%PROJECT_VERSION%</token>
+                                    <value>${project.version}</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
