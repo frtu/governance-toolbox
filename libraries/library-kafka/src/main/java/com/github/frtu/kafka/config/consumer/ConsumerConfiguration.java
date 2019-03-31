@@ -1,6 +1,8 @@
-package com.github.frtu.kafka.consumer;
+package com.github.frtu.kafka.config.consumer;
 
-import com.github.frtu.kafka.commons.BaseKafkaConfiguration;
+import com.github.frtu.kafka.config.commons.BaseKafkaConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
@@ -18,8 +20,8 @@ import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
  * @since 0.3.7
  */
 @Configuration
-public class ConsumerConfig<K, V> extends BaseKafkaConfiguration<K, V> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerConfig.class);
+public class ConsumerConfiguration<K, V> extends BaseKafkaConfiguration<K, V> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerConfiguration.class);
 
     @Bean
     public ConsumerFactory<K, V> consumerFactory() {

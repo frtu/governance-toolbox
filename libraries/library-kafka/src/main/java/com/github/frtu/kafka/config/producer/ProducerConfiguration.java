@@ -1,6 +1,6 @@
-package com.github.frtu.kafka.producer;
+package com.github.frtu.kafka.config.producer;
 
-import com.github.frtu.kafka.commons.BaseKafkaConfiguration;
+import com.github.frtu.kafka.config.commons.BaseKafkaConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -20,8 +20,8 @@ import javax.annotation.PreDestroy;
  * @since 0.3.7
  */
 @Configuration
-public class ProducerConfig<K, V> extends BaseKafkaConfiguration<K, V> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProducerConfig.class);
+public class ProducerConfiguration<K, V> extends BaseKafkaConfiguration<K, V> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProducerConfiguration.class);
 
     private DefaultKafkaProducerFactory<K, V> defaultKafkaProducerFactory;
 

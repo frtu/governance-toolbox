@@ -1,4 +1,4 @@
-package com.github.frtu.kafka.commons;
+package com.github.frtu.kafka.config.commons;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.slf4j.Logger;
