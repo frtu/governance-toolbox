@@ -39,7 +39,7 @@
         <jackson.version>2.9.8</jackson.version>
         <jackson-binding.version>${jackson.version}</jackson-binding.version>
         <!--===========================-->
-        <frdtu.lib.version>0.3.7</frdtu.lib.version>
+        <frdtu.lib.version>0.3.7-SNAPSHOT</frdtu.lib.version>
         <frdtu.simple-scan.version>0.2.0</frdtu.simple-scan.version>
     </properties>
 
@@ -47,21 +47,21 @@
     <dependencyManagement>
         <dependencies>
             <!--LIBRARY-->
-            <!--<dependency>-->
-                <!--<groupId>com.github.frtu.governance</groupId>-->
-                <!--<artifactId>library-dot</artifactId>-->
-                <!--<version>${frdtu.lib.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.github.frtu.governance</groupId>-->
-                <!--<artifactId>library-serdes</artifactId>-->
-                <!--<version>${frdtu.lib.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.github.frtu.governance</groupId>-->
-                <!--<artifactId>library-kafka</artifactId>-->
-                <!--<version>${frdtu.lib.version}</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-dot</artifactId>
+                <version>${frdtu.lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-serdes</artifactId>
+                <version>${frdtu.lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-kafka</artifactId>
+                <version>${frdtu.lib.version}</version>
+            </dependency>
             <!-- Directory scanner -->
             <dependency>
                 <groupId>com.github.frtu.simple</groupId>
