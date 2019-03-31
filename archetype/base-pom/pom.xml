@@ -47,21 +47,21 @@
     <dependencyManagement>
         <dependencies>
             <!--LIBRARY-->
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-dot</artifactId>
-                <version>${frdtu.lib.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-serdes</artifactId>
-                <version>${frdtu.lib.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-kafka</artifactId>
-                <version>${frdtu.lib.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>com.github.frtu.governance</groupId>-->
+                <!--<artifactId>library-dot</artifactId>-->
+                <!--<version>${frdtu.lib.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>com.github.frtu.governance</groupId>-->
+                <!--<artifactId>library-serdes</artifactId>-->
+                <!--<version>${frdtu.lib.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>com.github.frtu.governance</groupId>-->
+                <!--<artifactId>library-kafka</artifactId>-->
+                <!--<version>${frdtu.lib.version}</version>-->
+            <!--</dependency>-->
             <!-- Directory scanner -->
             <dependency>
                 <groupId>com.github.frtu.simple</groupId>
