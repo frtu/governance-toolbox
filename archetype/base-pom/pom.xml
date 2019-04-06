@@ -39,8 +39,8 @@
         <jackson.version>2.9.8</jackson.version>
         <jackson-binding.version>${jackson.version}</jackson-binding.version>
         <!--===========================-->
-        <frdtu.lib.version>0.3.8-SNAPSHOT</frdtu.lib.version>
-        <frdtu.simple-scan.version>0.2.0</frdtu.simple-scan.version>
+        <frtu.lib.version>0.3.8-SNAPSHOT</frtu.lib.version>
+        <frtu.simple-scan.version>0.2.0</frtu.simple-scan.version>
     </properties>
 
 
@@ -50,23 +50,23 @@
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
                 <artifactId>library-dot</artifactId>
-                <version>${frdtu.lib.version}</version>
+                <version>${frtu.lib.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
                 <artifactId>library-serdes</artifactId>
-                <version>${frdtu.lib.version}</version>
+                <version>${frtu.lib.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
                 <artifactId>library-kafka</artifactId>
-                <version>${frdtu.lib.version}</version>
+                <version>${frtu.lib.version}</version>
             </dependency>
             <!-- Directory scanner -->
             <dependency>
                 <groupId>com.github.frtu.simple</groupId>
                 <artifactId>simple-scan</artifactId>
-                <version>${frdtu.simple-scan.version}</version>
+                <version>${frtu.simple-scan.version}</version>
             </dependency>
 
             <!-- commons libs -->

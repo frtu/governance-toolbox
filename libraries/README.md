@@ -10,7 +10,7 @@ Provide libraries for :
 - Standalone project : Avro (Object vs bytes) & JSON serialization / deserialization
 - Kafka SerDes project : Serialize & deserialize Avro into Kafka
 
-## Libraries
+## Libraries - Metadata
 
 ### Dot language library
 
@@ -83,6 +83,8 @@ See sample usage, generate a dot graph [with only a few lines of Avro Record nav
 Check the latest version (clickable) :
 
 [<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/library-dot.svg?label=latest%20release%20:%20library-dot"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22library-dot%22+g%3A%22com.github.frtu.governance%22)
+
+## Libraries - Data
 
 ### Avro SerDes standalone library
 
@@ -167,6 +169,26 @@ Import using :
 ```
 
 **Notes** : Please do not use the version **0.3.5 of library-kafka**, since some classes has been renamed, to avoid visual confusion with Confluent Avro serdes (Don't have the 2 chances to make things right) ;).
+
+
+### Kafka publisher / consumer library
+
+Provide basic initialization on top of [spring-kafka](https://spring.io/projects/spring-kafka) to create publisher & consumer (base package com.github.frtu.kafka.config.*) :
+
+* producer.ProducerConfiguration\<K, V> : allow to create [KafkaTemplate](https://docs.spring.io/spring-kafka/api/org/springframework/kafka/core/KafkaTemplate.html) just by importing it in @ComponentScan.
+* consumer.ConsumerConfiguration\<K, V> : allow to bootstrap [@KafkaListener](https://docs.spring.io/spring-kafka/api/org/springframework/kafka/annotation/KafkaListener.html) usage just by importing it in @ComponentScan.
+
+
+Import using :
+
+```XML
+<dependency>
+  <groupId>com.github.frtu.governance</groupId>
+  <artifactId>library-kafka</artifactId>
+  <version>${library-kafka.version}</version>
+</dependency>
+```
+Check the latest version (clickable) :
 
 [<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/library-kafka.svg?label=latest%20release%20:%20library-kafka"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22library-kafka%22+g%3A%22com.github.frtu.governance%22)
 

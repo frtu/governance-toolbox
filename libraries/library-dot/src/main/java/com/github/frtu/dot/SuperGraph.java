@@ -26,9 +26,11 @@ public class SuperGraph extends Graph {
     }
 
     /**
+     * Copy constructor.
+     * <p>
      * ATTENTION SIDE EFFECT : Use soft copy so ensure to ONLY call after all modification is done on the original object.
      *
-     * @param graph
+     * @param graph Graph from which to copy.
      */
     protected SuperGraph(Graph graph) {
         super(graph.getId());
@@ -60,8 +62,16 @@ public class SuperGraph extends Graph {
     }
 
     /**
-     * @param rankdir
+     * Sets direction of graph layout.
+     * <p>
+     * For example, if rankdir="LR", and barring cycles, an edge T to H; will go from left to right.
+     * By default, graphs are laid out from top to bottom.
+     * <p>
+     * This attribute also has a side-effect in determining how record nodes are interpreted.
+     *
+     * @param rankdir direction of graph layout.
      * @return itself (since 0.3.7)
+     * @see <a href="https://graphviz.org/doc/info/attrs.html#a:rankdir">rankdir</a>
      */
     public SuperGraph setRankdir(String rankdir) {
         this.rankdir = rankdir;
