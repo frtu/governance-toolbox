@@ -18,27 +18,27 @@ import java.util.stream.IntStream;
 @ComponentScan(basePackageClasses = {ConsumerConfiguration.class, LoggerConsumer.class,
         ProducerConfiguration.class, WrapperProducer.class})
 //@PropertySource("classpath:kafka-default.properties")
-public class ProduceAndConsumeApplication implements CommandLineRunner {
+public class ProduceAndConsumeApplication { //implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(ProduceAndConsumeApplication.class, args);
     }
 
-    @Autowired
-    private WrapperProducer<Long, DummyData> producer;
-
-    @Autowired
-    private ProducerConfiguration<Long, DummyData> producerConfiguration;
-
-    @Override
-    public void run(String... strings) throws Exception {
-        DummyData dummyData = DummyData.newBuilder()
-                .setName("Fred")
-                .build();
-
-        IntStream.range(1, 3).forEach(index -> {
-            producer.send(1L * index, dummyData);
-        });
-        producerConfiguration.close();
-    }
+//    @Autowired
+//    private WrapperProducer<Long, DummyData> producer;
+//
+//    @Autowired
+//    private ProducerConfiguration<Long, DummyData> producerConfiguration;
+//
+//    @Override
+//    public void run(String... strings) throws Exception {
+//        DummyData dummyData = DummyData.newBuilder()
+//                .setName("Fred")
+//                .build();
+//
+//        IntStream.range(1, 3).forEach(index -> {
+//            producer.send(1L * index, dummyData);
+//        });
+//        producerConfiguration.close();
+//    }
 }
