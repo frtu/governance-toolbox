@@ -9,6 +9,7 @@
         <requiredProperty key="base-pom-version">
             <defaultValue>%PROJECT_VERSION%</defaultValue>
         </requiredProperty>
+        <requiredProperty key="avro-model-artifact-id"/>
         <requiredProperty key="DatamodelClassName"/>
     </requiredProperties>
     <fileSets>

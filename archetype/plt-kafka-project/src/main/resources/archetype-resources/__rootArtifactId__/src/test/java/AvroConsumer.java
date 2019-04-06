@@ -15,6 +15,9 @@ import java.util.Properties;
 import java.util.stream.IntStream;
 
 public class AvroConsumer {
+
+    public static final String AVRO_SCHEMA_FILE_BASE_NAME = "${avro-model-artifact-id}.avsc";
+
     private static Consumer<Long, ${DatamodelClassName}> createConsumer() {
         Properties props = new Properties();
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "${DatamodelClassName}AvroConsumer");
@@ -35,7 +38,7 @@ public class AvroConsumer {
         // Custom local serdes
         //------------------------------------------
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaDeserializerAvroRecord.class.getName());
-        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "classpath:" + avroSchemaFileBaseName + ".avsc");
+        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "classpath:" + AVRO_SCHEMA_FILE_BASE_NAME + ".avsc");
         props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_GENERIC_AVRO_READER, Boolean.FALSE);
         props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_IS_JSON, Boolean.TRUE);
 

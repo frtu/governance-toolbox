@@ -28,6 +28,10 @@ Generate archetypes with the below commands :
 
 > mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=x.y.z
 
+Parameter asked :
+
+* DatamodelClassName : Name of the generate class name inside avsc
+
 #### Avro library version
 
 Avro comes with the version [1.8.2](https://search.maven.org/artifact/org.apache.avro/avro/1.8.2/bundle) but feel free to upgrade it to the latest version. Check at :
@@ -44,6 +48,11 @@ When importing to IntelliJ or Eclipse, make sure you generate the sources. In In
 
 
 > mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=x.y.z
+
+Parameter asked :
+
+* avro-model-artifact-id : Artifact name of the Avro data model project
+* DatamodelClassName : Name of the class name of the Avro data model project previously
 
 ### Spark platform
 

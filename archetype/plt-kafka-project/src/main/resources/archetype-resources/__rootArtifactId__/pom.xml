@@ -17,7 +17,7 @@
         <!-- UNCOMMENT for Internal domain dependencies -->
         <!--<dependency>-->
         <!--<groupId>${project.groupId}</groupId>-->
-        <!--<artifactId>${artifactId}-datamodel</artifactId>-->
+        <!--<artifactId>${avro-model-artifact-id}-datamodel</artifactId>-->
         <!--<version>${project.version}</version>-->
         <!--</dependency>-->
 
