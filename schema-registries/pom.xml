@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.frtu.governance</groupId>
 		<artifactId>maven-plugin-parent-pom</artifactId>
-		<version>0.4.0-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../maven-plugins/pom.xml</relativePath>
 	</parent>
 

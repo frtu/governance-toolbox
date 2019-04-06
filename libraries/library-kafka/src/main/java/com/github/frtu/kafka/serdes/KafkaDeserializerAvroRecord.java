@@ -49,7 +49,7 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
      *
      * @param location Spring location
      * @throws IOException If location doesn't exist !
-     * @since 0.4.0
+     * @since 1.0.0
      */
     protected KafkaDeserializerAvroRecord(String location) throws IOException {
         this(avroSchemaUtil.readSchema(location));
@@ -118,7 +118,7 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
      *
      * @param configs The config map created by Kafka
      * @return an object representing the schema location
-     * @since 0.4.0
+     * @since 1.0.0
      */
     protected Object getSchemaLocation(Map<String, ?> configs) {
         return configs.get(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION);
@@ -126,7 +126,7 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
 
     /**
      * @return The Avro schema used
-     * @since 0.4.0
+     * @since 1.0.0
      */
     public Schema getSchema() {
         return schema;
@@ -137,7 +137,7 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
      *
      * @param configurationValue Pass a String, File or Path to the schema
      * @return
-     * @since 0.4.0
+     * @since 1.0.0
      */
     protected Schema readSchema(Object configurationValue) {
         try {
