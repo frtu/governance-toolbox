@@ -38,21 +38,48 @@ Avro comes with the version [1.8.2](https://search.maven.org/artifact/org.apache
 
 * [Search maven - g:org.apache.avro AND a:avro](https://search.maven.org/search?q=g:org.apache.avro%20AND%20a:avro&core=gav)
 
-#### Import project in IntelliJ
+#### Post action after importing in IDE
 
 When importing to IntelliJ or Eclipse, make sure you generate the sources. In IntelliJ, right click on the project > Maven > Generate Sources and Update Folders.
 
 ### Kafka platform
+#### Generate the project
 
 [<img src="https://img.shields.io/maven-central/v/com.github.frtu.archetype/plt-kafka-project-archetype.svg?label=latest%20release%20:%20plt-kafka-project-archetype"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22plt-kafka-project-archetype%22+g%3A%22com.github.frtu.archetype%22)
 
 
 > mvn archetype:generate -DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=x.y.z
 
+#### Option 1 - Don't use Avro data exchange format
+
+##### Generation
+
+Pass anything when parameter asked. 
+
+##### Post action after importing in IDE
+
+Remove of fix Unit Tests in **src/test/java** folder.
+
+#### Option 2 - Use Avro data exchange format
+
+##### Generation & Post generation
+
 Parameter asked :
 
 * avro-model-artifact-id : Artifact name of the Avro data model project
 * DatamodelClassName : Name of the class name of the Avro data model project previously
+
+Generate an Avro sub module inside this project, using the previous parameters :
+
+* Use archetype Avro data model with the same groupId & artifactId = avro-model-artifact-id
+* Pass the same parameter 'DatamodelClassName'
+
+##### Post action after importing in IDE
+
+In the kafka project pom.xml, uncomment the Internal domain dependencies section importing **${avro-model-artifact-id}-datamodel**
+
+Run Unit test __ProduceAndConsumeUnitTest.testReceive()__ for testing with an embedded Kafka
+
 
 ### Spark platform
 

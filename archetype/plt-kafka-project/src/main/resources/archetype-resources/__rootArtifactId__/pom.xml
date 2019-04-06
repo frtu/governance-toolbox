@@ -52,25 +52,27 @@
         <!--===========================-->
 
         <!--===========================-->
-        <!-- UNCOMMENT FOR Spring Kafka and Spring Boot -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.kafka</groupId>-->
-            <!--<artifactId>spring-kafka</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.kafka</groupId>-->
-            <!--<artifactId>spring-kafka-test</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-test</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <!-- UNCOMMENT scope to enable Spring Boot -->
+            <!-- and move ProduceAndConsumeApplication from /test to /main -->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Logs -->
         <dependency>

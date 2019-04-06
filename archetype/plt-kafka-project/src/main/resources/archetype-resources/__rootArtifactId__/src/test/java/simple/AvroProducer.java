@@ -1,8 +1,9 @@
-package ${groupId};
+package ${groupId}.simple;
 
 import com.github.frtu.kafka.serdes.BaseKafkaAvroRecordSerdes;
 import com.github.frtu.kafka.serdes.KafkaSerializerAvroRecord;
 
+import ${groupId}.*;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;

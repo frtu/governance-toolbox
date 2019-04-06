@@ -1,8 +1,9 @@
-package ${groupId};
+package ${groupId}.simple;
 
 import com.github.frtu.kafka.serdes.BaseKafkaAvroRecordSerdes;
 import com.github.frtu.kafka.serdes.KafkaDeserializerAvroRecord;
 
+import ${groupId}.*;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -38,7 +39,7 @@ public class AvroConsumer {
         // Custom local serdes
         //------------------------------------------
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaDeserializerAvroRecord.class.getName());
-        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "classpath:" + AVRO_SCHEMA_FILE_BASE_NAME + ".avsc");
+        props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, "classpath:" + AVRO_SCHEMA_FILE_BASE_NAME);
         props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_GENERIC_AVRO_READER, Boolean.FALSE);
         props.put(BaseKafkaAvroRecordSerdes.CONFIG_KEY_IS_JSON, Boolean.TRUE);
 
