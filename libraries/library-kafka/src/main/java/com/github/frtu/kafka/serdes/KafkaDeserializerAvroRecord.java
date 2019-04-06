@@ -35,9 +35,24 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
     /**
      * Default constructor to pass to Kafka Consumer.
      * MUST be initialized with {@link #configure(Map, boolean)} before calling {@link #deserialize(String, byte[])}
+     * <p>
+     * {@inheritDoc}
      */
     public KafkaDeserializerAvroRecord() {
         super();
+    }
+
+    /**
+     * Initialize the class with a String location path.
+     * <p>
+     * Attention : Please catch IOException, and write a handling logic.
+     *
+     * @param location Spring location
+     * @throws IOException If location doesn't exist !
+     * @since 0.4.0
+     */
+    protected KafkaDeserializerAvroRecord(String location) throws IOException {
+        this(avroSchemaUtil.readSchema(location));
     }
 
     /**
@@ -74,8 +89,7 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
     }
 
     public static <T extends GenericContainer> KafkaDeserializerAvroRecord<T> build(String location) throws IOException {
-        final Schema schema = avroSchemaUtil.readSchema(location);
-        return new KafkaDeserializerAvroRecord(schema);
+        return new KafkaDeserializerAvroRecord(location);
     }
 
     /**
@@ -86,10 +100,12 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
      */
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
+        // Lazy initialization, if not done by constructor.
         if (this.schema == null) {
-            final Object configurationValue = configs.get(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION);
-            this.schema = getSchema(configurationValue);
+            final Object configurationValue = getSchemaLocation(configs);
+            this.schema = readSchema(configurationValue);
         }
+        // Lazy initialization, if not done by constructor.
         if (this.avroRecordDeserializer == null) {
             final boolean isFormatJson = isJson(configs);
             final boolean isGenericRecord = isGeneric(configs);
@@ -97,7 +113,33 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
         }
     }
 
-    protected Schema getSchema(Object configurationValue) {
+    /**
+     * Allow to override the schema location.
+     *
+     * @param configs The config map created by Kafka
+     * @return an object representing the schema location
+     * @since 0.4.0
+     */
+    protected Object getSchemaLocation(Map<String, ?> configs) {
+        return configs.get(CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION);
+    }
+
+    /**
+     * @return The Avro schema used
+     * @since 0.4.0
+     */
+    public Schema getSchema() {
+        return schema;
+    }
+
+    /**
+     * Read the schema from the specified location.
+     *
+     * @param configurationValue Pass a String, File or Path to the schema
+     * @return
+     * @since 0.4.0
+     */
+    protected Schema readSchema(Object configurationValue) {
         try {
             if (configurationValue instanceof String) {
                 LOGGER.debug("Found config={} string={}", CONFIG_KEY_SCHEMA_CLASSPATH_LOCATION, configurationValue);

@@ -45,7 +45,7 @@ public class KafkaDeserializerAvroRecordTest {
     @Test
     public void getSchemaString() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        final Schema schema = kafkaDeserializerAvroRecord.getSchema("classpath:dummy_data.avsc");
+        final Schema schema = kafkaDeserializerAvroRecord.readSchema("classpath:dummy_data.avsc");
 
         LOGGER.debug(schema.toString());
         Assert.assertNotNull("Schema must not be null", schema);
@@ -54,7 +54,7 @@ public class KafkaDeserializerAvroRecordTest {
     @Test
     public void getSchemaWithFile() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        final Schema schema = kafkaDeserializerAvroRecord.getSchema(new File("src/test/resources/dummy_data.avsc"));
+        final Schema schema = kafkaDeserializerAvroRecord.readSchema(new File("src/test/resources/dummy_data.avsc"));
 
         LOGGER.debug(schema.toString());
         Assert.assertNotNull("Schema must not be null", schema);
@@ -63,7 +63,7 @@ public class KafkaDeserializerAvroRecordTest {
     @Test
     public void getSchemaWithPath() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        final Schema schema = kafkaDeserializerAvroRecord.getSchema(Paths.get("src/test/resources/dummy_data.avsc"));
+        final Schema schema = kafkaDeserializerAvroRecord.readSchema(Paths.get("src/test/resources/dummy_data.avsc"));
 
         LOGGER.debug(schema.toString());
         Assert.assertNotNull("Schema must not be null", schema);
@@ -72,36 +72,36 @@ public class KafkaDeserializerAvroRecordTest {
     @Test(expected = IllegalStateException.class)
     public void getSchemaNull() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(null);
+        kafkaDeserializerAvroRecord.readSchema(null);
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaEmptyPath() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema("");
+        kafkaDeserializerAvroRecord.readSchema("");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaOnlySpacePath() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema("     ");
+        kafkaDeserializerAvroRecord.readSchema("     ");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaFolderPath() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema("src/test/resources/");
+        kafkaDeserializerAvroRecord.readSchema("src/test/resources/");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaNonExistingPath() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema("non/existing/path");
+        kafkaDeserializerAvroRecord.readSchema("non/existing/path");
     }
 
     @Test(expected = IllegalStateException.class)
     public void getSchemaUnsupportedType() {
         final KafkaDeserializerAvroRecord kafkaDeserializerAvroRecord = new KafkaDeserializerAvroRecord();
-        kafkaDeserializerAvroRecord.getSchema(new Object());
+        kafkaDeserializerAvroRecord.readSchema(new Object());
     }
 }
