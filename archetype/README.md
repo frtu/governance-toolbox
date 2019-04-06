@@ -30,9 +30,13 @@ Generate archetypes with the below commands :
 
 #### Avro library version
 
-Avro comes with the version [1.8.1](https://search.maven.org/artifact/org.apache.avro/avro/1.8.1/bundle) but feel free to upgrade it to the latest version. Check at :
+Avro comes with the version [1.8.2](https://search.maven.org/artifact/org.apache.avro/avro/1.8.2/bundle) but feel free to upgrade it to the latest version. Check at :
 
 * [Search maven - g:org.apache.avro AND a:avro](https://search.maven.org/search?q=g:org.apache.avro%20AND%20a:avro&core=gav)
+
+#### Import project in IntelliJ
+
+When importing to IntelliJ or Eclipse, make sure you generate the sources. In IntelliJ, right click on the project > Maven > Generate Sources and Update Folders.
 
 ### Kafka platform
 
