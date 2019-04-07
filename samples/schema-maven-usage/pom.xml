@@ -59,8 +59,8 @@
                                     <goal>avro2dot</goal>
                                 </goals>
                                 <configuration>
-                                    <schemaPath>${project.basedir}/src/main/resources/</schemaPath>
-                                    <outputDirectory>${basedir}/target/generated-sources/</outputDirectory>
+                                    <schemaPath>${project.basedir}/src/main/avro/</schemaPath>
+                                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
