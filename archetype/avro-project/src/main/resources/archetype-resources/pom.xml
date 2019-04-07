@@ -73,6 +73,26 @@
                 </executions>
             </plugin>
             <!--===========================-->
+            <!--GENERATE DOT for the avro schema-->
+            <!--===========================-->
+            <!--<plugin>-->
+            <!--<groupId>com.github.frtu.governance</groupId>-->
+            <!--<artifactId>schema-maven-plugin</artifactId>-->
+            <!--<version>${governance-maven-plugin.version}</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<phase>process-resources</phase>-->
+            <!--<goals>-->
+            <!--<goal>avro2dot</goal>-->
+            <!--</goals>-->
+            <!--<configuration>-->
+            <!--<schemaPath>${project.basedir}/src/main/avro/</schemaPath>-->
+            <!--<outputDirectory>${project.build.outputDirectory}</outputDirectory>-->
+            <!--</configuration>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--</plugin>-->
+            <!--===========================-->
             <!--===========================-->
             <!--REMOVE ALL THE SECTIONS BELOW IF YOU HAVE YOUR OWN POM-->
             <!--===========================-->
@@ -119,17 +139,17 @@
                     <artifactId>kafka-schema-registry-maven-plugin</artifactId>
                     <version>${confluent.version}</version>
                     <dependencies>
-                      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-                      <dependency>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                        <version>${jackson-binding.version}</version>
-                      </dependency>
-                      <dependency>
-                        <groupId>org.apache.avro</groupId>
-                        <artifactId>avro</artifactId>
-                        <version>${avro.version}</version>
-                      </dependency>
+                        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+                        <dependency>
+                            <groupId>com.fasterxml.jackson.core</groupId>
+                            <artifactId>jackson-databind</artifactId>
+                            <version>${jackson-binding.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.avro</groupId>
+                            <artifactId>avro</artifactId>
+                            <version>${avro.version}</version>
+                        </dependency>
                     </dependencies>
                 </plugin>
                 <!--===========================-->
