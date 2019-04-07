@@ -30,13 +30,13 @@ public class DotGraphGen4AvroMojo extends AbstractMojo {
     /**
      * Schemas directory folder
      */
-    @Parameter(property = "schema.path", defaultValue = "${project.basedir}/src/main/resources")
+    @Parameter(property = "schema.path", defaultValue = "${project.basedir}/src/main/avro/")
     private File schemaPath;
 
     /**
      * This is where the output is generated.
      */
-    @Parameter(property = "schema.outputDirectory", defaultValue = "${basedir}/target/generated-sources/")
+    @Parameter(property = "schema.outputDirectory", defaultValue = "${project.build.outputDirectory}")
     protected File outputDirectory;
 
     public void execute() throws MojoExecutionException {
