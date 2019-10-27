@@ -27,8 +27,8 @@
 
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-io.version>2.4</commons-io.version>
-        <!-- https://nvd.nist.gov/vuln/detail/CVE-2018-11771 -->
-        <commons-compress.version>1.18</commons-compress.version>
+        <!-- https://nvd.nist.gov/vuln/detail/CVE-2019-12402 -->
+        <commons-compress.version>1.19</commons-compress.version>
 
         <!--https://search.maven.org/search?q=g:org.springframework.boot%20a:spring-boot-dependencies-->
         <spring.version>5.1.5.RELEASE</spring.version>
