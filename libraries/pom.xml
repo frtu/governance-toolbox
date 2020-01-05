@@ -15,7 +15,9 @@
 
     <modules>
         <module>library-dot</module>
+        <!-- SHOULD BE RENAMED library-avro-serdes-->
         <module>library-serdes</module>
+        <module>library-proto-meta</module>
         <module>library-kafka</module>
     </modules>
 
