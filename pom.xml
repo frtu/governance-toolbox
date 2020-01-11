@@ -22,7 +22,8 @@
 		<module>libraries</module>
 		<module>maven-plugins</module>
 		<module>samples/schema-maven-usage</module>
-	</modules>
+        <module>ext-protobuf</module>
+    </modules>
 
 	<licenses>
 		<license>

@@ -38,8 +38,6 @@
         <avro.version>1.8.2</avro.version>
         <jackson.version>2.9.8</jackson.version>
         <jackson-binding.version>${jackson.version}</jackson-binding.version>
-        <!--https://github.com/protocolbuffers/protobuf/tree/v3.11.2/java-->
-        <protobuf.version>3.11.0</protobuf.version>
         <!--===========================-->
         <frtu.lib.version>1.0.1-SNAPSHOT</frtu.lib.version>
         <frtu.simple-scan.version>0.2.0</frtu.simple-scan.version>
@@ -102,16 +100,6 @@
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro</artifactId>
                 <version>${avro.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java</artifactId>
-                <version>${protobuf-java.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java-util</artifactId>
-                <version>${protobuf-java.version}</version>
             </dependency>
             <!--JSON Library-->
             <dependency>

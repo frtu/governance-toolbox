@@ -3,30 +3,34 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.frtu.governance</groupId>
-        <artifactId>libraries-pom</artifactId>
+        <artifactId>master-pom</artifactId>
         <version>1.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>library-proto-meta</artifactId>
+    <artifactId>ext-protobuf-pom</artifactId>
+    <packaging>pom</packaging>
 
-    <name>library-proto-meta</name>
-    <description>Library for adding metadata to protobuf</description>
+    <name>protobuf-extension</name>
+    <description>Base project for Protobuf extension for governance toolbox</description>
+
+    <modules>
+        <module>library-proto-meta</module>
+    </modules>
 
     <properties>
+        <java.version>1.8</java.version>
+        <!--===========================-->
         <!--https://github.com/protocolbuffers/protobuf/tree/v3.11.0/java-->
         <protobuf.version>3.11.0</protobuf.version>
         <protoc.version>${protobuf.version}</protoc.version>
-        <!--Internal folders-->
-        <protobuf.source.dir>${project.basedir}/src/main/proto/</protobuf.source.dir>
+        <!--===========================-->
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
         </dependency>
-
         <!-- Log -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -37,7 +41,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
         <!--===========================-->
         <!--Test -->
         <!--===========================-->
@@ -53,15 +56,6 @@
         </dependency>
     </dependencies>
     <build>
-        <!-- Include core protos in the bundle as resources -->
-        <resources>
-            <resource>
-                <directory>${protobuf.source.dir}</directory>
-                <includes>
-                    <include>security/protobuf/security.proto</include>
-                </includes>
-            </resource>
-        </resources>
         <extensions>
             <extension>
                 <groupId>kr.motd.maven</groupId>
@@ -70,22 +64,17 @@
             </extension>
         </extensions>
         <plugins>
+            <!-- JDK version -->
             <plugin>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <version>0.6.1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
-                    <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
+            <!-- Source -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -105,7 +94,39 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Generate Javadocs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <configuration>
+                    <author>Frederic TU</author>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.xolstice.maven.plugins</groupId>
+                    <artifactId>protobuf-maven-plugin</artifactId>
+                    <version>0.6.1</version>
+                    <configuration>
+                        <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
     <dependencyManagement>
         <dependencies>
@@ -119,6 +140,15 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java-util</artifactId>
                 <version>${protobuf.version}</version>
+            </dependency>
+
+            <!--Internal domain dependencies -->
+            <dependency>
+                <groupId>com.github.frtu.archetype</groupId>
+                <artifactId>base-pom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
