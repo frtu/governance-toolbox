@@ -1,6 +1,9 @@
 // Field options https://developers.google.com/protocol-buffers/docs/proto#customoptions
-
 syntax = "proto3";
+option java_multiple_files = true;
+
+package metadata;
+option java_package = "com.github.frtu.proto.metadata";
 
 import "google/protobuf/descriptor.proto";
 
