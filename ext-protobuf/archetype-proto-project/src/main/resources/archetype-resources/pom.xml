@@ -23,6 +23,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.frtu.governance</groupId>
+            <artifactId>library-proto-meta</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
         </dependency>
