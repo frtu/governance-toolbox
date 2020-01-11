@@ -46,7 +46,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--LIBRARY-->
+            <!-- governance-libraries -->
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
                 <artifactId>library-dot</artifactId>
