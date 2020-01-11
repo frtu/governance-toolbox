@@ -2,9 +2,10 @@
 
 Protobuf package for :
 
+* base-pom & archetype : allow to generate a Protobuf project with **all required dependencies**
 * metadata : annotate proto with common metadata
-* maven-plugins (in the future)
 * serdes & kafka (in the future)
+* maven-plugins (in the future)
 
 ## Overview
 

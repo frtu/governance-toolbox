@@ -34,6 +34,16 @@ Data :
 
 * **schema-registries-maven-plugin:register** : Register all Avro schema from a folder into Hortonworks Schema-registry
 
+## SerDes platform
+
+| Characteristics          | [Avro](http://avro.apache.org/docs/current/)                                                                                  | [Protobuf](https://developers.google.com/protocol-buffers/docs/proto3) [(source)](https://github.com/protocolbuffers/protobuf)                                                                    |
+|--------------------------|---------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Dynamic typing           | YES                                                                                   | NO (needs to compile)                                                       |
+| Backward compatibilities | Complex                                                                               | [Easy](https://developers.google.com/protocol-buffers/docs/proto3#updating) |
+| Support null values      | Medium (Complex data struct)                                                          |                                                                             |
+| Performance              |                                                                                       | Very good                                                                   |
+| Compactness              |                                                                                       | Excellent                                                                   |
+| Current toolbox support  | [Good](https://github.com/frtu/governance-toolbox/tree/master/archetype/avro-project) | [Good](https://github.com/frtu/governance-toolbox/tree/master/ext-protobuf) |
 ## Docker images
 ### Confluent Stack (Kafka, REST API, ...)
 
