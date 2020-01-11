@@ -17,6 +17,7 @@
     <modules>
         <module>base-proto-pom</module>
         <module>library-proto-meta</module>
+        <module>archetype-proto-project</module>
     </modules>
 
     <properties>

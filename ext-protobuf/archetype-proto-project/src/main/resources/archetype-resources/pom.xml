@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}-datamodel</artifactId>
+    <version>${version}</version>
+
+    <properties>
+        <!--===========================-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--===========================-->
+        <!--Internal folders-->
+        <protobuf.source.dir>${project.basedir}/src/main/proto/</protobuf.source.dir>
+        <!--===========================-->
+        <!--https://github.com/protocolbuffers/protobuf/tree/v3.11.2/java-->
+        <!--<protobuf.version>3.11.0</protobuf.version>-->
+        <!--<protoc.version>${protobuf.version}</protoc.version>-->
+        <governance-maven-plugin.version>${base-pom-version}</governance-maven-plugin.version>
+        <!--===========================-->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+        </dependency>
+
+        <!--===========================-->
+        <!--Test -->
+        <!--===========================-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- Include core protos in the bundle as resources -->
+        <resources>
+            <resource>
+                <directory>${protobuf.source.dir}</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.9</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/target/generated-sources/</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencyManagement>
+        <dependencies>
+            <!--===========================-->
+            <!--UNCOMMENT FOR MANAGING YOURSELF DEPENDENCIES -->
+            <!--===========================-->
+            <!--<dependency>-->
+            <!--<groupId>com.google.protobuf</groupId>-->
+            <!--<artifactId>protobuf-java</artifactId>-->
+            <!--<version>${protobuf.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>com.google.protobuf</groupId>-->
+            <!--<artifactId>protobuf-java-util</artifactId>-->
+            <!--<version>${protobuf.version}</version>-->
+            <!--</dependency>-->
+            <!--===========================-->
+
+            <!--Internal domain dependencies -->
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>base-proto-pom</artifactId>
+                <version>${base-pom-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
