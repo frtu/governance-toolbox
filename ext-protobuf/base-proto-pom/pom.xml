@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.frtu.archetype</groupId>
         <artifactId>base-pom</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
         <relativePath>../../archetype/base-pom/pom.xml</relativePath>
     </parent>
 
@@ -21,7 +20,7 @@
         <protobuf.version>3.11.0</protobuf.version>
         <protoc.version>${protobuf.version}</protoc.version>
         <!--===========================-->
-        <frtu.lib.version>1.0.1-SNAPSHOT</frtu.lib.version>
+        <frtu.lib.version>1.0.1</frtu.lib.version>
     </properties>
 
 
