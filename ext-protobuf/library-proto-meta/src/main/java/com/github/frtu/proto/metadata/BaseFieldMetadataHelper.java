@@ -6,10 +6,10 @@ import com.google.protobuf.GeneratedMessage;
 
 import java.util.Optional;
 
-public class BaseAnnotatedHelper<T> {
+public class BaseFieldMetadataHelper<T> {
     protected final GeneratedMessage.GeneratedExtension<DescriptorProtos.FieldOptions, T> fieldExtention;
 
-    public BaseAnnotatedHelper(GeneratedMessage.GeneratedExtension<DescriptorProtos.FieldOptions, T> fieldExtention) {
+    public BaseFieldMetadataHelper(GeneratedMessage.GeneratedExtension<DescriptorProtos.FieldOptions, T> fieldExtention) {
         this.fieldExtention = fieldExtention;
     }
 

@@ -1,9 +1,10 @@
 package com.github.frtu.proto.metadata;
 
+import com.github.frtu.proto.metadata.security.Security;
 import com.google.protobuf.Descriptors;
 
-public class SecuredFieldHelper extends BaseAnnotatedHelper<Boolean> {
-    public SecuredFieldHelper() {
+public class SecurityMetadataHelper extends BaseFieldMetadataHelper<Boolean> {
+    public SecurityMetadataHelper() {
         super(Security.securedField);
     }
 

@@ -14,7 +14,7 @@ option java_outer_classname = "AddressBookProtos";
 message Person {
     string name = 1;
     int32 id = 2;
-    string email = 3 [(secured_field) = true];
+    string email = 3 [(security.secured_field) = true];
 
     enum PhoneType {
         MOBILE = 0;
@@ -23,7 +23,7 @@ message Person {
     }
 
     message PhoneNumber {
-        string number = 1 [(secured_field) = true];
+        string number = 1 [(security.secured_field) = true];
         PhoneType type = 2;
     }
 

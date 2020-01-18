@@ -2,8 +2,8 @@
 syntax = "proto3";
 option java_multiple_files = true;
 
-package metadata;
-option java_package = "com.github.frtu.proto.metadata";
+package security;
+option java_package = "com.github.frtu.proto.metadata.security";
 
 import "google/protobuf/descriptor.proto";
 

@@ -11,8 +11,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @Slf4j
-public class SecuredFieldHelperTest {
-    private SecuredFieldHelper securedFieldHelper = new SecuredFieldHelper();
+public class SecurityMetadataHelperTest {
+    private SecurityMetadataHelper securityMetadataHelper = new SecurityMetadataHelper();
 
     @Test
     public void isSecured() {
@@ -26,9 +26,9 @@ public class SecuredFieldHelperTest {
         //--------------------------------------
         // 2 & 3. Execute & Validate
         //--------------------------------------
-        assertFalse(securedFieldHelper.isSecured(fieldDescriptorMap.get("name")));
-        assertFalse(securedFieldHelper.isSecured(fieldDescriptorMap.get("id")));
-        assertTrue(securedFieldHelper.isSecured(fieldDescriptorMap.get("email")));
-        assertFalse(securedFieldHelper.isSecured(fieldDescriptorMap.get("phones")));
+        assertFalse(securityMetadataHelper.isSecured(fieldDescriptorMap.get("name")));
+        assertFalse(securityMetadataHelper.isSecured(fieldDescriptorMap.get("id")));
+        assertTrue(securityMetadataHelper.isSecured(fieldDescriptorMap.get("email")));
+        assertFalse(securityMetadataHelper.isSecured(fieldDescriptorMap.get("phones")));
     }
 }
