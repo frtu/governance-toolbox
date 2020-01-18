@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.github.frtu.archetype</groupId>
         <artifactId>base-pom</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
         <relativePath>../../archetype/base-pom/pom.xml</relativePath>
     </parent>
 
@@ -20,7 +20,7 @@
         <protobuf.version>3.11.0</protobuf.version>
         <protoc.version>${protobuf.version}</protoc.version>
         <!--===========================-->
-        <frtu.lib.version>1.0.1</frtu.lib.version>
+        <frtu.lib.version>1.0.2-SNAPSHOT</frtu.lib.version>
     </properties>
 
 
