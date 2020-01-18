@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 /**
  * Class illustrating a few {@link java.util.stream.Stream} use cases.
+ *
+ * @author Frédéric TU
+ * @since 1.0.1
  */
 public class GroupConverter {
     /**
