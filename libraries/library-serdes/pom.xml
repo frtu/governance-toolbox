@@ -10,7 +10,7 @@
     <artifactId>library-serdes</artifactId>
 
     <name>library-serdes</name>
-    <description>Library for serialization deserialization</description>
+    <description>Library for serialization deserialization based on dynamic schema.</description>
 
     <properties>
     </properties>
