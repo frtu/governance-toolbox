@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.frtu.governance</groupId>
@@ -7,12 +8,21 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>library-utils</artifactId>
+    <artifactId>library-generators</artifactId>
 
-    <name>library-utils</name>
-    <description>Library for utilities</description>
+    <name>library-generators</name>
+    <description>Library for generating objects and populating them</description>
 
     <dependencies>
+        <!--===========================-->
+        <!-- Internal domain dependencies -->
+        <!--===========================-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>library-spring-reflection</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -26,7 +36,6 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!--===========================-->

@@ -8,6 +8,7 @@ Provide libraries for :
 
 - Dot notation generator : [Dot notation](https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) graph generator library.
 - Spring Reflection : Library for Class, Annotation reflection and Bean based on spring-context
+- Generators : Library for generating objects and populating them
 - Standalone project : Avro (Object vs bytes) & JSON serialization / deserialization
 - Kafka SerDes project : Serialize & deserialize Avro into Kafka
 
@@ -125,6 +126,12 @@ final Multimap<String, AnnotationMethodScan<Class<? extends Annotation>, Class<?
 final Method spanMethod = ExecutionSpanConfiguration.class.getMethod("spanWithTags");
 final AnnotationMethodScan spanMethodScan = scanner.scan(spanMethod);
 ```
+
+#### Reflection and Bean manipulation
+
+* BeanGenerator : generate class instance and populate them using field name
+* ClassloaderUtil : Classpath refresh based on new file paths
+
 
 ## Libraries - Data
 
