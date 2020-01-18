@@ -25,6 +25,7 @@
         <powermock.version>1.6.2</powermock.version>
         <easymock.version>3.2</easymock.version>
         <!--=========================== -->
+        <guava.version>28.1-jre</guava.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <commons-io.version>2.4</commons-io.version>
         <!-- https://nvd.nist.gov/vuln/detail/CVE-2019-12402 -->
@@ -69,7 +70,12 @@
                 <version>${frtu.simple-scan.version}</version>
             </dependency>
 
-            <!-- commons libs -->
+            <!-- Common libs -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>

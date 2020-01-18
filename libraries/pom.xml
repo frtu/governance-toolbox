@@ -16,6 +16,7 @@
 
     <modules>
         <module>library-dot</module>
+        <module>library-spring-reflection</module>
         <!-- SHOULD BE RENAMED library-avro-serdes-->
         <module>library-serdes</module>
         <module>library-kafka</module>

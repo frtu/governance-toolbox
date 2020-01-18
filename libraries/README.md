@@ -7,6 +7,7 @@ Note : The artefacts below all rely on [base-pom](https://search.maven.org/artif
 Provide libraries for :
 
 - Dot notation generator : [Dot notation](https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29) graph generator library.
+- Spring Reflection : Library for Class, Annotation reflection and Bean based on spring-context
 - Standalone project : Avro (Object vs bytes) & JSON serialization / deserialization
 - Kafka SerDes project : Serialize & deserialize Avro into Kafka
 
@@ -22,7 +23,7 @@ Import using :
 <dependency>
   <groupId>com.github.frtu.governance</groupId>
   <artifactId>library-dot</artifactId>
-  <version>${library-serdes.version}</version>
+  <version>${governance-libraries.version}</version>
 </dependency>
 ```
 
@@ -83,6 +84,47 @@ See sample usage, generate a dot graph [with only a few lines of Avro Record nav
 Check the latest version (clickable) :
 
 [<img src="https://img.shields.io/maven-central/v/com.github.frtu.governance/library-dot.svg?label=latest%20release%20:%20library-dot"/>](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22library-dot%22+g%3A%22com.github.frtu.governance%22)
+
+## Libraries - Reflection utilities
+
+### Spring Reflection
+
+Library for Class, Annotation reflection and Bean based on spring-context.
+
+Import using :
+
+```XML
+<dependency>
+  <groupId>com.github.frtu.governance</groupId>
+  <artifactId>library-spring-reflection</artifactId>
+  <version>${governance-libraries.version}</version>
+</dependency>
+```
+
+#### @LightConditional* annotation
+
+[Spring Boot conditional](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/condition/package-frame.html) without Spring Boot.
+
+* LightConditionalOnBean
+* LightConditionalOnClass
+* LightConditionalOnMissingBean
+* LightConditionalOnMissingClass
+
+#### Annotation class based on java Class or Method
+
+* AnnotationMethodScanner : scan Class or Method for specific annotation
+
+```Java
+final AnnotationMethodScanner<Class<ExecutionSpan>, Class<ToLog>> scanner = AnnotationMethodScanner.of(ExecutionSpan.class, ToLog.class);
+
+// Scan Class
+final Multimap<String, AnnotationMethodScan<Class<? extends Annotation>, Class<? extends Annotation>>> multimap = scanner
+        .scan(ExecutionSpanConfiguration.class);
+
+// Scan Method
+final Method spanMethod = ExecutionSpanConfiguration.class.getMethod("spanWithTags");
+final AnnotationMethodScan spanMethodScan = scanner.scan(spanMethod);
+```
 
 ## Libraries - Data
 
