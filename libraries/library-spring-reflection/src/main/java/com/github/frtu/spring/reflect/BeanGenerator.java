@@ -7,6 +7,10 @@ import org.springframework.util.ReflectionUtils.FieldCallback;
 import java.lang.reflect.Field;
 
 /**
+ * Generate a Bean that is public {@link #generateBean(Class)}.
+ * <p>
+ * Generate & populate String values using {@link #generatePopulatedBean(Class)}. String ONLY.
+ *
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleInfra/src/main/java/com/github/frtu/simple/infra/reflect/BeanGenerator.java#L22-L56">Moved from old project SimpleToolbox</a>
  * @since 1.1.0

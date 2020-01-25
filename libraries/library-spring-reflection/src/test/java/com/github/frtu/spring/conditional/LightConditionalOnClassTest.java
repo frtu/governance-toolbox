@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Condition;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-
 public class LightConditionalOnClassTest {
     @Test
     public void matchesExisting() {

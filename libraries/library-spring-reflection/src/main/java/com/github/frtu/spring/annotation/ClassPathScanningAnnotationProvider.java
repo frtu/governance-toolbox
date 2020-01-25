@@ -9,6 +9,9 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 
 /**
+ * Search for all classes that has certain annotation at class level using {@link #findCandidateComponents(Class)}.
+ * Can also limit research under a specific basePackage using {@link #findCandidateComponents(Class, String)}
+ *
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleInfra/src/main/java/com/github/frtu/simple/infra/reflect/ClassPathScanningAnnotationProvider.java">Moved from old project SimpleToolbox</a>
  * @since 1.1.0
