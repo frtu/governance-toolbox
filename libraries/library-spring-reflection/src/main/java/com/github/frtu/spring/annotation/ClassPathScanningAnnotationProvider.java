@@ -44,6 +44,18 @@ public class ClassPathScanningAnnotationProvider extends ClassPathScanningCandid
      * @return Set of all {@link BeanDefinition} having class annotation DesiredAnnotation
      */
     public static Set<BeanDefinition> findCandidateComponents(Class<? extends Annotation> annotationType, String basePackage) {
+        return findCandidateComponents(annotationType, basePackage, null);
+    }
+
+    /**
+     * Scan for class annotation under basePackage for that specific classloader (when many involved and result not found).
+     *
+     * @param annotationType DesiredAnnotation.class
+     * @param basePackage    Only subpackage of basePackage is scan
+     * @param classLoader    Pass a specific classloader to scan
+     * @return Set of all {@link BeanDefinition} having class annotation DesiredAnnotation
+     */
+    public static Set<BeanDefinition> findCandidateComponents(Class<? extends Annotation> annotationType, String basePackage, ClassLoader classLoader) {
         ClassPathScanningAnnotationProvider classPathScanningCandidateComponentProvider = new ClassPathScanningAnnotationProvider();
         classPathScanningCandidateComponentProvider.addIncludeFilter(new AnnotationTypeFilter(annotationType));
 
