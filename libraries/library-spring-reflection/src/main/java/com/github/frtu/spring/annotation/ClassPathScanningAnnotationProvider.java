@@ -26,10 +26,23 @@ public class ClassPathScanningAnnotationProvider extends ClassPathScanningCandid
         return beanDefinition.getMetadata().isIndependent();
     }
 
+    /**
+     * Simplest scan for class annotation in all packages.
+     *
+     * @param annotationType DesiredAnnotation.class
+     * @return Set of all {@link BeanDefinition} having class annotation DesiredAnnotation
+     */
     public static Set<BeanDefinition> findCandidateComponents(Class<? extends Annotation> annotationType) {
         return findCandidateComponents(annotationType, "");
     }
 
+    /**
+     * Scan for class annotation under basePackage.
+     *
+     * @param annotationType DesiredAnnotation.class
+     * @param basePackage    Only subpackage of basePackage is scan
+     * @return Set of all {@link BeanDefinition} having class annotation DesiredAnnotation
+     */
     public static Set<BeanDefinition> findCandidateComponents(Class<? extends Annotation> annotationType, String basePackage) {
         ClassPathScanningAnnotationProvider classPathScanningCandidateComponentProvider = new ClassPathScanningAnnotationProvider();
         classPathScanningCandidateComponentProvider.addIncludeFilter(new AnnotationTypeFilter(annotationType));

@@ -12,11 +12,12 @@ import java.lang.reflect.Parameter;
 import java.util.Map;
 
 /**
- * Scan a {@link Class} for {@link Annotation} and return result in an inner {@link Multimap}.
+ * Scan a {@link Class} for {@link Annotation} and return result in an inner {@link Multimap} that you can cache.
  *
  * @param <MethodAnno> Annotation class used on method
  * @param <ParamAnno>  Annotation class used on method parameter
  * @author Frédéric TU
+ * @see <a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/annotation/AnnotationUtils.html">Rely on Spring {@link AnnotationUtils}</a>
  * @see <a href="https://github.com/frtu/log-platform/blob/v0.9.4/logger-libraries/logger-core/src/main/java/com/github/frtu/utils/AnnotationMethodScanner.java">Moved from log-platform project</a>
  * @since 1.0.1
  */
