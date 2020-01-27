@@ -57,7 +57,7 @@ public class GroupConverter {
      * Illustration of list joining with prefix and suffix
      *
      * @param sourceList list of {@link Integer}
-     * @return
+     * @return string of list of element under bracket
      * @see <a href="https://www.baeldung.com/java-8-collectors">Guide to Java 8’s Collectors</a>
      */
     public static String toJsonNumberArray(List<Integer> sourceList) {
@@ -68,7 +68,7 @@ public class GroupConverter {
      * Illustration of list joining with prefix and suffix
      *
      * @param sourceList list of {@link String}
-     * @return
+     * @return string of list of quoted element under bracket
      * @see <a href="https://www.baeldung.com/java-8-collectors">Guide to Java 8’s Collectors</a>
      */
     public static String toJsonStringArray(List<String> sourceList) {

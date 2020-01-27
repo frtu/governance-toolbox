@@ -136,7 +136,7 @@ public class KafkaDeserializerAvroRecord<T extends GenericContainer> extends Bas
      * Read the schema from the specified location.
      *
      * @param configurationValue Pass a String, File or Path to the schema
-     * @return
+     * @return {@link Schema} object
      * @since 1.0.0
      */
     protected Schema readSchema(Object configurationValue) {
