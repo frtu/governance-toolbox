@@ -3,7 +3,7 @@ package com.github.frtu.spring.conditional.commons;
 import com.github.frtu.spring.conditional.LightConditionalOnClass;
 
 /**
- * Used with spring-core {@link org.springframework.context.annotation.Conditional} annotation.
+ * Used with spring-core {link org.springframework.context.annotation.Conditional} annotation.
  * <p>
  * Check if aspectj is in the classpath.
  *

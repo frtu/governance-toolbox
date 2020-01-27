@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleMavenPlugins/src/main/java/com/github/frtu/maven/plugin/utils/ClassloaderUtil.java">Moved from old project SimpleToolbox</a>
- * @since 1.1.0
+ * @since 1.0.2
  */
 public class ClassloaderUtil {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ClassloaderUtil.class);

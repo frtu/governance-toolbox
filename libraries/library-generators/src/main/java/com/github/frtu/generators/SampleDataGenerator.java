@@ -15,7 +15,7 @@ import java.io.StringWriter;
  *
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleInfra/src/main/java/com/github/frtu/simple/infra/reflect/BeanGenerator.java#L58-L98">Moved from old project SimpleToolbox</a>
- * @since 1.1.0
+ * @since 1.0.2
  */
 public class SampleDataGenerator extends BeanGenerator {
     private static ObjectMapper objectMapper = new ObjectMapper();

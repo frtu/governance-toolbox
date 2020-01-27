@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleInfra/src/main/java/com/github/frtu/simple/infra/reflect/ClassPathScanningAnnotationProvider.java">Moved from old project SimpleToolbox</a>
- * @since 1.1.0
+ * @since 1.0.2
  */
 public class ClassPathScanningAnnotationProvider extends ClassPathScanningCandidateComponentProvider {
     public ClassPathScanningAnnotationProvider() {

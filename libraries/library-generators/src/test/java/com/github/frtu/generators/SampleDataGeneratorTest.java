@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleInfra/src/test/java/com/github/frtu/simple/infra/reflect/BeanGeneratorTest.java">Moved from old project SimpleToolbox</a>
- * @since 1.1.0
+ * @since 1.0.2
  */
 public class SampleDataGeneratorTest {
     @Test

@@ -6,7 +6,7 @@ import java.lang.management.ManagementFactory;
 /**
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleInfra/src/main/java/com/github/frtu/simple/infra/jdk/JdkAttributeHelper.java">Moved from old project SimpleToolbox</a>
- * @since 1.1.0
+ * @since 1.0.2
  */
 public class JdkAttributeHelper {
     public static final String PLATFORM_32BITS = "x86";

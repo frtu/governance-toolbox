@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 /**
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/SimpleToolbox/blob/master/SimpleInfra/src/main/java/com/github/frtu/simple/infra/jdk/SunJdkHelper.java">Moved from old project SimpleToolbox</a>
- * @since 1.1.0
+ * @since 1.0.2
  */
 public class SunJdkHelper {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(SunJdkHelper.class);
