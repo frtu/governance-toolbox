@@ -20,8 +20,8 @@
 	<modules>
 		<module>base-pom</module>
 		<!--<module>avro-project</module>-->
-		<module>plt-kafka-project</module>
-		<module>plt-spark-project</module>
+		<!--<module>plt-kafka-project</module>-->
+		<!--<module>plt-spark-project</module>-->
 	</modules>
 
 	<licenses>

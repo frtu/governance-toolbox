@@ -20,10 +20,10 @@
 	<modules>
 		<module>archetype</module>
 		<module>libraries</module>
-		<module>maven-plugins</module>
-		<module>samples/schema-maven-usage</module>
-		<module>ext-avro</module>
-		<module>ext-protobuf</module>
+		<!--<module>maven-plugins</module>-->
+		<!--<module>samples/schema-maven-usage</module>-->
+		<!--<module>ext-avro</module>-->
+		<!--<module>ext-protobuf</module>-->
     </modules>
 
 	<licenses>
