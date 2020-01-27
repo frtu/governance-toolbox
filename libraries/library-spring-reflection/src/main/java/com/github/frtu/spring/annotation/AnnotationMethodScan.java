@@ -10,7 +10,7 @@ import java.util.Objects;
  * Result of an annotation method scan {@link AnnotationMethodScanner#scan(Method)}.
  *
  * @param <MethodAnno> Annotation class used on method
- * @param <ParamAnno> Annotation class used on method parameter
+ * @param <ParamAnno>  Annotation class used on method parameter
  * @author Frédéric TU
  * @see <a href="https://github.com/frtu/log-platform/blob/v0.9.4/logger-libraries/logger-core/src/main/java/com/github/frtu/utils/AnnotationMethodScan.java">Moved from log-platform project</a>
  * @since 1.0.1
@@ -67,6 +67,29 @@ public class AnnotationMethodScan<MethodAnno extends Class<? extends Annotation>
      */
     public <ParamAnno extends Annotation> ParamAnno[] getParamAnnotations() {
         return (ParamAnno[]) paramAnnotation;
+    }
+
+    /**
+     * Is AnnotationMethodScan contains nothing.
+     *
+     * @return if contains nothing
+     * @author Frédéric TU
+     * @since 1.0.2
+     */
+    public boolean isEmpty() {
+        return isEmpty(this);
+    }
+
+    /**
+     * Is AnnotationMethodScan contains nothing.
+     *
+     * @param annotationMethodScan an {@link AnnotationMethodScan}
+     * @return if contains nothing
+     * @author Frédéric TU
+     * @since 1.0.2
+     */
+    public static boolean isEmpty(AnnotationMethodScan annotationMethodScan) {
+        return AnnotationMethodScan.EMPTY.equals(annotationMethodScan);
     }
 
     @Override

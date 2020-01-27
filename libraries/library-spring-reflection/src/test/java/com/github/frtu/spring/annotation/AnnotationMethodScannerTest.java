@@ -63,4 +63,26 @@ public class AnnotationMethodScannerTest {
         assertNull("No Annotation on the first parameter!", paramAnnotations[0]);
         assertTrue("Should have @ToLog annotation on the second parameter!", (paramAnnotations[1] instanceof ToLog));
     }
+
+    @Test
+    public void isAnnotationFoundPositive() throws NoSuchMethodException {
+        final Method spanMethod = ExecutionSpanConfiguration.class.getMethod("simpleSpan", String.class, String.class);
+
+        final AnnotationMethodScanner<Class<ExecutionSpan>, Class<ToLog>> scanner = AnnotationMethodScanner.of(ExecutionSpan.class, ToLog.class);
+        final AnnotationMethodScan annotationMethodScan = scanner.scan(spanMethod);
+
+        assertFalse("Annotation should exist in " + spanMethod.getName()
+                , annotationMethodScan.isEmpty());
+    }
+
+    @Test
+    public void isAnnotationFoundNegative() throws NoSuchMethodException {
+        final Method spanMethod = ExecutionSpanConfiguration.class.getMethod("noAnnotation");
+
+        final AnnotationMethodScanner<Class<ExecutionSpan>, Class<ToLog>> scanner = AnnotationMethodScanner.of(ExecutionSpan.class, ToLog.class);
+        final AnnotationMethodScan annotationMethodScan = scanner.scan(spanMethod);
+
+        assertTrue("Annotation doesn't exist in " + spanMethod.getName()
+                , annotationMethodScan.isEmpty());
+    }
 }
