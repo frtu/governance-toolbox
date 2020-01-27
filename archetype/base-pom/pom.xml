@@ -56,12 +56,17 @@
             </dependency>
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-serdes</artifactId>
+                <artifactId>library-spring-reflection</artifactId>
                 <version>${frtu.lib.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-kafka</artifactId>
+                <artifactId>library-generators</artifactId>
+                <version>${frtu.lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-utils</artifactId>
                 <version>${frtu.lib.version}</version>
             </dependency>
             <!-- Directory scanner -->

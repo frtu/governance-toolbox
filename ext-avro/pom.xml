@@ -108,6 +108,17 @@
             <!--Internal domain dependencies -->
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-serdes</artifactId>
+                <version>${frtu.lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-kafka</artifactId>
+                <version>${frtu.lib.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
                 <artifactId>base-avro-pom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
