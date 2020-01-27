@@ -10,7 +10,7 @@
 
 	<groupId>com.github.frtu.archetype</groupId>
 	<artifactId>archetype-pom</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Archetypes parent pom</name>
@@ -41,7 +41,7 @@
 		<connection>scm:git:git@github.com:frtu/governance-toolbox.git</connection>
 		<developerConnection>scm:git:git@github.com:frtu/governance-toolbox.git</developerConnection>
 		<url>https://github.com/frtu/governance-toolbox/tree/master</url>
-		<tag>v1.0.2</tag>
+		<tag>v0.3.7</tag>
 	</scm>
 
 	<distributionManagement>
