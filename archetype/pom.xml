@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.frtu.governance</groupId>
 		<artifactId>master-pom</artifactId>
-		<version>${governance-libraries.version}</version>
+		<version>1.0.4</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
