@@ -44,7 +44,7 @@
         <jackson-binding.version>${jackson.version}</jackson-binding.version>
         <!--===========================-->
         <frtu.lib.version>1.1.0-SNAPSHOT</frtu.lib.version>
-        <frtu.logger-core.version>1.0.1</frtu.logger-core.version>
+        <frtu.logger-core.version>1.0.2</frtu.logger-core.version>
         <frtu.simple-scan.version>0.2.0</frtu.simple-scan.version>
     </properties>
 
