@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<!-- sonatype parent pom -->
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -10,12 +9,21 @@
 
 	<groupId>com.github.frtu.governance</groupId>
 	<artifactId>master-pom</artifactId>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>${frtu-governance.version}</version>
 	<packaging>pom</packaging>
 
 	<name>Governance toolbox</name>
 	<description>A toolbox for tracking static metdata (Data model schema, ...) and dynamic metadata.</description>
 	<url>https://github.com/frtu/governance-toolbox/</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!--=========================== -->
+		<lombok.version>1.18.10</lombok.version>
+		<!--=========================== -->
+		<frtu-governance.version>1.0.5-SNAPSHOT</frtu-governance.version>
+	</properties>
 
 	<modules>
 		<module>archetype</module>
@@ -58,15 +66,6 @@
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<!--=========================== -->
-		<lombok.version>1.18.10</lombok.version>
-		<!--=========================== -->
-		<governance-libraries.version>1.0.4-SNAPSHOT</governance-libraries.version>
-	</properties>
 
 	<dependencyManagement>
 		<dependencies>
