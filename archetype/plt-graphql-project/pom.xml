@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.frtu.archetype</groupId>
+        <artifactId>archetype-pom</artifactId>
+        <version>1.0.5-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>plt-graphql-project-archetype</artifactId>
+    <packaging>jar</packaging>
+
+    <name>GraphQL Platform project archetype</name>
+    <description>Platform project archetype to generate GraphQL using
+        https://github.com/graphql-java-generator/graphql-maven-plugin-project
+    </description>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <ignoreMissingFile>false</ignoreMissingFile>
+                    <file>${project.build.outputDirectory}/META-INF/maven/archetype-metadata.xml</file>
+                    <replacements>
+                        <replacement>
+                            <token>%PROJECT_VERSION%</token>
+                            <value>${project.version}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
