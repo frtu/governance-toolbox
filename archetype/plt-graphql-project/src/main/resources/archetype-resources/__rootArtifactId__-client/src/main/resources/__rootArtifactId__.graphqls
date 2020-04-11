@@ -1,0 +1,38 @@
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+type QueryType {
+    findAll: [${DatamodelClassName}]
+    find(name: String!): [${DatamodelClassName}]
+}
+
+type MutationType {
+}
+
+"""
+Please describe your object
+"""
+type ${DatamodelClassName} {
+    """
+    ID from which this data can be uniquely identified
+    """
+    id: String!
+
+    """
+    Name of this data
+    """
+    name: String
+
+    """
+    A certain value this data contains
+    """
+    value: String
+
+    """
+    epoch time when the event occurred.
+    See https://databricks.com/blog/2017/05/08/event-time-aggregation-watermarking-apache-sparks-structured-streaming.html
+    """
+    eventTime: String
+}
