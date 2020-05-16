@@ -1,9 +1,9 @@
 package com.github.frtu.samples.enums;
 
 public enum TestEnum implements IEnum {
-    ENUM1(1, "First enum"),
-    ENUM2(2, "Second enum"),
-    ENUM3(3, "Third enum");
+    TENUM1(1, "First enum"),
+    TENUM2(2, "Second enum"),
+    TENUM3(3, "Third enum");
 
     private Integer index;
     private String description;

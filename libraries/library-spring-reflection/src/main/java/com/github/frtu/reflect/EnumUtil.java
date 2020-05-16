@@ -5,15 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.function.Predicate;
 
 @Slf4j
 public class EnumUtil {
     public static final String ALL_ENUM_FIELD_NAME = "$VALUES";
 
-    public static <E extends Enum> E[] getEnumValues(Class<E> enumClass) {
+    public static <E extends Enum> List<E> getEnumValues(Class<E> enumClass) {
         Object o = getValue(null, enumClass, ALL_ENUM_FIELD_NAME, enumClass);
-        return (E[]) o;
+        return Arrays.asList((E[]) o);
     }
 
     public static HashMap<String, Object> getSomeValues(final Enum anEnum, String... fieldNames) {
