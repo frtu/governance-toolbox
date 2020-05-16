@@ -19,6 +19,17 @@ public class EnumUtilTest {
     }
 
     @Test
+    public void getValue() {
+        EnumUtil enumUtil = EnumUtil.of("non_existing", "description");
+        Object value = enumUtil.getValue(TestEnum.TENUM1);
+        assertEquals(TestEnum.TENUM1.getDescription(), value);
+
+        enumUtil = EnumUtil.of("non_existing");
+        value = enumUtil.getValue(TestEnum.TENUM1);
+        assertEquals(TestEnum.TENUM1.name(), value);
+    }
+
+    @Test
     public void getValueObject() {
         final List<TestEnum> testEnumList = EnumUtil.getEnumValues(TestEnum.class);
         final List<Object> descriptionList = testEnumList.stream()

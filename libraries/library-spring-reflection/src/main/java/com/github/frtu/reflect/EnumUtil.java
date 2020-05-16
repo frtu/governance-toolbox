@@ -54,11 +54,25 @@ public class EnumUtil {
     }
 
     public Object getValue(final Enum anEnum) {
-        return getValue(anEnum, Object.class);
+        Object result = getValue(anEnum, Object.class);
+        if (result == null) {
+            result = anEnum.name();
+        }
+        return result;
     }
 
     public <T> T getValue(final Enum anEnum, Class<T> returnType) {
-        return getValue(anEnum, fieldNames[0], returnType);
+        T result = null;
+        for (String fieldName : fieldNames) {
+            try {
+                result = getValue(anEnum, fieldName, returnType);
+                if (result != null) {
+                    break;
+                }
+            } catch (IllegalArgumentException e) {
+            }
+        }
+        return result;
     }
 
     public static Object getValue(final Enum anEnum, final String fieldName) {
