@@ -27,14 +27,18 @@ public class EnumScannerTest {
         final Set<Class<? extends Enum>> scanEnum = EnumScanner.of(TestEnum.class.getPackage()).scan();
         final EnumUtil enumUtil = EnumUtil.of("description");
 
-        scanEnum.stream().map(EnumUtil::getEnumValues).forEach(listOfEnums -> {
+        scanEnum.stream().map(EnumUtil::getEnumValues).forEach(listOfEnumsOfOneKind -> {
                     // A list of all the enum of one kind
-                    LOGGER.debug("========== {} ============", listOfEnums.get(0).getClass());
-                    listOfEnums.stream().forEach(anEnum -> {
-                        final HashMap<String, Object> allValues = enumUtil.getSomeValues(anEnum);
+                    LOGGER.debug("========== {} ============", listOfEnumsOfOneKind.get(0).getClass());
+                    listOfEnumsOfOneKind.stream().forEach(enumsOfOneKind -> {
+                        final HashMap<String, Object> allValues = enumUtil.getSomeValues(enumsOfOneKind);
                         LOGGER.debug("** {}", allValues);
-                        assertNull(allValues.get("index"));
-                        assertNotNull(allValues.get("description"));
+                        
+                        assertNotNull("EnumUtil.of(\"description\") SHOULD have returned a 'description'"
+                                , allValues.get("description"));
+
+                        assertNull("EnumUtil.of(\"description\") should NOT have 'index'",
+                                allValues.get("index"));
                     });
                 }
         );
