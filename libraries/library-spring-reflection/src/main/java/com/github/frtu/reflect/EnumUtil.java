@@ -12,9 +12,23 @@ import java.util.function.Predicate;
 public class EnumUtil {
     public static final String ALL_ENUM_FIELD_NAME = "$VALUES";
 
+    private String[] fieldNames;
+
+    public static EnumUtil of(String... fieldNames) {
+        return new EnumUtil(fieldNames);
+    }
+
+    private EnumUtil(String... fieldNames) {
+        this.fieldNames = fieldNames;
+    }
+
     public static <E extends Enum> List<E> getEnumValues(Class<E> enumClass) {
         Object o = getValue(null, enumClass, ALL_ENUM_FIELD_NAME, enumClass);
         return Arrays.asList((E[]) o);
+    }
+
+    public HashMap<String, Object> getSomeValues(final Enum anEnum) {
+        return getSomeValues(anEnum, fieldNames);
     }
 
     public static HashMap<String, Object> getSomeValues(final Enum anEnum, String... fieldNames) {
@@ -34,6 +48,14 @@ public class EnumUtil {
             result.put(field.getName(), value);
         });
         return result;
+    }
+
+    public Object getValue(final Enum anEnum) {
+        return getValue(anEnum, Object.class);
+    }
+
+    public <T> T getValue(final Enum anEnum, Class<T> returnType) {
+        return getValue(anEnum, fieldNames[0], returnType);
     }
 
     public static Object getValue(final Enum anEnum, final String fieldName) {

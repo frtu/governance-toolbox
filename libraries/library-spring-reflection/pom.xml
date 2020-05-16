@@ -13,17 +13,6 @@
     <description>Library for Class, Annotation reflection and Bean based on spring-context</description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-
         <!-- Common libs -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -37,9 +26,27 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+        </dependency>
 
         <!--===========================-->
-        <!--Test -->
+        <!-- Base -->
+        <!--===========================-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!--===========================-->
+        <!-- Test -->
         <!--===========================-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
