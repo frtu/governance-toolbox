@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.github.frtu.archetype</groupId>
         <artifactId>archetype-pom</artifactId>
-        <version>${governance-libraries.version}</version>
+        <version>${frtu-governance.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
