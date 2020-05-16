@@ -8,7 +8,7 @@ import com.github.frtu.samples.enums.TestNoInterfaceEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -31,9 +31,9 @@ public class EnumScannerTest {
                     // A list of all the enum of one kind
                     LOGGER.debug("========== {} ============", listOfEnumsOfOneKind.get(0).getClass());
                     listOfEnumsOfOneKind.stream().forEach(enumsOfOneKind -> {
-                        final HashMap<String, Object> allValues = enumUtil.getSomeValues(enumsOfOneKind);
+                        final Map<String, Object> allValues = enumUtil.getSomeValues(enumsOfOneKind);
                         LOGGER.debug("** {}", allValues);
-                        
+
                         assertNotNull("EnumUtil.of(\"description\") SHOULD have returned a 'description'"
                                 , allValues.get("description"));
 

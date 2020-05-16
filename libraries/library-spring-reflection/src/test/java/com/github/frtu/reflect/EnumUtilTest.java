@@ -3,8 +3,8 @@ package com.github.frtu.reflect;
 import com.github.frtu.samples.enums.TestEnum;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
@@ -42,14 +42,16 @@ public class EnumUtilTest {
 
     @Test
     public void getAllValues() {
-        final HashMap<String, Object> allValues = EnumUtil.getAllValues(TestEnum.TENUM1);
+        final Map<String, Object> allValues = EnumUtil.getAllValues(TestEnum.TENUM1);
+        assertEquals(TestEnum.TENUM1.name(), allValues.get("name"));
         assertEquals(TestEnum.TENUM1.getIndex(), allValues.get("index"));
         assertEquals(TestEnum.TENUM1.getDescription(), allValues.get("description"));
     }
 
     @Test
     public void getSomeValues() {
-        final HashMap<String, Object> someValues = EnumUtil.getSomeValues(TestEnum.TENUM1, "index");
+        final Map<String, Object> someValues = EnumUtil.getSomeValues(TestEnum.TENUM1, "index");
+        assertEquals(TestEnum.TENUM1.name(), someValues.get("name"));
         assertEquals(TestEnum.TENUM1.getIndex(), someValues.get("index"));
         assertNull(someValues.get("description"));
     }

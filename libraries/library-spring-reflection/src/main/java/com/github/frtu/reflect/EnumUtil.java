@@ -4,8 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 
 @Slf4j
@@ -27,20 +28,22 @@ public class EnumUtil {
         return Arrays.asList((E[]) o);
     }
 
-    public HashMap<String, Object> getSomeValues(final Enum anEnum) {
+    public Map<String, Object> getSomeValues(final Enum anEnum) {
         return getSomeValues(anEnum, fieldNames);
     }
 
-    public static HashMap<String, Object> getSomeValues(final Enum anEnum, String... fieldNames) {
+    public static Map<String, Object> getSomeValues(final Enum anEnum, String... fieldNames) {
         return getAllValues(anEnum, new FieldPredicate.NameInArray(fieldNames));
     }
 
-    public static HashMap<String, Object> getAllValues(final Enum anEnum) {
+    public static Map<String, Object> getAllValues(final Enum anEnum) {
         return getAllValues(anEnum, FieldPredicate.isEnumInnerField());
     }
 
-    protected static HashMap<String, Object> getAllValues(Enum anEnum, Predicate<Field> predicate) {
-        final HashMap<String, Object> result = new HashMap<>();
+    protected static Map<String, Object> getAllValues(Enum anEnum, Predicate<Field> predicate) {
+        final TreeMap<String, Object> result = new TreeMap<>();
+        result.put("name", anEnum.name());
+
         final Field[] fields = anEnum.getClass().getDeclaredFields();
         Arrays.stream(fields).filter(predicate).forEach(field -> {
             LOGGER.trace("Scanning fieldName:[{}] class:[{}]", field.getName(), field.getType());
