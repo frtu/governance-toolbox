@@ -28,7 +28,7 @@
     </appender>
 
     <!-- Main package -->
-    <logger name="com.github.frtu" level="debug"/>
+    <logger name="com.github.frtu" level="trace"/>
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

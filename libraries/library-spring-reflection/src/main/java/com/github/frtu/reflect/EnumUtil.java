@@ -3,6 +3,9 @@ package com.github.frtu.reflect;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.function.Predicate;
 
 @Slf4j
 public class EnumUtil {
@@ -11,6 +14,25 @@ public class EnumUtil {
     public static <E extends Enum> E[] getEnumValues(Class<E> enumClass) {
         Object o = getValue(null, enumClass, ALL_ENUM_FIELD_NAME, enumClass);
         return (E[]) o;
+    }
+
+    public static HashMap<String, Object> getSomeValues(final Enum anEnum, String... fieldNames) {
+        return getAllValues(anEnum, new FieldPredicate.NameInArray(fieldNames));
+    }
+
+    public static HashMap<String, Object> getAllValues(final Enum anEnum) {
+        return getAllValues(anEnum, FieldPredicate.isEnumInnerField());
+    }
+
+    protected static HashMap<String, Object> getAllValues(Enum anEnum, Predicate<Field> predicate) {
+        final HashMap<String, Object> result = new HashMap<>();
+        final Field[] fields = anEnum.getClass().getDeclaredFields();
+        Arrays.stream(fields).filter(predicate).forEach(field -> {
+            LOGGER.trace("Scanning fieldName:[{}] class:[{}]", field.getName(), field.getType());
+            final Object value = getValue(anEnum, field, Object.class);
+            result.put(field.getName(), value);
+        });
+        return result;
     }
 
     public static Object getValue(final Enum anEnum, final String fieldName) {
