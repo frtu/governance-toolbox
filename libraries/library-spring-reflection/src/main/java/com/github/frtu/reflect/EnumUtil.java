@@ -9,6 +9,17 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
+/**
+ * Get all Enums from an {@link Enum} and also all the fields in that enum.
+ * <p>
+ * Static methods : one can choose to get all fields {@link #getAllValues(Enum)}
+ * or only some of them {@link #getSomeValues(Enum, String...)}
+ * <p>
+ * Instance methods : EnumUtil.of("field1", "field2").{@link #getSomeValues(Enum)}
+ *
+ * @author Frédéric TU
+ * @since 1.0.5
+ */
 @Slf4j
 public class EnumUtil {
     public static final String ALL_ENUM_FIELD_NAME = "$VALUES";

@@ -5,6 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * {@link Predicate} for {@link Field}.
+ *
+ * @author Frédéric TU
+ * @since 1.0.5
+ */
 public class FieldPredicate {
     public static Predicate<Field> isEnumInnerField() {
         return field -> !field.getType().equals(field.getDeclaringClass()) && !EnumUtil.ALL_ENUM_FIELD_NAME.equals(field.getName());

@@ -7,6 +7,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Scaner package for all Enums {@link #scan()} or {@link #scan(Class)}
+ *
+ * @param <E>
+ * @author Frédéric TU
+ * @since 1.0.5
+ */
 @Slf4j
 public class EnumScanner<E extends Enum> {
     private Reflections reflections;
