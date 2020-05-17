@@ -129,9 +129,32 @@ final AnnotationMethodScan spanMethodScan = scanner.scan(spanMethod);
 
 #### Reflection and Bean manipulation
 
+* EnumUtil & EnumScanner : Allow to scan & get all Enum inner fields
 * BeanGenerator : generate class instance and populate them using field name
 * ClassloaderUtil : Classpath refresh based on new file paths
 
+##### EnumUtil & EnumScanner
+
+* EnumScanner : scan package for all Enums #scan() or #scan(EnumInterfaceMarker.class)
+* EnumUtil : can directly use static method OR instance using #of("field1", "field2")
+
+```Java
+final String packageToScan = "com.github.frtu.samples.enums";
+final Class<EnumInterfaceMarker> type = EnumInterfaceMarker.class;
+
+final Set<Class<? extends Enum>> scanEnum = EnumScanner.of(packageToScan).scan(type);
+final EnumUtil enumUtil = EnumUtil.of("description");
+
+scanEnum.stream().map(EnumUtil::getEnumValues).forEach(listOfEnumsOfOneKind -> {
+            // A list of all the enum of one kind
+            LOGGER.debug("========== {} ============", listOfEnumsOfOneKind.get(0).getClass());
+            listOfEnumsOfOneKind.stream().forEach(enumsOfOneKind -> {
+                final Map<String, Object> values = enumUtil.getSomeValues(enumsOfOneKind);
+                LOGGER.debug("* {} -> {}", values.get("name"), values.get("description"));
+            });
+        }
+);
+```
 
 ## Libraries - Data
 

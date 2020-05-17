@@ -24,7 +24,8 @@ public class EnumScannerTest {
 
     @Test
     public void scanAllEnumsForValues() {
-        final Set<Class<? extends Enum>> scanEnum = EnumScanner.of(TestEnum.class.getPackage()).scan();
+        final Package packageToScan = TestEnum.class.getPackage();
+        final Set<Class<? extends Enum>> scanEnum = EnumScanner.of(packageToScan).scan();
         final EnumUtil enumUtil = EnumUtil.of("description");
 
         scanEnum.stream().map(EnumUtil::getEnumValues).forEach(listOfEnumsOfOneKind -> {
