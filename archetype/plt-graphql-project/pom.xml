@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.frtu.archetype</groupId>
         <artifactId>archetype-pom</artifactId>
-        <version>${frtu-governance.version}</version>
+        <version>1.0.5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
