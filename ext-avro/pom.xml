@@ -102,19 +102,4 @@
             </plugin>
         </plugins>
     </build>
-    <dependencyManagement>
-        <dependencies>
-            <!--Internal domain dependencies -->
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-serdes</artifactId>
-                <version>${frtu.lib.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-kafka</artifactId>
-                <version>${frtu.lib.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>
