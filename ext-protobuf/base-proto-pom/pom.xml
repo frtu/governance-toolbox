@@ -3,8 +3,7 @@
     <parent>
         <groupId>com.github.frtu.archetype</groupId>
         <artifactId>base-pom</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../../archetype/base-pom/pom.xml</relativePath>
+        <version>1.1.0</version>
     </parent>
 
     <groupId>com.github.frtu.governance</groupId>
@@ -20,9 +19,7 @@
         <protobuf.version>3.11.0</protobuf.version>
         <protoc.version>${protobuf.version}</protoc.version>
         <!--===========================-->
-        <frtu.lib.version>1.0.2-SNAPSHOT</frtu.lib.version>
     </properties>
-
 
     <dependencyManagement>
         <dependencies>
@@ -61,44 +58,7 @@
                     <artifactId>protobuf-maven-plugin</artifactId>
                     <version>0.6.1</version>
                     <configuration>
-                        <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}
-                        </protocArtifact>
-                    </configuration>
-                </plugin>
-                <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.20.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.1</version>
-                    <configuration>
-                        <mavenExecutorId>forked-path</mavenExecutorId>
-                        <useReleaseProfile>false</useReleaseProfile>
-                        <arguments>${arguments}</arguments>
+                        <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
                     </configuration>
                 </plugin>
             </plugins>
