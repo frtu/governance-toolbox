@@ -1,4 +1,4 @@
-# Avro artefact generator
+# Extension - Avro artefact generator
 
 Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/1.1.0/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
 

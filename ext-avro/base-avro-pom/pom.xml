@@ -23,8 +23,8 @@
         <confluent.maven.repo>https://packages.confluent.io/maven/</confluent.maven.repo>
         <confluent.version>5.0.0</confluent.version>
         <!--https://github.com/frtu/governance-toolbox#hortonworks-schema-registry-->
-        <frtu.governance.version>${project.version}</frtu.governance.version>
-        <frtu.lib.version>${project.version}</frtu.lib.version>
+        <frtu.governance.version>1.1.0-SNAPSHOT</frtu.governance.version>
+        <frtu.lib.version>1.1.0-SNAPSHOT</frtu.lib.version>
         <!--===========================-->
     </properties>
     <dependencyManagement>
