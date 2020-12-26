@@ -25,7 +25,7 @@ public class LightConditionalOnClass implements Condition {
     @Override
     public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
         try {
-            Class cls = Class.forName(className);
+            Class.forName(className);
             return true;
         } catch (ClassNotFoundException e) {
             return false;
