@@ -8,7 +8,7 @@
 
     <groupId>com.github.frtu.governance</groupId>
     <artifactId>base-proto-pom</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Base Parent pom extension for Protobuf</name>
