@@ -1,6 +1,6 @@
-# Maven artefact generator
+# Avro artefact generator
 
-Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/0.3.4/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
+Note : The artecfacts below all rely on [base-pom](https://search.maven.org/artifact/com.github.frtu.archetype/base-pom/1.1.0/pom) that helps to normalize all the libraries CVE fixes and version upgrades.
 
 Feel free to inline some of the dependencies or all dependencies & remove it.
 
@@ -118,7 +118,7 @@ Generate your Spark app with :
 
 ```
 mvn archetype:generate -DarchetypeCatalog=local \
--DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-spark-project-archetype -DarchetypeVersion=0.3.3 \
+-DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-spark-project-archetype -DarchetypeVersion=1.1.0 \
 -DgroupId=com.github.frtu -DartifactId=sparkapp -Dversion=0.0.1-SNAPSHOT
 ```
 
@@ -142,7 +142,7 @@ Generate your Avro sub module to manipulate **sales** record with :
 
 ```
 mvn archetype:generate -DarchetypeCatalog=local \
--DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=0.3.3 \
+-DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=avro-project-archetype -DarchetypeVersion=1.1.0 \
 -DgroupId=com.github.frtu -DartifactId=sales -Dversion=0.0.1-SNAPSHOT
 ```
 
@@ -153,6 +153,18 @@ To finish to generate all the artifacts, run :
 ```
 mvn compile
 ```
+
+### Generate an Kafka publisher module
+
+Generate your Kafka application using :
+
+```
+mvn archetype:generate -DarchetypeCatalog=local \
+-DarchetypeGroupId=com.github.frtu.archetype -DarchetypeArtifactId=plt-kafka-project-archetype -DarchetypeVersion=1.1.0 \
+-DgroupId=com.github.frtu -DartifactId=kafka -Dversion=0.0.1-SNAPSHOT
+```
+
+When asked a **DatamodelClassName**, type **Sales** which will be the *Class name* of the generated object. For **avro-model-artifact-id** use **sales** which will reuse the previously generated avro file *sales.avsc*
 
 ### Work with Data Model & Data
 

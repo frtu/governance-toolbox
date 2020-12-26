@@ -23,7 +23,8 @@
         <confluent.maven.repo>https://packages.confluent.io/maven/</confluent.maven.repo>
         <confluent.version>5.0.0</confluent.version>
         <!--https://github.com/frtu/governance-toolbox#hortonworks-schema-registry-->
-        <governance-libraries.version>${project.version}</governance-libraries.version>
+        <frtu.governance.version>${project.version}</frtu.governance.version>
+        <frtu.lib.version>${project.version}</frtu.lib.version>
         <!--===========================-->
     </properties>
     <dependencyManagement>
@@ -34,6 +35,18 @@
                 <artifactId>avro</artifactId>
                 <version>${avro.version}</version>
             </dependency>
+            <!--LIBRARY-->
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-serdes</artifactId>
+                <version>${frtu.lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.frtu.governance</groupId>
+                <artifactId>library-kafka</artifactId>
+                <version>${frtu.lib.version}</version>
+            </dependency>
+
             <!-- Confluent Stack -->
             <dependency>
                 <groupId>io.confluent</groupId>
@@ -118,7 +131,7 @@
                 <plugin>
                     <groupId>com.github.frtu.governance</groupId>
                     <artifactId>schema-registries-maven-plugin</artifactId>
-                    <version>${governance-libraries.version}</version>
+                    <version>${frtu.governance.version}</version>
                 </plugin>
                 <!--===========================-->
                 <!-- CONFLUENT SCHEMA REGISTRY-->

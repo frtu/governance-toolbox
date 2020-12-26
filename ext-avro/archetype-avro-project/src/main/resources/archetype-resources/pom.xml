@@ -16,7 +16,7 @@
         <!--<avro.version>1.9.1</avro.version>-->
         <!--===========================-->
         <!--https://github.com/frtu/governance-toolbox#hortonworks-schema-registry-->
-        <governance-libraries.version>${base-pom-version}</governance-libraries.version>
+        <frtu.governance.version>${frtu-governance-version}</frtu.governance.version>
         <!--===========================-->
     </properties>
 
@@ -106,7 +106,7 @@
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
                 <artifactId>base-avro-pom</artifactId>
-                <version>${governance-libraries.version}</version>
+                <version>${frtu.governance.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

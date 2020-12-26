@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.github.frtu.archetype</groupId>
-        <artifactId>base-pom</artifactId>
-        <version>${base-pom-version}</version>
+        <groupId>com.github.frtu.governance</groupId>
+        <artifactId>base-avro-pom</artifactId>
+        <version>${frtu-governance-version}</version>
     </parent>
 
     <groupId>${groupId}</groupId>
@@ -28,10 +28,11 @@
         <!--Check latest at https://mvnrepository.com/artifact/org.apache.kafka/kafka-->
         <kafka.version>2.0.0</kafka.version>
         <!--===========================-->
-        <slf4j.version>1.7.25</slf4j.version>
-        <logback.version>1.2.2</logback.version>
+        <!--<slf4j.version>1.7.25</slf4j.version>-->
+        <!--<logback.version>1.2.2</logback.version>-->
         <!--===========================-->
-        <frtu.lib.version>${base-pom-version}</frtu.lib.version>
+        <frtu.governance.version>${frtu-governance-version}</frtu.governance.version>
+        <frtu.lib.version>${frtu-governance-version}</frtu.lib.version>
         <!--===========================-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -54,17 +55,20 @@
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <!--===========================-->
+            <!--UNCOMMENT for override-->
+            <!--===========================-->
             <!--LIBRARY-->
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-serdes</artifactId>
-                <version>${frtu.lib.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>library-kafka</artifactId>
-                <version>${frtu.lib.version}</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--<groupId>com.github.frtu.governance</groupId>-->
+            <!--<artifactId>library-serdes</artifactId>-->
+            <!--<version>${frtu.lib.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+            <!--<groupId>com.github.frtu.governance</groupId>-->
+            <!--<artifactId>library-kafka</artifactId>-->
+            <!--<version>${frtu.lib.version}</version>-->
+            <!--</dependency>-->
 
             <!--KAFKA-->
             <dependency>
@@ -155,7 +159,7 @@
             <!--<dependency>-->
             <!--<groupId>com.github.frtu.archetype</groupId>-->
             <!--<artifactId>base-pom</artifactId>-->
-            <!--<version>${base-pom-version}</version>-->
+            <!--<version>${frtu.governance.version}</version>-->
             <!--<type>pom</type>-->
             <!--<scope>import</scope>-->
             <!--</dependency>-->

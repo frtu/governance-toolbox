@@ -7,6 +7,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <groupId>com.github.frtu.archetype</groupId>
     <artifactId>plt-spark-project-archetype</artifactId>
     <packaging>jar</packaging>
 

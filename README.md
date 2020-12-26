@@ -88,7 +88,3 @@ Using official Docker image. Look at this link for more details on the port :
 
 * Docker InfluxDB : [https://hub.docker.com/_/influxdb/](https://hub.docker.com/_/influxdb/)
 * Docker Grafana : [https://hub.docker.com/r/grafana/grafana/](https://hub.docker.com/r/grafana/grafana/)
-
-## Maven artefact generator
-
-See [Archetype](https://github.com/frtu/governance-toolbox/tree/master/archetype)
