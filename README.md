@@ -9,7 +9,7 @@ Dynamic metadata
 
 * InfluxDB : TSDB to store PiT (Point In Time) based metadata.
 
-## [Archetype](https://github.com/frtu/governance-toolbox/tree/master/archetype)
+## [Archetype for Avro](https://github.com/frtu/governance-toolbox/tree/master/ext-avro)
 
 * avro : generate a base project for avro data model, generate & compile
 * plt-kafka : standalone multi modules project to Publish & Consume Kafka
