@@ -17,7 +17,7 @@
         <!--https://github.com/protocolbuffers/protobuf/tree/v3.11.2/java-->
         <!--<protobuf.version>3.11.0</protobuf.version>-->
         <!--<protoc.version>${protobuf.version}</protoc.version>-->
-        <governance-maven-plugin.version>${base-pom-version}</governance-maven-plugin.version>
+        <frtu.governance.version>${frtu-governance-version}</frtu.governance.version>
         <!--===========================-->
     </properties>
 
@@ -107,7 +107,7 @@
             <dependency>
                 <groupId>com.github.frtu.governance</groupId>
                 <artifactId>base-proto-pom</artifactId>
-                <version>${base-pom-version}</version>
+                <version>${frtu.governance.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

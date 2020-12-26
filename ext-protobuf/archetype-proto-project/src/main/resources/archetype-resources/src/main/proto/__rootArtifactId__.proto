@@ -8,7 +8,7 @@ package ${groupId};
 option java_package = "${groupId}";
 
 // [START security_flag]
-import "metadata/security.proto";
+//import "metadata/security.proto";
 // [START security_flag]
 
 // [START java_declaration and messages]
@@ -19,7 +19,7 @@ option java_outer_classname = "${DatamodelClassName}Protos";
 message ${DatamodelClassName} {
   int32 id = 1;    // ID from which this data can be uniquely identified.
   string name = 2; // Name of this data.
-  string value = 3 [(metadata.secured_field) = true]; // A certain value this data contains.
+//  string value = 3 [(metadata.secured_field) = true]; // A certain value this data contains.
 
   google.protobuf.Timestamp event_time = 4; // epoch time when the event occurred. See https://databricks.com/blog/2017/05/08/event-time-aggregation-watermarking-apache-sparks-structured-streaming.html
 }
