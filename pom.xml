@@ -22,15 +22,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!--===========================-->
-        <frtu.lib.version>1.0.6-SNAPSHOT</frtu.lib.version>
+        <java.version>1.8</java.version>
+        <base-pom.version>1.1.0</base-pom.version>
+        <frtu.lib.version>${project.version}</frtu.lib.version>
     </properties>
 
     <modules>
-        <!--<module>archetype</module>-->
         <module>libraries</module>
-        <!--<module>maven-plugins</module>-->
+        <module>maven-plugins</module>
         <module>samples/schema-maven-usage</module>
-        <!--<module>ext-avro</module>-->
+        <module>ext-avro</module>
         <!--<module>ext-protobuf</module>-->
     </modules>
 
@@ -67,6 +68,17 @@
         </repository>
     </distributionManagement>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.frtu.archetype</groupId>
+                <artifactId>base-pom</artifactId>
+                <version>${base-pom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
@@ -136,7 +148,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
                 <configuration>
                     <!--<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>-->
                     <tagNameFormat>v@{project.version}</tagNameFormat>

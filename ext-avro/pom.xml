@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.github.frtu.governance</groupId>
         <artifactId>master-pom</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.6-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -17,10 +17,11 @@
     <modules>
         <module>base-avro-pom</module>
         <module>archetype-avro-project</module>
+        <module>plt-kafka-project</module>
+        <module>plt-spark-project</module>
     </modules>
 
     <properties>
-        <java.version>1.8</java.version>
         <!--===========================-->
         <!--<avro.version>1.9.1</avro.version>-->
         <!--===========================-->
@@ -55,7 +56,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -85,7 +85,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0-M1</version>
                 <configuration>
                     <author>Frederic TU</author>
                     <encoding>${project.build.sourceEncoding}</encoding>
@@ -115,14 +114,6 @@
                 <groupId>com.github.frtu.governance</groupId>
                 <artifactId>library-kafka</artifactId>
                 <version>${frtu.lib.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.frtu.governance</groupId>
-                <artifactId>base-avro-pom</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

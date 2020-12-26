@@ -4,8 +4,7 @@
     <parent>
         <groupId>com.github.frtu.archetype</groupId>
         <artifactId>base-pom</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
-        <relativePath>../../archetype/base-pom/pom.xml</relativePath>
+        <version>1.1.0</version>
     </parent>
 
     <groupId>com.github.frtu.governance</groupId>
