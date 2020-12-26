@@ -24,7 +24,7 @@
         <!--===========================-->
         <java.version>1.8</java.version>
         <base-pom.version>1.1.0</base-pom.version>
-        <frtu.lib.version>${project.version}</frtu.lib.version>
+        <frtu.lib.version>1.1.0-SNAPSHOT</frtu.lib.version>
     </properties>
 
     <modules>
