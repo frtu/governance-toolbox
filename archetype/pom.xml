@@ -16,9 +16,6 @@
 	<url>https://github.com/frtu/governance-toolbox/</url>
 
 	<modules>
-		<module>base-pom</module>
-		<module>base-project</module>
-		<module>plt-graphql-project</module>
 		<!--<module>avro-project</module>-->
 		<!--<module>plt-kafka-project</module>-->
 		<!--<module>plt-spark-project</module>-->
