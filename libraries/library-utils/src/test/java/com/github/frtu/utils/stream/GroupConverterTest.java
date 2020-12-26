@@ -74,13 +74,14 @@ public class GroupConverterTest {
         // 3. Validate
         //--------------------------------------
         ObjectMapper objectMapper = new ObjectMapper();
-        final List<String> resultList = objectMapper
+        final List<Integer> resultList = objectMapper
                 .readValue(json, new TypeReference<List<Integer>>() {
                 });
 
         assertEquals(numberList.size(), resultList.size());
-        LOGGER.debug("First item:{}, type:{}", resultList.get(0));
-        assertEquals(1, resultList.get(0));
+        final Integer integer = resultList.get(0);
+        LOGGER.debug("First item:{}, type:{}", integer);
+        assertEquals(1, integer.intValue());
     }
 
     @Test

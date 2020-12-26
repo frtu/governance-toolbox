@@ -63,7 +63,7 @@ public class DotRendererTest {
         //--------------------------------------
         Assert.assertTrue(renderGraph.contains("/* graph trimmed comment */"));
         Assert.assertTrue(renderGraph.contains("/* node trimmed comment */"));
-        Assert.assertTrue(renderGraph.contains("[color=blue,style=dotted]"));
+        Assert.assertTrue(renderGraph.contains("[color=blue,style=dotted"));
     }
 
     @Test
