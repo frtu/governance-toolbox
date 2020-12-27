@@ -79,10 +79,26 @@ final String renderGraph = dotRenderer.renderGraph(graph, true);
 
 * [https://dreampuf.github.io/GraphvizOnline/](https://dreampuf.github.io/GraphvizOnline/)
 
-#### Installables
+#### UI tools
+
+VSCode and search for Extensions
+
+* Graphviz Interactive Preview : Interactive preview and search
+* Graphviz (dot) language support for Visual Studio Code : Add visualizaton pane using ```Cmd+Shift+v```
+* Graphviz Markdown Preview : Allow to see graphviz notation inside Markdown
+
+
+
+#### Command line tools - GraphViz
 
 * GraphViz (multiple library installable with brew, apt, ...) : [https://www.graphviz.org/download/](https://www.graphviz.org/download/)
 
-For MacOS, just run ```brew install graphviz```
+For MacOS, just run ```brew install graphviz```, then run :
+
+```
+graphviz user.dot
+```
+
+You can find the png file in the same folder.
 
 => Also check [other viewers](https://www.graphviz.org/about/#viewers)
